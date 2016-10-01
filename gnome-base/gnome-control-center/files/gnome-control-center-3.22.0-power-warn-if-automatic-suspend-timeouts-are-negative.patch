@@ -1,0 +1,38 @@
+From 1abacd29706716edee2dd9b368ca75861ed5389d Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Fri, 16 Sep 2016 17:33:56 +0200
+Subject: power: Warn if automatic suspend timeouts are negative
+
+They should probably have been unsigned integers, but they're not, so
+warn if they are. The rest of the code handles negative values as if
+they were 0.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=771542
+---
+ panels/power/cc-power-panel.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/panels/power/cc-power-panel.c b/panels/power/cc-power-panel.c
+index e85ce2f..ff7f6c3 100644
+--- a/panels/power/cc-power-panel.c
++++ b/panels/power/cc-power-panel.c
+@@ -1951,9 +1951,14 @@ update_automatic_suspend_label (CcPowerPanel *self)
+   ac_timeout = g_settings_get_int (priv->gsd_settings, "sleep-inactive-ac-timeout");
+   battery_timeout = g_settings_get_int (priv->gsd_settings, "sleep-inactive-battery-timeout");
+ 
+-  if (ac_action == GSD_POWER_ACTION_NOTHING)
++  if (ac_timeout < 0)
++    g_warning ("Invalid negative timeout for 'sleep-inactive-ac-timeout': %d", ac_timeout);
++  if (battery_timeout < 0)
++    g_warning ("Invalid negative timeout for 'sleep-inactive-battery-timeout': %d", battery_timeout);
++
++  if (ac_action == GSD_POWER_ACTION_NOTHING || ac_timeout < 0)
+     ac_timeout = NEVER;
+-  if (battery_action == GSD_POWER_ACTION_NOTHING)
++  if (battery_action == GSD_POWER_ACTION_NOTHING || battery_timeout < 0)
+     battery_timeout = NEVER;
+ 
+   if (priv->has_batteries)
+-- 
+cgit v0.12
+

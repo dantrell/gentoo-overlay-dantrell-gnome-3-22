@@ -1,0 +1,37 @@
+From 4033a3dbca5bef880b0694c0cdad0ccd465b3e4a Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Fri, 16 Sep 2016 17:36:02 +0200
+Subject: power: Fix "automatic suspend" label not taking batteries into
+ account
+
+Whether or not we have batteries was computed after we updated the
+label.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=771532
+---
+ panels/power/cc-power-panel.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/panels/power/cc-power-panel.c b/panels/power/cc-power-panel.c
+index ff7f6c3..8358121 100644
+--- a/panels/power/cc-power-panel.c
++++ b/panels/power/cc-power-panel.c
+@@ -2242,7 +2242,6 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
+       gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+       gtk_container_add (GTK_CONTAINER (widget), row);
+       gtk_size_group_add_widget (priv->row_sizegroup, row);
+-      update_automatic_suspend_label (self);
+ 
+       dialog = priv->automatic_suspend_dialog;
+       g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+@@ -2279,6 +2278,7 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
+                               G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+ 
+       set_ac_battery_ui_mode (self);
++      update_automatic_suspend_label (self);
+     }
+ 
+   if (g_strcmp0 (priv->chassis_type, "vm") == 0 ||
+-- 
+cgit v0.12
+

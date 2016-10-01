@@ -1,0 +1,24 @@
+From 5ae3e5aeb78d9d47641c85d3e15096912dc36cad Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
+Date: Thu, 28 Apr 2016 00:07:45 +0200
+Subject: build: Explicitly add mutter-cogl-pango dependency
+
+---
+ configure.ac | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configure.ac b/configure.ac
+index d1eb382..c69629c 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -99,6 +99,7 @@ SHARED_PCS="gio-unix-2.0 >= $GIO_MIN_VERSION
+             $recorder_modules
+             gdk-x11-3.0 libsoup-2.4
+             mutter-clutter-1.0 >= $CLUTTER_MIN_VERSION
++            mutter-cogl-pango-1.0
+             libstartup-notification-1.0 >= $STARTUP_NOTIFICATION_MIN_VERSION
+             gobject-introspection-1.0 >= $GOBJECT_INTROSPECTION_MIN_VERSION
+             libcanberra libcanberra-gtk3
+-- 
+cgit v0.12
+

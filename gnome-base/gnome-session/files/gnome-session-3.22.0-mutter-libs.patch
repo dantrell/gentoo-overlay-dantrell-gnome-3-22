@@ -1,0 +1,10 @@
+diff -ru gnome-session-3.22.0.old/gnome-session/gnome-session.in gnome-session-3.22.0/gnome-session/gnome-session.in
+--- gnome-session-3.22.0.old/gnome-session/gnome-session.in	2016-08-25 19:56:54.000000000 +0300
++++ gnome-session-3.22.0/gnome-session/gnome-session.in	2016-09-21 14:53:45.952898149 +0300
+@@ -14,4 +14,6 @@
+ 
+ dbus-update-activation-environment --all > /dev/null 2>&1 ||:
+ 
++export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/mutter
++
+ exec @libexecdir@/gnome-session-binary "$@"

@@ -1,0 +1,44 @@
+From b7867fe44c45f60a9399baf737132a9ba30351aa Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
+Date: Thu, 12 May 2016 17:35:47 +0200
+Subject: build: Set rpath on more executables
+
+We need to point executables to our private cogl/clutter forks.
+Commit 093fd54e2 did this for the main executable, but forgot
+the extension-prefs tool and other helpers.
+---
+ src/Makefile.am | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 76ad9f7..e9aacfe 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -213,6 +213,7 @@ nodist_gnome_shell_extension_prefs_SOURCES = \
+ 	$(NULL)
+ gnome_shell_extension_prefs_CPPFLAGS = $(gnome_shell_cflags)
+ gnome_shell_extension_prefs_LDADD = libgnome-shell-js.la $(GNOME_SHELL_LIBS)
++gnome_shell_extension_prefs_LDFLAGS = -rpath $(MUTTER_TYPELIB_DIR)
+ 
+ if HAVE_NETWORKMANAGER
+ 
+@@ -226,6 +227,7 @@ nodist_gnome_shell_portal_helper_SOURCES = \
+ 	$(NULL)
+ gnome_shell_portal_helper_CPPFLAGS = $(gnome_shell_cflags)
+ gnome_shell_portal_helper_LDADD = libgnome-shell-js.la $(GNOME_SHELL_LIBS)
++gnome_shell_portal_helper_LDFLAGS = -rpath $(MUTTER_TYPELIB_DIR)
+ 
+ endif
+ 
+@@ -280,7 +282,7 @@ noinst_PROGRAMS += run-js-test
+ 
+ run_js_test_CPPFLAGS = $(MUTTER_CFLAGS) $(gnome_shell_cflags)
+ run_js_test_LDADD = libgnome-shell.la $(GNOME_SHELL_JS_LIBS) $(MUTTER_LIBS)
+-run_js_test_LDFLAGS = -export-dynamic
++run_js_test_LDFLAGS = -export-dynamic -rpath $(MUTTER_TYPELIB_DIR)
+ 
+ run_js_test_SOURCES =			\
+ 	run-js-test.c
+-- 
+cgit v0.12
+

@@ -1,0 +1,29 @@
+From 358f64d66b37fa547af3e06dc85f4c5f008b7847 Mon Sep 17 00:00:00 2001
+From: Rui Matos <tiagomatos@gmail.com>
+Date: Fri, 3 Jun 2016 15:20:20 +0200
+Subject: main: Reload theme on video memory purge errors
+
+The theme machinery uses FBOs in some cases (mainly for shadows) which
+need to be reloaded if we get a video memory purged error.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=739178
+---
+ js/ui/main.js | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/js/ui/main.js b/js/ui/main.js
+index ad95ce0..789dd69 100644
+--- a/js/ui/main.js
++++ b/js/ui/main.js
+@@ -191,6 +191,8 @@ function _initializeUI() {
+         return true;
+     });
+ 
++    global.display.connect('gl-video-memory-purged', loadTheme);
++
+     // Provide the bus object for gnome-session to
+     // initiate logouts.
+     EndSessionDialog.init();
+-- 
+cgit v0.12
+
