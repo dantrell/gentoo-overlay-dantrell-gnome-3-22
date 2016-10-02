@@ -27,7 +27,7 @@ RDEPEND="
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf:2
 	x11-libs/pango
-	nautilus? ( >=gnome-base/nautilus-3 )
+	nautilus? ( >=gnome-base/nautilus-3[-vanilla-menu-compress] )
 	packagekit? ( app-admin/packagekit-base )
 "
 DEPEND="${RDEPEND}
@@ -60,6 +60,16 @@ unstuff - app-arch/stuffit
 zoo     - app-arch/zoo"
 
 src_prepare() {
+	# From GNOME:
+	# 	https://git.gnome.org/browse/file-roller/commit/?id=b78272c758a7f1835471e3804d1e9340e69bd2a3
+	eapply "${FILESDIR}"/${PN}-3.22.1-revert-fix-fr-application-local-command-line-memory-leak.patch
+
+	if use nautilus; then
+		# From GNOME:
+		# 	https://git.gnome.org/browse/file-roller/commit/?id=da09ee41ca7c9b63082cf2a35ae19701c34adca7
+		eapply -R "${FILESDIR}"/${PN}-3.21.91-remove-nautilus-extension.patch
+	fi
+
 	# File providing Gentoo package names for various archivers
 	cp -f "${FILESDIR}"/3.6.0-packages.match data/packages.match || die
 	gnome2_src_prepare

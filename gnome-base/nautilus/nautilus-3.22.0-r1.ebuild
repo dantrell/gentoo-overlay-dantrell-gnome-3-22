@@ -12,7 +12,7 @@ LICENSE="GPL-2+ LGPL-2+ FDL-1.1"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="exif gnome +introspection packagekit +previewer selinux sendto tracker vanilla-icon vanilla-icon-grid vanilla-menu vanilla-rename vanilla-search xmp"
+IUSE="exif gnome +introspection packagekit +previewer selinux sendto tracker vanilla-icon vanilla-icon-grid vanilla-menu vanilla-menu-compress vanilla-rename vanilla-search xmp"
 REQUIRED_USE="!vanilla-icon-grid? ( !vanilla-icon )"
 
 # FIXME: tests fails under Xvfb, but pass when building manually
@@ -84,19 +84,26 @@ src_prepare() {
 	#	fi
 	#fi
 
-	#if ! use vanilla-menu; then
-	#	eapply "${FILESDIR}"/${PN}-3.22.0-reorder-context-menu.patch
-	#fi
+	if ! use vanilla-menu; then
+		eapply "${FILESDIR}"/${PN}-3.22.0-reorder-context-menu.patch
+		if ! vanilla-menu-compress; then
+			eapply "${FILESDIR}"/${PN}-3.22.0-disable-automatic-decompression-of-archives.patch
+			eapply "${FILESDIR}"/${PN}-3.22.0-remove-native-compress-rebased.patch
+		fi
+	elif ! vanilla-menu-compress; then
+		eapply "${FILESDIR}"/${PN}-3.22.0-disable-automatic-decompression-of-archives.patch
+		eapply "${FILESDIR}"/${PN}-3.22.0-remove-native-compress.patch
+	fi
 
-	#if ! use vanilla-rename; then
-	#	eapply "${FILESDIR}"/${PN}-3.22.0-support-slow-double-click-to-rename.patch
-	#fi
+	if ! use vanilla-rename; then
+		eapply "${FILESDIR}"/${PN}-3.22.0-support-slow-double-click-to-rename.patch
+	fi
 
-	#if ! use vanilla-search; then
-	#	# From Dr. Amr Osman:
-	#	# 	https://bugs.launchpad.net/ubuntu/+source/nautilus/+bug/1164016/comments/31
-	#	eapply "${FILESDIR}"/${PN}-3.22.0-support-alternative-search.patch
-	#fi
+	if ! use vanilla-search; then
+		# From Dr. Amr Osman:
+		# 	https://bugs.launchpad.net/ubuntu/+source/nautilus/+bug/1164016/comments/31
+		eapply "${FILESDIR}"/${PN}-3.22.0-support-alternative-search.patch
+	fi
 
 	# Remove -D*DEPRECATED flags. Don't leave this for eclass! (bug #448822)
 	sed -e 's/DISABLE_DEPRECATED_CFLAGS=.*/DISABLE_DEPRECATED_CFLAGS=/' \

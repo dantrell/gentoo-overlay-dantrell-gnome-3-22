@@ -1,6 +1,6 @@
 diff '--exclude=.git' -urN a/data/org.gnome.nautilus.gschema.xml b/data/org.gnome.nautilus.gschema.xml
 --- a/data/org.gnome.nautilus.gschema.xml	2016-09-13 17:06:51.000000000 -0400
-+++ b/data/org.gnome.nautilus.gschema.xml	2016-09-27 10:02:55.286966263 -0400
++++ b/data/org.gnome.nautilus.gschema.xml	2016-10-02 00:39:08.864377082 -0400
 @@ -126,6 +126,11 @@
        <summary>Type of click used to launch/open files</summary>
        <description>Possible values are "single" to launch files on a single click, or "double" to launch them on a double click.</description>
@@ -15,7 +15,7 @@ diff '--exclude=.git' -urN a/data/org.gnome.nautilus.gschema.xml b/data/org.gnom
        <summary>What to do with executable text files when activated</summary>
 diff '--exclude=.git' -urN a/src/nautilus-canvas-container.c b/src/nautilus-canvas-container.c
 --- a/src/nautilus-canvas-container.c	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-canvas-container.c	2016-09-27 12:24:03.055571733 -0400
++++ b/src/nautilus-canvas-container.c	2016-10-02 00:39:08.865377065 -0400
 @@ -184,6 +184,11 @@
  static void store_layout_timestamps_now (NautilusCanvasContainer *container);
  static void schedule_redo_layout (NautilusCanvasContainer *container);
@@ -200,7 +200,7 @@ diff '--exclude=.git' -urN a/src/nautilus-canvas-container.c b/src/nautilus-canv
  nautilus_canvas_container_get_is_fixed_size (NautilusCanvasContainer *container)
 diff '--exclude=.git' -urN a/src/nautilus-canvas-container.h b/src/nautilus-canvas-container.h
 --- a/src/nautilus-canvas-container.h	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-canvas-container.h	2016-09-27 10:02:55.288966227 -0400
++++ b/src/nautilus-canvas-container.h	2016-10-02 00:39:08.865377065 -0400
 @@ -281,6 +281,8 @@
  									   int                     new_zoom_level);
  void              nautilus_canvas_container_set_single_click_mode         (NautilusCanvasContainer  *container,
@@ -212,7 +212,7 @@ diff '--exclude=.git' -urN a/src/nautilus-canvas-container.h b/src/nautilus-canv
  gboolean          nautilus_canvas_container_get_is_fixed_size             (NautilusCanvasContainer  *container);
 diff '--exclude=.git' -urN a/src/nautilus-canvas-private.h b/src/nautilus-canvas-private.h
 --- a/src/nautilus-canvas-private.h	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-canvas-private.h	2016-09-27 10:06:15.841346396 -0400
++++ b/src/nautilus-canvas-private.h	2016-10-02 00:39:08.865377065 -0400
 @@ -27,6 +27,8 @@
  #include "nautilus-canvas-item.h"
  #include "nautilus-canvas-container.h"
@@ -242,7 +242,7 @@ diff '--exclude=.git' -urN a/src/nautilus-canvas-private.h b/src/nautilus-canvas
  	gboolean keep_aligned;
 diff '--exclude=.git' -urN a/src/nautilus-canvas-view-container.c b/src/nautilus-canvas-view-container.c
 --- a/src/nautilus-canvas-view-container.c	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-canvas-view-container.c	2016-09-27 10:02:55.289966208 -0400
++++ b/src/nautilus-canvas-view-container.c	2016-10-02 00:39:08.866377048 -0400
 @@ -34,7 +34,7 @@
  
  static GQuark attribute_none_q;
@@ -254,7 +254,7 @@ diff '--exclude=.git' -urN a/src/nautilus-canvas-view-container.c b/src/nautilus
      /* Type unsafe comparison for performance */
 diff '--exclude=.git' -urN a/src/nautilus-canvas-view-container.h b/src/nautilus-canvas-view-container.h
 --- a/src/nautilus-canvas-view-container.h	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-canvas-view-container.h	2016-09-27 10:02:55.289966208 -0400
++++ b/src/nautilus-canvas-view-container.h	2016-10-02 00:39:08.866377048 -0400
 @@ -56,6 +56,8 @@
  	NautilusCanvasContainerClass parent_class;
  };
@@ -266,7 +266,7 @@ diff '--exclude=.git' -urN a/src/nautilus-canvas-view-container.h b/src/nautilus
  								      NautilusCanvasView      *view);
 diff '--exclude=.git' -urN a/src/nautilus-canvas-view.c b/src/nautilus-canvas-view.c
 --- a/src/nautilus-canvas-view.c	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-canvas-view.c	2016-09-27 10:14:27.819459852 -0400
++++ b/src/nautilus-canvas-view.c	2016-10-02 00:39:08.866377048 -0400
 @@ -180,6 +180,7 @@
                                                                          NautilusFile        *file,
                                                                          const SortCriterion *sort);
@@ -330,8 +330,27 @@ diff '--exclude=.git' -urN a/src/nautilus-canvas-view.c b/src/nautilus-canvas-vi
      nautilus_files_view_class->using_manual_layout = nautilus_canvas_view_using_manual_layout;
 diff '--exclude=.git' -urN a/src/nautilus-files-view.c b/src/nautilus-files-view.c
 --- a/src/nautilus-files-view.c	2016-09-19 14:54:58.000000000 -0400
-+++ b/src/nautilus-files-view.c	2016-09-27 12:09:54.726986899 -0400
-@@ -170,118 +170,6 @@
++++ b/src/nautilus-files-view.c	2016-10-02 01:25:40.737584296 -0400
+@@ -42,7 +42,6 @@
+ #include "nautilus-properties-window.h"
+ #include "nautilus-window.h"
+ #include "nautilus-toolbar.h"
+-#include "nautilus-view.h"
+ 
+ #if ENABLE_EMPTY_VIEW
+ #include "nautilus-empty-view.h"
+@@ -83,10 +82,6 @@
+ #include "nautilus-file-operations.h"
+ #include "nautilus-file-utilities.h"
+ #include "nautilus-file-private.h"
+-#include "nautilus-file-name-widget-controller.h"
+-#include "nautilus-rename-file-popover-controller.h"
+-#include "nautilus-new-folder-dialog-controller.h"
+-#include "nautilus-compress-dialog-controller.h"
+ #include "nautilus-global-preferences.h"
+ #include "nautilus-link.h"
+ #include "nautilus-metadata.h"
+@@ -170,118 +165,6 @@
  
  static GHashTable *script_accels = NULL;
  
@@ -450,7 +469,7 @@ diff '--exclude=.git' -urN a/src/nautilus-files-view.c b/src/nautilus-files-view
  typedef struct
  {
      NautilusFile *file;
-@@ -1870,7 +1758,7 @@
+@@ -1870,7 +1753,7 @@
      g_clear_object (&view->details->rename_file_controller);
  }
  
@@ -459,7 +478,7 @@ diff '--exclude=.git' -urN a/src/nautilus-files-view.c b/src/nautilus-files-view
  nautilus_files_view_rename_file_popover_new (NautilusFilesView *view,
                                               NautilusFile      *target_file)
  {
-@@ -2569,6 +2457,16 @@
+@@ -2569,6 +2452,16 @@
      NAUTILUS_FILES_VIEW_CLASS (G_OBJECT_GET_CLASS (view))->click_policy_changed (view);
  }
  
@@ -476,7 +495,7 @@ diff '--exclude=.git' -urN a/src/nautilus-files-view.c b/src/nautilus-files-view
  gboolean
  nautilus_files_view_should_sort_directories_first (NautilusFilesView *view)
  {
-@@ -3004,6 +2902,8 @@
+@@ -3004,6 +2897,8 @@
      g_signal_handlers_disconnect_by_func (nautilus_preferences,
                                            click_policy_changed_callback, view);
      g_signal_handlers_disconnect_by_func (nautilus_preferences,
@@ -485,7 +504,7 @@ diff '--exclude=.git' -urN a/src/nautilus-files-view.c b/src/nautilus-files-view
                                            sort_directories_first_changed_callback, view);
      g_signal_handlers_disconnect_by_func (gtk_filechooser_preferences,
                                            show_hidden_files_changed_callback, view);
-@@ -9163,6 +9063,10 @@
+@@ -9163,6 +9058,10 @@
                                G_CALLBACK (click_policy_changed_callback),
                                view);
      g_signal_connect_swapped (nautilus_preferences,
@@ -498,11 +517,18 @@ diff '--exclude=.git' -urN a/src/nautilus-files-view.c b/src/nautilus-files-view
      g_signal_connect_swapped (gtk_filechooser_preferences,
 diff '--exclude=.git' -urN a/src/nautilus-files-view.h b/src/nautilus-files-view.h
 --- a/src/nautilus-files-view.h	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-files-view.h	2016-09-27 12:04:26.730949641 -0400
-@@ -58,6 +58,118 @@
++++ b/src/nautilus-files-view.h	2016-10-02 01:25:36.610663585 -0400
+@@ -58,6 +58,125 @@
  #define NAUTILUS_FILES_VIEW_GET_CLASS(obj)\
          (G_TYPE_INSTANCE_GET_CLASS ((obj), NAUTILUS_TYPE_FILES_VIEW, NautilusFilesViewClass))
  
++#include "nautilus-view.h"
++
++#include "nautilus-file-name-widget-controller.h"
++#include "nautilus-rename-file-popover-controller.h"
++#include "nautilus-new-folder-dialog-controller.h"
++#include "nautilus-compress-dialog-controller.h"
++
 +struct NautilusFilesViewDetails
 +{
 +    /* Main components */
@@ -618,7 +644,7 @@ diff '--exclude=.git' -urN a/src/nautilus-files-view.h b/src/nautilus-files-view
  typedef struct NautilusFilesViewDetails NautilusFilesViewDetails;
  
  struct NautilusFilesView {
-@@ -245,6 +357,7 @@
+@@ -245,6 +364,7 @@
           * values and forcing an update if appropriate.
           */
          void        (* click_policy_changed) (NautilusFilesView *view);
@@ -626,7 +652,7 @@ diff '--exclude=.git' -urN a/src/nautilus-files-view.h b/src/nautilus-files-view
          void        (* sort_directories_first_changed) (NautilusFilesView *view);
  
          /* Get the id for this view. Its a guint*/
-@@ -336,6 +449,9 @@
+@@ -336,6 +456,9 @@
                                                                    int                     copy_action,
                                                                    int                     x,
                                                                    int                     y);
@@ -638,7 +664,7 @@ diff '--exclude=.git' -urN a/src/nautilus-files-view.h b/src/nautilus-files-view
                                                                        const char         *filename,
 diff '--exclude=.git' -urN a/src/nautilus-global-preferences.h b/src/nautilus-global-preferences.h
 --- a/src/nautilus-global-preferences.h	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-global-preferences.h	2016-09-27 10:02:55.288966227 -0400
++++ b/src/nautilus-global-preferences.h	2016-10-02 00:39:08.867377031 -0400
 @@ -55,6 +55,9 @@
  /* Drag and drop preferences */
  #define NAUTILUS_PREFERENCES_OPEN_FOLDER_ON_DND_HOVER   	"open-folder-on-dnd-hover"
@@ -651,7 +677,7 @@ diff '--exclude=.git' -urN a/src/nautilus-global-preferences.h b/src/nautilus-gl
  
 diff '--exclude=.git' -urN a/src/nautilus-list-view-private.h b/src/nautilus-list-view-private.h
 --- a/src/nautilus-list-view-private.h	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-list-view-private.h	2016-09-27 10:02:55.291966172 -0400
++++ b/src/nautilus-list-view-private.h	2016-10-02 00:39:08.867377031 -0400
 @@ -39,6 +39,9 @@
  
    GtkTreePath *double_click_path[2]; /* Both clicks in a double click need to be on the same row */
@@ -672,7 +698,7 @@ diff '--exclude=.git' -urN a/src/nautilus-list-view-private.h b/src/nautilus-lis
  
 diff '--exclude=.git' -urN a/src/nautilus-list-view.c b/src/nautilus-list-view.c
 --- a/src/nautilus-list-view.c	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-list-view.c	2016-09-27 12:39:21.162403413 -0400
++++ b/src/nautilus-list-view.c	2016-10-02 00:39:08.868377014 -0400
 @@ -32,6 +32,8 @@
  #include "nautilus-toolbar.h"
  #include "nautilus-list-view-dnd.h"
@@ -1029,7 +1055,7 @@ diff '--exclude=.git' -urN a/src/nautilus-list-view.c b/src/nautilus-list-view.c
      nautilus_list_view_set_zoom_level (list_view, get_default_zoom_level ());
 diff '--exclude=.git' -urN a/src/nautilus-preferences-window.c b/src/nautilus-preferences-window.c
 --- a/src/nautilus-preferences-window.c	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/nautilus-preferences-window.c	2016-09-27 10:11:46.414376295 -0400
++++ b/src/nautilus-preferences-window.c	2016-10-02 00:39:08.868377014 -0400
 @@ -59,11 +59,15 @@
      "trash_confirm_checkbutton"
  #define NAUTILUS_PREFERENCES_DIALOG_AUTOMATIC_DECOMPRESSION_WIDGET             \
@@ -1099,7 +1125,7 @@ diff '--exclude=.git' -urN a/src/nautilus-preferences-window.c b/src/nautilus-pr
  
 diff '--exclude=.git' -urN a/src/resources/ui/nautilus-preferences-window.ui b/src/resources/ui/nautilus-preferences-window.ui
 --- a/src/resources/ui/nautilus-preferences-window.ui	2016-09-13 17:06:51.000000000 -0400
-+++ b/src/resources/ui/nautilus-preferences-window.ui	2016-09-27 10:02:55.292966154 -0400
++++ b/src/resources/ui/nautilus-preferences-window.ui	2016-10-02 00:39:08.868377014 -0400
 @@ -557,6 +557,23 @@
                      <property name="position">3</property>
                    </packing>
