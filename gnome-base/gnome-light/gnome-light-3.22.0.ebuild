@@ -34,7 +34,7 @@ RDEPEND="!gnome-base/gnome
 		>=gnome-base/gnome-shell-${PV} )
 
 	>=x11-themes/adwaita-icon-theme-$(get_version_component_range 1-2)
-	>=x11-themes/gnome-themes-standard-3.20
+	>=x11-themes/gnome-themes-standard-$(get_version_component_range 1-2)
 	>=x11-themes/gnome-backgrounds-$(get_version_component_range 1-2)
 
 	>=x11-terms/gnome-terminal-${PV}
