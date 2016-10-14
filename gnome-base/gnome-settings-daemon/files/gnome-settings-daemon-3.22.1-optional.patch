@@ -1,22 +1,11 @@
-From 8b526c757f0e977eeda9285762e137deba0a31f4 Mon Sep 17 00:00:00 2001
-From: Ole Reifschneider <mail@ole-reifschneider.de>
-Date: Sat, 11 Apr 2015 23:10:21 +0200
-Subject: [PATCH] Make colord and wacom support optional
-
----
- configure.ac        | 35 +++++++++++++++++++++++++++++------
- plugins/Makefile.am |  7 ++++++-
- 2 files changed, 35 insertions(+), 7 deletions(-)
-
-diff --git a/configure.ac b/configure.ac
-index 50a6bb1..a42ec20 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -236,7 +236,20 @@ dnl ---------------------------------------------------------------------------
+diff -ru gnome-settings-daemon-3.22.1.old/configure.ac gnome-settings-daemon-3.22.1/configure.ac
+--- gnome-settings-daemon-3.22.1.old/configure.ac	2016-10-11 14:31:11.000000000 +0300
++++ gnome-settings-daemon-3.22.1/configure.ac	2016-10-12 15:36:40.710769455 +0300
+@@ -245,7 +245,20 @@
  dnl - color
  dnl ---------------------------------------------------------------------------
  
--PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3])
+-PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3 lcms2 >= $LCMS_REQUIRED_VERSION])
 +AC_ARG_ENABLE([color],
 +  AS_HELP_STRING([--disable-color],
 +                 [turn off color plugin]),
@@ -24,7 +13,7 @@ index 50a6bb1..a42ec20 100644
 +       [with_color=yes]) dnl Default value
 +
 +if test x$with_color = xyes; then
-+       PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3])
++       PKG_CHECK_MODULES(COLOR, [colord >= 1.0.2 gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION libcanberra-gtk3 lcms2 >= $LCMS_REQUIRED_VERSION])
 +       AC_DEFINE(HAVE_COLOR, 1, [Define if color plugin is enabled])
 +fi
 +AM_CONDITIONAL(WITH_COLOR, test "x$with_color" = "xyes")
@@ -34,7 +23,7 @@ index 50a6bb1..a42ec20 100644
  
  dnl ---------------------------------------------------------------------------
  dnl - datetime
-@@ -267,15 +280,25 @@ case $host_os in
+@@ -270,21 +283,32 @@
      if test "$host_cpu" = s390 -o "$host_cpu" = s390x; then
        have_wacom=no
      else
@@ -65,11 +54,17 @@ index 50a6bb1..a42ec20 100644
      fi
      ;;
    *)
-diff --git a/plugins/Makefile.am b/plugins/Makefile.am
-index 7365953..779b5d9 100644
---- a/plugins/Makefile.am
-+++ b/plugins/Makefile.am
-@@ -4,7 +4,6 @@ enabled_plugins =	\
+     have_wacom=no
+     ;;
+ esac
++
+ AM_CONDITIONAL(HAVE_WACOM, test x$have_wacom = xyes)
+ 
+ dnl ==============================================
+diff -ru gnome-settings-daemon-3.22.1.old/plugins/Makefile.am gnome-settings-daemon-3.22.1/plugins/Makefile.am
+--- gnome-settings-daemon-3.22.1.old/plugins/Makefile.am	2015-07-03 16:31:43.000000000 +0300
++++ gnome-settings-daemon-3.22.1/plugins/Makefile.am	2016-10-12 15:20:24.538594104 +0300
+@@ -4,7 +4,6 @@
  	a11y-keyboard	\
  	a11y-settings	\
  	clipboard	\
@@ -77,7 +72,7 @@ index 7365953..779b5d9 100644
  	datetime	\
  	dummy		\
  	power		\
-@@ -21,6 +20,12 @@ enabled_plugins =	\
+@@ -22,6 +21,12 @@
  
  disabled_plugins = $(NULL)
  
@@ -90,6 +85,3 @@ index 7365953..779b5d9 100644
  if SMARTCARD_SUPPORT
  enabled_plugins += smartcard
  else
--- 
-2.0.5
-

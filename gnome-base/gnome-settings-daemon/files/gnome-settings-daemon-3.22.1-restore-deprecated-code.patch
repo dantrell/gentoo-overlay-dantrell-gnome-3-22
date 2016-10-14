@@ -1,6 +1,6 @@
 diff '--exclude=.git' -urN a/config.h.in b/config.h.in
---- a/config.h.in	2015-11-10 08:08:29.000000000 -0500
-+++ b/config.h.in	2016-01-16 00:48:36.937569865 -0500
+--- a/config.h.in	2016-10-11 07:36:16.000000000 -0400
++++ b/config.h.in	2016-10-12 19:07:42.734379862 -0400
 @@ -1,5 +1,8 @@
  /* config.h.in.  Generated from configure.ac by autoheader.  */
  
@@ -11,9 +11,9 @@ diff '--exclude=.git' -urN a/config.h.in b/config.h.in
  #undef ENABLE_NLS
  
 diff '--exclude=.git' -urN a/configure b/configure
---- a/configure	2015-11-10 08:08:25.000000000 -0500
-+++ b/configure	2016-01-16 00:48:36.944569823 -0500
-@@ -714,6 +714,8 @@
+--- a/configure	2016-10-11 07:36:15.000000000 -0400
++++ b/configure	2016-10-12 19:09:32.740769193 -0400
+@@ -715,6 +715,8 @@
  GLIB_COMPILE_SCHEMAS
  gsettingsschemadir
  GSETTINGS_DISABLE_SCHEMAS_COMPILE
@@ -22,15 +22,15 @@ diff '--exclude=.git' -urN a/configure b/configure
  GLIB_MKENUMS
  GLIB_GENMARSHAL
  GSD_PLUGIN_LDFLAGS
-@@ -915,6 +917,7 @@
+@@ -916,6 +918,7 @@
  enable_nls
  enable_compile_warnings
  enable_iso_c
 +enable_deprecated
  enable_schemas_compile
  enable_gudev
- enable_wayland
-@@ -1634,6 +1637,7 @@
+ enable_alsa
+@@ -1636,6 +1639,7 @@
    --enable-compile-warnings=[no/minimum/yes/maximum/error]
                            Turn on compiler warnings
    --enable-iso-c          Try to warn if code is not ISO C
@@ -38,7 +38,7 @@ diff '--exclude=.git' -urN a/configure b/configure
    --disable-schemas-compile
                            Disable regeneration of gschemas.compiled on install
    --disable-gudev         Disable GUdev support (not optional on Linux
-@@ -17597,6 +17601,28 @@
+@@ -17599,6 +17603,28 @@
  
  
  
@@ -67,7 +67,7 @@ diff '--exclude=.git' -urN a/configure b/configure
  
  
  
-@@ -21618,6 +21644,10 @@
+@@ -21548,6 +21574,10 @@
    ac_config_commands="$ac_config_commands po/stamp-it"
  
  
@@ -78,18 +78,18 @@ diff '--exclude=.git' -urN a/configure b/configure
  if test -z "${HAVE_GUDEV_TRUE}" && test -z "${HAVE_GUDEV_FALSE}"; then
    as_fn_error $? "conditional \"HAVE_GUDEV\" was never defined.
  Usually this means the macro was only invoked conditionally." "$LINENO" 5
-@@ -24151,6 +24181,7 @@
+@@ -24085,6 +24115,7 @@
          cflags:                   ${CFLAGS}
          Maintainer mode:          ${USE_MAINTAINER_MODE}
  
 +        Enable deprecated stuff:  ${enable_deprecated}
-         LCMS DICT support:        ${have_new_lcms}
          NetworkManager support:   ${enable_network_manager}
          Libnotify support:        ${have_libnotify}
+         Smartcard support:        ${have_smartcard_support}
 diff '--exclude=.git' -urN a/configure.ac b/configure.ac
---- a/configure.ac	2015-11-10 08:08:14.000000000 -0500
-+++ b/configure.ac	2016-01-16 00:48:36.944569823 -0500
-@@ -90,6 +90,15 @@
+--- a/configure.ac	2016-10-11 07:31:11.000000000 -0400
++++ b/configure.ac	2016-10-12 19:08:32.257105013 -0400
+@@ -91,6 +91,15 @@
  AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
  AC_PATH_PROG([GLIB_MKENUMS],[glib-mkenums])
  
@@ -105,17 +105,17 @@ diff '--exclude=.git' -urN a/configure.ac b/configure.ac
  dnl ================================================================
  dnl GSettings stuff
  dnl ================================================================
-@@ -576,6 +585,7 @@
+@@ -581,6 +590,7 @@
          cflags:                   ${CFLAGS}
          Maintainer mode:          ${USE_MAINTAINER_MODE}
  
 +        Enable deprecated stuff:  ${enable_deprecated}
-         LCMS DICT support:        ${have_new_lcms}
          NetworkManager support:   ${enable_network_manager}
          Libnotify support:        ${have_libnotify}
+         Smartcard support:        ${have_smartcard_support}
 diff '--exclude=.git' -urN a/data/org.gnome.settings-daemon.plugins.power.gschema.xml.in.in b/data/org.gnome.settings-daemon.plugins.power.gschema.xml.in.in
---- a/data/org.gnome.settings-daemon.plugins.power.gschema.xml.in.in	2015-11-10 08:00:41.000000000 -0500
-+++ b/data/org.gnome.settings-daemon.plugins.power.gschema.xml.in.in	2016-01-16 01:42:37.438365457 -0500
+--- a/data/org.gnome.settings-daemon.plugins.power.gschema.xml.in.in	2016-03-15 10:54:50.000000000 -0400
++++ b/data/org.gnome.settings-daemon.plugins.power.gschema.xml.in.in	2016-10-12 19:07:42.736379851 -0400
 @@ -50,5 +50,10 @@
        <summary>Power button action</summary>
        <description>The action to take when the system power button is pressed. This action is hard-coded (and the setting ignored) on virtual machines (power off) and tablets (suspend).</description>
@@ -128,8 +128,8 @@ diff '--exclude=.git' -urN a/data/org.gnome.settings-daemon.plugins.power.gschem
    </schema>
  </schemalist>
 diff '--exclude=.git' -urN a/plugins/common/Makefile.am b/plugins/common/Makefile.am
---- a/plugins/common/Makefile.am	2015-10-12 06:44:00.000000000 -0400
-+++ b/plugins/common/Makefile.am	2016-01-16 00:48:36.945569817 -0500
+--- a/plugins/common/Makefile.am	2016-10-04 05:40:20.000000000 -0400
++++ b/plugins/common/Makefile.am	2016-10-12 19:07:42.736379851 -0400
 @@ -35,6 +35,8 @@
  	gsd-keygrab.h		\
  	gsd-input-helper.c	\
@@ -140,9 +140,9 @@ diff '--exclude=.git' -urN a/plugins/common/Makefile.am b/plugins/common/Makefil
  	gsd-settings-migrate.h	\
  	gsd-shell-helper.c	\
 diff '--exclude=.git' -urN a/plugins/common/Makefile.in b/plugins/common/Makefile.in
---- a/plugins/common/Makefile.in	2015-11-10 08:08:25.000000000 -0500
-+++ b/plugins/common/Makefile.in	2016-01-16 00:48:36.946569811 -0500
-@@ -118,6 +118,7 @@
+--- a/plugins/common/Makefile.in	2016-10-11 07:36:17.000000000 -0400
++++ b/plugins/common/Makefile.in	2016-10-12 19:07:42.736379851 -0400
+@@ -117,6 +117,7 @@
  	gsd-device-manager-x11.c gsd-device-manager-x11.h \
  	gsd-device-mapper.c gsd-device-mapper.h gsd-keygrab.c \
  	gsd-keygrab.h gsd-input-helper.c gsd-input-helper.h \
@@ -150,7 +150,7 @@ diff '--exclude=.git' -urN a/plugins/common/Makefile.in b/plugins/common/Makefil
  	gsd-settings-migrate.c gsd-settings-migrate.h \
  	gsd-shell-helper.c gsd-shell-helper.h \
  	gsd-device-manager-udev.c gsd-device-manager-udev.h
-@@ -128,6 +129,7 @@
+@@ -127,6 +128,7 @@
  	libcommon_la-gsd-device-manager-x11.lo \
  	libcommon_la-gsd-device-mapper.lo libcommon_la-gsd-keygrab.lo \
  	libcommon_la-gsd-input-helper.lo \
@@ -158,7 +158,7 @@ diff '--exclude=.git' -urN a/plugins/common/Makefile.in b/plugins/common/Makefil
  	libcommon_la-gsd-settings-migrate.lo \
  	libcommon_la-gsd-shell-helper.lo $(am__objects_1)
  libcommon_la_OBJECTS = $(am_libcommon_la_OBJECTS)
-@@ -483,6 +485,7 @@
+@@ -453,6 +455,7 @@
  	gsd-device-manager-x11.c gsd-device-manager-x11.h \
  	gsd-device-mapper.c gsd-device-mapper.h gsd-keygrab.c \
  	gsd-keygrab.h gsd-input-helper.c gsd-input-helper.h \
@@ -166,7 +166,7 @@ diff '--exclude=.git' -urN a/plugins/common/Makefile.in b/plugins/common/Makefil
  	gsd-settings-migrate.c gsd-settings-migrate.h \
  	gsd-shell-helper.c gsd-shell-helper.h $(am__append_1)
  libcommon_la_CPPFLAGS = \
-@@ -650,6 +653,7 @@
+@@ -618,6 +621,7 @@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcommon_la-gsd-device-mapper.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcommon_la-gsd-input-helper.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcommon_la-gsd-keygrab.Plo@am__quote@
@@ -174,7 +174,7 @@ diff '--exclude=.git' -urN a/plugins/common/Makefile.in b/plugins/common/Makefil
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcommon_la-gsd-settings-migrate.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcommon_la-gsd-shell-helper.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_egg_key_parsing-test-egg-key-parsing.Po@am__quote@
-@@ -724,6 +728,13 @@
+@@ -692,6 +696,13 @@
  @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
  @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcommon_la_CPPFLAGS) $(CPPFLAGS) $(libcommon_la_CFLAGS) $(CFLAGS) -c -o libcommon_la-gsd-settings-migrate.lo `test -f 'gsd-settings-migrate.c' || echo '$(srcdir)/'`gsd-settings-migrate.c
  
@@ -190,7 +190,7 @@ diff '--exclude=.git' -urN a/plugins/common/Makefile.in b/plugins/common/Makefil
  @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libcommon_la-gsd-shell-helper.Tpo $(DEPDIR)/libcommon_la-gsd-shell-helper.Plo
 diff '--exclude=.git' -urN a/plugins/common/gsd-power-helper.c b/plugins/common/gsd-power-helper.c
 --- a/plugins/common/gsd-power-helper.c	1969-12-31 19:00:00.000000000 -0500
-+++ b/plugins/common/gsd-power-helper.c	2016-01-16 00:48:36.946569811 -0500
++++ b/plugins/common/gsd-power-helper.c	2016-10-12 19:07:42.736379851 -0400
 @@ -0,0 +1,139 @@
 +/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
 + *
@@ -333,7 +333,7 @@ diff '--exclude=.git' -urN a/plugins/common/gsd-power-helper.c b/plugins/common/
 +#endif /* ENABLE_DEPRECATED */
 diff '--exclude=.git' -urN a/plugins/common/gsd-power-helper.h b/plugins/common/gsd-power-helper.h
 --- a/plugins/common/gsd-power-helper.h	1969-12-31 19:00:00.000000000 -0500
-+++ b/plugins/common/gsd-power-helper.h	2016-01-16 00:48:36.946569811 -0500
++++ b/plugins/common/gsd-power-helper.h	2016-10-12 19:07:42.736379851 -0400
 @@ -0,0 +1,35 @@
 +/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
 + *
@@ -371,8 +371,8 @@ diff '--exclude=.git' -urN a/plugins/common/gsd-power-helper.h b/plugins/common/
 +
 +#endif /* __GSD_POWER_HELPER_H */
 diff '--exclude=.git' -urN a/plugins/media-keys/gsd-media-keys-manager.c b/plugins/media-keys/gsd-media-keys-manager.c
---- a/plugins/media-keys/gsd-media-keys-manager.c	2015-11-10 08:05:30.000000000 -0500
-+++ b/plugins/media-keys/gsd-media-keys-manager.c	2016-01-16 00:48:36.947569805 -0500
+--- a/plugins/media-keys/gsd-media-keys-manager.c	2016-10-04 05:30:09.000000000 -0400
++++ b/plugins/media-keys/gsd-media-keys-manager.c	2016-10-12 19:07:42.737379846 -0400
 @@ -57,6 +57,9 @@
  #include "shell-key-grabber.h"
  #include "gsd-screenshot-utils.h"
@@ -396,7 +396,7 @@ diff '--exclude=.git' -urN a/plugins/media-keys/gsd-media-keys-manager.c b/plugi
  #define GSD_MEDIA_KEYS_DBUS_PATH GSD_DBUS_PATH "/MediaKeys"
  #define GSD_MEDIA_KEYS_DBUS_NAME GSD_DBUS_NAME ".MediaKeys"
  
-@@ -189,6 +198,11 @@
+@@ -204,6 +213,11 @@
          GDBusProxy      *logind_proxy;
          gint             inhibit_keys_fd;
  
@@ -408,7 +408,7 @@ diff '--exclude=.git' -urN a/plugins/media-keys/gsd-media-keys-manager.c b/plugi
          GList           *media_players;
  
          GDBusNodeInfo   *introspection_data;
-@@ -1808,17 +1822,34 @@
+@@ -1888,17 +1902,34 @@
  {
          switch (action_type) {
          case GSD_POWER_ACTION_SUSPEND:
@@ -443,8 +443,8 @@ diff '--exclude=.git' -urN a/plugins/media-keys/gsd-media-keys-manager.c b/plugi
                  break;
          case GSD_POWER_ACTION_BLANK:
          case GSD_POWER_ACTION_LOGOUT:
-@@ -2499,6 +2530,10 @@
-         g_clear_object (&priv->screencast_proxy);
+@@ -2902,6 +2933,10 @@
+         g_clear_object (&priv->iio_sensor_proxy);
          g_clear_pointer (&priv->chassis_type, g_free);
  
 +#ifdef ENABLE_DEPRECATED
@@ -454,7 +454,7 @@ diff '--exclude=.git' -urN a/plugins/media-keys/gsd-media-keys-manager.c b/plugi
          if (priv->cancellable != NULL) {
                  g_cancellable_cancel (priv->cancellable);
                  g_clear_object (&priv->cancellable);
-@@ -2686,6 +2721,24 @@
+@@ -3102,6 +3137,24 @@
          }
  }
  
@@ -479,7 +479,7 @@ diff '--exclude=.git' -urN a/plugins/media-keys/gsd-media-keys-manager.c b/plugi
  static void
  power_screen_ready_cb (GObject             *source_object,
                         GAsyncResult        *res,
-@@ -2803,6 +2856,19 @@
+@@ -3216,6 +3269,19 @@
                     manager->priv->bus_cancellable,
                     (GAsyncReadyCallback) on_bus_gotten,
                     manager);
@@ -500,8 +500,8 @@ diff '--exclude=.git' -urN a/plugins/media-keys/gsd-media-keys-manager.c b/plugi
  
  GsdMediaKeysManager *
 diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/gsd-power-manager.c
---- a/plugins/power/gsd-power-manager.c	2015-10-12 06:43:47.000000000 -0400
-+++ b/plugins/power/gsd-power-manager.c	2016-01-16 00:59:58.972360955 -0500
+--- a/plugins/power/gsd-power-manager.c	2016-10-04 05:40:12.000000000 -0400
++++ b/plugins/power/gsd-power-manager.c	2016-10-12 19:07:42.737379846 -0400
 @@ -49,6 +49,9 @@
  #include "gnome-settings-bus.h"
  #include "gsd-enums.h"
@@ -512,7 +512,7 @@ diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/g
  
  #define UPOWER_DBUS_NAME                        "org.freedesktop.UPower"
  #define UPOWER_DBUS_PATH                        "/org/freedesktop/UPower"
-@@ -184,6 +187,11 @@
+@@ -185,6 +188,11 @@
          gboolean                 is_virtual_machine;
          gboolean                 is_tablet;
  
@@ -524,7 +524,7 @@ diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/g
          /* Idles */
          GnomeIdleMonitor        *idle_monitor;
          guint                    idle_dim_id;
-@@ -1055,24 +1063,63 @@
+@@ -1053,24 +1061,63 @@
  }
  
  static void
@@ -588,7 +588,7 @@ diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/g
                  break;
          case GSD_POWER_ACTION_BLANK:
                  backlight_disable (manager);
-@@ -1261,29 +1308,6 @@
+@@ -1259,29 +1306,6 @@
  }
  
  static void
@@ -618,7 +618,7 @@ diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/g
  do_lid_closed_action (GsdPowerManager *manager)
  {
          /* play a sound, using sounds from the naming spec */
-@@ -1307,7 +1331,15 @@
+@@ -1305,7 +1329,15 @@
                          /* We put the screensaver on * as we're not suspending,
                           * but the lid is closed */
                          lock_screensaver (manager);
@@ -634,7 +634,7 @@ diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/g
          }
  }
  
-@@ -1949,6 +1981,24 @@
+@@ -1937,6 +1969,24 @@
                  handle_wake_up_screen (GSD_POWER_MANAGER (user_data));
  }
  
@@ -659,7 +659,7 @@ diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/g
  static void
  power_keyboard_proxy_ready_cb (GObject             *source_object,
                                 GAsyncResult        *res,
-@@ -2591,6 +2641,18 @@
+@@ -2590,6 +2640,18 @@
          if (manager->priv->lid_is_present)
                  manager->priv->lid_is_closed = up_client_get_lid_is_closed (manager->priv->up_client);
  
@@ -678,7 +678,7 @@ diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/g
          /* Set up the logind proxy */
          manager->priv->logind_proxy =
                  g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-@@ -2605,6 +2667,7 @@
+@@ -2604,6 +2666,7 @@
                  g_debug ("No systemd (logind) support, disabling plugin");
                  return FALSE;
          }
@@ -686,7 +686,7 @@ diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/g
  
          /* Check for XTEST support */
          if (supports_xtest () == FALSE) {
-@@ -2694,6 +2757,9 @@
+@@ -2693,6 +2756,9 @@
          }
          g_clear_object (&manager->priv->device_composite);
  
@@ -697,8 +697,8 @@ diff '--exclude=.git' -urN a/plugins/power/gsd-power-manager.c b/plugins/power/g
  
          play_loop_stop (&manager->priv->critical_alert_timeout_id);
 diff '--exclude=.git' -urN a/plugins/power/test.py b/plugins/power/test.py
---- a/plugins/power/test.py	2015-10-12 06:43:47.000000000 -0400
-+++ b/plugins/power/test.py	2016-01-16 01:42:37.438365457 -0500
+--- a/plugins/power/test.py	2015-07-03 09:31:43.000000000 -0400
++++ b/plugins/power/test.py	2016-10-12 19:07:42.738379840 -0400
 @@ -86,7 +86,6 @@
          # start power plugin
          self.settings_gsd_power['active'] = False

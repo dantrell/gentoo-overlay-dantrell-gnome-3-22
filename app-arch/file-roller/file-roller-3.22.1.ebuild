@@ -60,10 +60,6 @@ unstuff - app-arch/stuffit
 zoo     - app-arch/zoo"
 
 src_prepare() {
-	# From GNOME:
-	# 	https://git.gnome.org/browse/file-roller/commit/?id=b78272c758a7f1835471e3804d1e9340e69bd2a3
-	eapply "${FILESDIR}"/${PN}-3.22.1-revert-fix-fr-application-local-command-line-memory-leak.patch
-
 	if use nautilus; then
 		# From GNOME:
 		# 	https://git.gnome.org/browse/file-roller/commit/?id=da09ee41ca7c9b63082cf2a35ae19701c34adca7

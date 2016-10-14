@@ -127,6 +127,7 @@ DEPEND="${COMMON_DEPEND}
 src_prepare() {
 	if use xephyr; then
 		# From GNOME (enforce old X11 backend):
+		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=0c22a21a2490024110d8a61afd4d385b2e91de6c
 		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=f9ef80749af3535879f6e3d11ac3489270b849f1
 		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=22f0d3076ead0c20ff5fc0e5f861d7164142e168
 		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=f5c058a036b21da747921d0ed9eefa64331e4f17
@@ -135,6 +136,7 @@ src_prepare() {
 		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=093fd54e2b7cf2e57982f78f729394f4f1c0cf4b
 		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=5ae3e5aeb78d9d47641c85d3e15096912dc36cad
 		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=af28a219be30490c1c50a9ed99c1e22e70a36826
+		eapply -R "${FILESDIR}"/${PN}-3.22.1-window-tracker-consider-flatpak-id-for-window-matching.patch
 		eapply -R "${FILESDIR}"/${PN}-3.21.92-recorder-composite-captured-images-before-passing-into-gstreamer.patch
 		eapply -R "${FILESDIR}"/${PN}-3.21.92-screenshot-composite-multiple-captures-into-one-image.patch
 		eapply -R "${FILESDIR}"/${PN}-3.21.4-use-clutter-stage-capture-instead-of-cogls-read-pixels.patch
@@ -146,7 +148,7 @@ src_prepare() {
 
 		# From GNOME (enforce old X11 backend):
 		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=296b61b61c623b6a2a1011618ab1300041f45840
-		eapply "${FILESDIR}"/${PN}-3.22.0-reduce-mutter-dependency-requirement.patch
+		eapply "${FILESDIR}"/${PN}-3.22.1-reduce-mutter-dependency-requirement.patch
 	fi
 
 	if use deprecated; then
