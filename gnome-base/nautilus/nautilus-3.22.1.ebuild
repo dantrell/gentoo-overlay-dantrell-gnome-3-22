@@ -86,11 +86,11 @@ src_prepare() {
 
 	if ! use vanilla-menu; then
 		eapply "${FILESDIR}"/${PN}-3.22.0-reorder-context-menu.patch
-		if ! vanilla-menu-compress; then
+		if ! use vanilla-menu-compress; then
 			eapply "${FILESDIR}"/${PN}-3.22.0-disable-automatic-decompression-of-archives.patch
 			eapply "${FILESDIR}"/${PN}-3.22.0-remove-native-compress-rebased.patch
 		fi
-	elif ! vanilla-menu-compress; then
+	elif ! use vanilla-menu-compress; then
 		eapply "${FILESDIR}"/${PN}-3.22.0-disable-automatic-decompression-of-archives.patch
 		eapply "${FILESDIR}"/${PN}-3.22.0-remove-native-compress.patch
 	fi
