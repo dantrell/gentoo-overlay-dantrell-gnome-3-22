@@ -24,9 +24,8 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	$(vala_depend)
-	>=dev-util/intltool-0.50.1
 	dev-util/itstool
-	>=sys-devel/gettext-0.17
+	>=sys-devel/gettext-0.19.8
 	virtual/pkgconfig
 "
 
