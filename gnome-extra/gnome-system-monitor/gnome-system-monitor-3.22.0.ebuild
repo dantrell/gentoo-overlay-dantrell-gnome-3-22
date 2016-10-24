@@ -26,14 +26,15 @@ RDEPEND="
 "
 # eautoreconf requires gnome-base/gnome-common
 DEPEND="${RDEPEND}
-	>=app-text/gnome-doc-utils-0.20
+	app-text/yelp-tools
 	>=dev-util/intltool-0.41.0
-	dev-util/itstool
 	virtual/pkgconfig
 "
 
 src_configure() {
+	# XXX: appdata is deprecated by appstream-glib, upstream must upgrade
 	gnome2_src_configure \
 		$(use_enable systemd) \
-		$(use_enable X wnck)
+		$(use_enable X wnck) \
+		APPDATA_VALIDATE="$(type -P true)"
 }

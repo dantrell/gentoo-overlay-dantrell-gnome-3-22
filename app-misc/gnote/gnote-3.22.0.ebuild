@@ -25,14 +25,13 @@ COMMON_DEPEND="
 	>=dev-libs/libxml2-2:2
 	dev-libs/libxslt
 	>=sys-apps/util-linux-2.16:=
-	>=x11-libs/gtk+-3.16:3
+	>=x11-libs/gtk+-3.20:3
 "
 RDEPEND="${COMMON_DEPEND}
 	gnome-base/gsettings-desktop-schemas
 "
 DEPEND="${DEPEND}
 	app-text/docbook-xml-dtd:4.1.2
-	dev-util/desktop-file-utils
 	>=dev-util/intltool-0.35.0
 	dev-util/itstool
 	virtual/pkgconfig

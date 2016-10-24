@@ -20,8 +20,8 @@ RDEPEND=""
 DEPEND="
 	app-text/docbook-xml-dtd:4.1.2
 	app-text/docbook-xml-dtd:4.2
+	app-text/yelp-tools
 	dev-libs/libxslt
-	dev-util/itstool
 	sys-devel/gettext
 	virtual/pkgconfig
 "

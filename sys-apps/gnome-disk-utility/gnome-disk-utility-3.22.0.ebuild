@@ -15,18 +15,18 @@ KEYWORDS="*"
 IUSE="fat gnome systemd"
 
 COMMON_DEPEND="
-	>=dev-libs/glib-2.31:2[dbus]
-	>=sys-fs/udisks-2.1.1:2
-	>=x11-libs/gtk+-3.16.0:3
 	>=app-arch/xz-utils-5.0.5
 	>=app-crypt/libsecret-0.7
+	>=dev-libs/glib-2.31:2[dbus]
 	dev-libs/libpwquality
+	>=media-libs/libcanberra-0.1[gtk3]
+	>=media-libs/libdvdread-4.2.0
+	>=sys-fs/udisks-2.1.1:2
+	>=x11-libs/gtk+-3.16.0:3
+	>=x11-libs/libnotify-0.7:=
 	systemd? ( >=sys-apps/systemd-209:0= )
 "
 RDEPEND="${COMMON_DEPEND}
-	>=media-libs/libdvdread-4.2.0
-	>=media-libs/libcanberra-0.1[gtk3]
-	>=x11-libs/libnotify-0.7:=
 	x11-themes/adwaita-icon-theme
 	fat? ( sys-fs/dosfstools )
 	gnome? ( >=gnome-base/gnome-settings-daemon-3.8 )

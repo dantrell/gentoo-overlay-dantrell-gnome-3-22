@@ -11,25 +11,24 @@ LICENSE="LGPL-2+"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="debug libnotify test webkit"
+IUSE="debug libnotify webkit"
 
+# TODO: X11 dependency is automagically enabled
 RDEPEND="
 	>=dev-libs/glib-2.8:2
 	x11-libs/gdk-pixbuf:2
-	>=x11-libs/gtk+-3:3
+	>=x11-libs/gtk+-3:3[X]
 	x11-libs/libX11
 	x11-libs/pango
 	libnotify? ( >=x11-libs/libnotify-0.6.1:= )
 	webkit? ( >=net-libs/webkit-gtk-2.8.1:4 )
 "
 DEPEND="${RDEPEND}
-	dev-util/itstool
+	app-text/yelp-tools
+	gnome-base/gnome-common
 	>=sys-devel/gettext-0.19.4
 	virtual/pkgconfig
-	test? ( app-text/yelp-tools )
 "
-# eautoreconf needs:
-#	>=gnome-base/gnome-common-2.12
 
 src_configure() {
 	gnome2_src_configure \

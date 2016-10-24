@@ -25,15 +25,13 @@ RDEPEND="
 	zeitgeist? ( gnome-extra/zeitgeist )
 "
 DEPEND="${RDEPEND}
+	app-text/yelp-tools
 	dev-libs/appstream-glib
 	dev-util/gdbus-codegen
 	>=dev-util/intltool-0.50.1
-	dev-util/itstool
 	sys-devel/gettext
 	virtual/pkgconfig
 "
-# Needed by eautoreconf:
-#	app-text/yelp-tools
 
 src_configure() {
 	gnome2_src_configure \

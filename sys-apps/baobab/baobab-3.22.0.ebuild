@@ -25,10 +25,9 @@ RDEPEND="${COMMON_DEPEND}
 "
 # ${PN} was part of gnome-utils before 3.4
 DEPEND="${COMMON_DEPEND}
-	dev-libs/libxml2
-	>=dev-util/intltool-0.40
-	dev-util/itstool
-	>=sys-devel/gettext-0.17
+	app-text/yelp-tools
+	dev-libs/appstream-glib
+	>=sys-devel/gettext-0.19.8
 	virtual/pkgconfig
 "
 

@@ -12,7 +12,7 @@ LICENSE="GPL-2+ CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="nautilus packagekit"
+IUSE="libnotify nautilus packagekit"
 
 # gdk-pixbuf used extensively in the source
 # cairo used in eggtreemultidnd.c
@@ -22,16 +22,15 @@ RDEPEND="
 	>=dev-libs/glib-2.36:2
 	>=dev-libs/json-glib-0.14
 	>=x11-libs/gtk+-3.13.2:3
-	>=x11-libs/libnotify-0.4.3:=
 	sys-apps/file
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf:2
 	x11-libs/pango
+	libnotify? ( >=x11-libs/libnotify-0.4.3:= )
 	nautilus? ( >=gnome-base/nautilus-3[-vanilla-menu-compress] )
 	packagekit? ( app-admin/packagekit-base )
 "
 DEPEND="${RDEPEND}
-	dev-util/desktop-file-utils
 	>=dev-util/intltool-0.50.1
 	dev-util/itstool
 	sys-devel/gettext
@@ -79,6 +78,7 @@ src_configure() {
 		--disable-debug \
 		--enable-magic \
 		--enable-libarchive \
+		$(use_enable libnotify notification) \
 		$(use_enable nautilus nautilus-actions) \
 		$(use_enable packagekit)
 }

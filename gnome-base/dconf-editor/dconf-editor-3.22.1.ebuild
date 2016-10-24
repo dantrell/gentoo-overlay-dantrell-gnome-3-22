@@ -14,8 +14,8 @@ KEYWORDS="*"
 COMMON_DEPEND="
 	dev-libs/appstream-glib
 	>=dev-libs/glib-2.46.0:2
-	>=gnome-base/dconf-0.23.2
-	>=x11-libs/gtk+-3.19.5:3
+	>=gnome-base/dconf-0.25.1
+	>=x11-libs/gtk+-3.21.6:3
 "
 DEPEND="${COMMON_DEPEND}
 	>=dev-util/intltool-0.50
@@ -25,3 +25,8 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	!<gnome-base/dconf-0.22[X]
 "
+
+src_configure() {
+	gnome2_src_configure \
+		VALAC="$(type -P true)"
+}

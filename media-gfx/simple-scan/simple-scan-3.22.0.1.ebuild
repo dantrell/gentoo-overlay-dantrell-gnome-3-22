@@ -34,7 +34,8 @@ RDEPEND="${COMMON_DEPEND}
 DEPEND="${COMMON_DEPEND}
 	$(vala_depend)
 	app-text/yelp-tools
-	>=dev-util/intltool-0.35.0
+	dev-libs/appstream-glib
+	>=sys-devel/gettext-0.19.7
 	virtual/pkgconfig
 "
 

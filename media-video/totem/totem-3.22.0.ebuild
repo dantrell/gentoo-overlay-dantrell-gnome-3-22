@@ -30,7 +30,7 @@ RDEPEND="
 	>=dev-libs/totem-pl-parser-3.10.1:0=[introspection?]
 	>=media-libs/clutter-1.17.3:1.0[gtk]
 	>=media-libs/clutter-gst-2.99.2:3.0
-	>=media-libs/clutter-gtk-1.7.1:1.0
+	>=media-libs/clutter-gtk-1.8.1:1.0
 	>=x11-libs/cairo-1.14
 	>=x11-libs/gdk-pixbuf-2.23.0:2
 	>=x11-libs/gtk+-3.19.4:3[introspection?]
@@ -105,7 +105,7 @@ src_configure() {
 	local plugins="apple-trailers,autoload-subtitles,brasero-disc-recorder"
 	plugins+=",im-status,gromit,media-player-keys,ontop"
 	plugins+=",properties,recent,rotation,screensaver,screenshot"
-	plugins+=",skipto,vimeo"
+	plugins+=",skipto,variable-rate,vimeo"
 	use lirc && plugins+=",lirc"
 	use nautilus && plugins+=",save-file"
 	use python && plugins+=",dbusservice,pythonconsole,opensubtitles"

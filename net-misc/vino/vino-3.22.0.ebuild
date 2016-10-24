@@ -2,7 +2,7 @@
 
 EAPI="6"
 
-inherit gnome2
+inherit gnome2 systemd
 
 DESCRIPTION="An integrated VNC server for GNOME"
 HOMEPAGE="https://wiki.gnome.org/Projects/Vino"
@@ -22,7 +22,6 @@ RDEPEND="
 	>=dev-libs/libgcrypt-1.1.90:0=
 	>=x11-libs/gtk+-3:3
 
-	dev-libs/dbus-glib
 	x11-libs/cairo:=
 	x11-libs/libICE
 	x11-libs/libSM
@@ -39,15 +38,16 @@ RDEPEND="
 	gnome-keyring? ( app-crypt/libsecret )
 	jpeg? ( virtual/jpeg:0= )
 	ssl? ( >=net-libs/gnutls-2.2.0:= )
-	telepathy? ( >=net-libs/telepathy-glib-0.18 )
+	telepathy? (
+		dev-libs/dbus-glib
+		>=net-libs/telepathy-glib-0.18 )
 	zeroconf? ( >=net-dns/avahi-0.6:=[dbus] )
 	zlib? ( sys-libs/zlib:= )
 "
 DEPEND="${RDEPEND}
-	>=dev-lang/perl-5
+	app-crypt/libsecret
 	>=dev-util/intltool-0.50
 	virtual/pkgconfig
-	app-crypt/libsecret
 "
 # libsecret is always required at build time per bug 322763
 
@@ -61,5 +61,6 @@ src_configure() {
 		$(use_with ssl gnutls) \
 		$(use_with telepathy) \
 		$(use_with zeroconf avahi) \
-		$(use_with zlib)
+		$(use_with zlib) \
+		--with-systemduserunitdir="$(systemd_get_userunitdir)"
 }

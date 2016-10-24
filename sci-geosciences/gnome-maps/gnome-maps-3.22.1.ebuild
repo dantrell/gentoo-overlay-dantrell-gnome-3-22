@@ -17,7 +17,7 @@ COMMON_DEPEND="
 	>=app-misc/geoclue-1.99.3:2.0[introspection]
 	>=dev-libs/folks-0.10
 	>=dev-libs/gjs-1.44.0
-	>=dev-libs/gobject-introspection-0.6.3:=
+	>=dev-libs/gobject-introspection-0.10.1:=
 	>=dev-libs/glib-2.39.3:2
 	>=dev-libs/libgee-0.16:0.8[introspection]
 	dev-libs/libxml2:2
@@ -33,7 +33,7 @@ RDEPEND="${COMMON_DEPEND}
 	media-libs/clutter-gtk:1.0[introspection]
 	media-libs/clutter:1.0[introspection]
 	media-libs/cogl:1.0[introspection]
-	net-libs/gnome-online-accounts[introspection]
+	net-libs/gnome-online-accounts:=[introspection]
 	net-libs/libgfbgraph[introspection]
 	net-libs/libsoup:2.4[introspection]
 	net-libs/webkit-gtk:4[introspection]

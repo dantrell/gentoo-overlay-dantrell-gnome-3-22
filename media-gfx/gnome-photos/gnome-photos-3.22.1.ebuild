@@ -16,7 +16,7 @@ IUSE="test"
 
 RDEPEND="
 	>=app-misc/tracker-1:=[miner-fs]
-	>=dev-libs/glib-2.39.3:2
+	>=dev-libs/glib-2.44:2
 	gnome-base/gnome-desktop:3=
 	>=dev-libs/libgdata-0.15.2:0=[gnome-online-accounts]
 	media-libs/babl
@@ -32,16 +32,14 @@ RDEPEND="
 	>=x11-libs/gtk+-3.19.1:3
 "
 DEPEND="${RDEPEND}
+	app-text/yelp-tools
 	dev-util/desktop-file-utils
 	>=dev-util/intltool-0.50.1
-	dev-util/itstool
 	virtual/pkgconfig
 	test? (
 		${PYTHON_DEPS}
 		$(python_gen_any_dep 'dev-util/dogtail[${PYTHON_USEDEP}]') )
 "
-# eautoreconf
-#	app-text/yelp-tools
 
 python_check_deps() {
 	use test && has_version "dev-util/dogtail[${PYTHON_USEDEP}]"
@@ -52,6 +50,7 @@ pkg_setup() {
 }
 
 src_configure() {
+	# XXX: how to deal with rdtscp support, x86intrin
 	gnome2_src_configure \
 		$(use_enable test dogtail)
 }

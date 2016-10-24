@@ -15,8 +15,8 @@ IUSE="debug flac test vorbis"
 
 COMMON_DEPEND="
 	app-text/iso-codes
-	>=dev-libs/glib-2.38:2[dbus]
-	>=x11-libs/gtk+-3.19.6:3
+	>=dev-libs/glib-2.49.5:2[dbus]
+	>=x11-libs/gtk+-3.21.6:3
 	media-libs/libcanberra[gtk3]
 	>=app-cdr/brasero-2.90
 	sys-apps/dbus
@@ -37,13 +37,13 @@ RDEPEND="${COMMON_DEPEND}
 	media-plugins/gst-plugins-meta:1.0
 "
 DEPEND="${COMMON_DEPEND}
+	app-text/yelp-tools
 	dev-libs/appstream-glib
-	>=dev-util/intltool-0.50
-	dev-util/itstool
+	gnome-base/gnome-common
+	>=sys-devel/gettext-0.19.6
 	virtual/pkgconfig
 	test? ( ~app-text/docbook-xml-dtd-4.3 )
 "
-# eautoreconf needs gnome-common
 
 src_prepare() {
 	gnome2_src_prepare

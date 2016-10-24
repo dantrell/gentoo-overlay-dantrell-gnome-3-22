@@ -14,9 +14,8 @@ KEYWORDS="*"
 
 IUSE="+introspection +latexmk rubber"
 
-# gspell-0.1 is required for this cycle
-# https://git.gnome.org/browse/latexila/commit/?h=gnome-3-18&id=fd6b77796e304cfb9e31844cf24432d3b2cb6043
-COMMON_DEPEND="$(vala_depend)
+COMMON_DEPEND="
+	$(vala_depend)
 	app-text/enchant
 	>=app-text/gspell-1.0:0=
 	>=dev-libs/glib-2.40:2[dbus]
@@ -25,7 +24,6 @@ COMMON_DEPEND="$(vala_depend)
 	>=x11-libs/gtk+-3.20:3
 	>=x11-libs/gtksourceview-3.18:3.0=
 	x11-libs/gdk-pixbuf:2
-	x11-libs/libX11
 	x11-libs/pango
 	introspection? ( >=dev-libs/gobject-introspection-1.30.0:= )
 "
@@ -36,9 +34,10 @@ RDEPEND="${COMMON_DEPEND}
 	rubber? ( dev-tex/rubber )
 "
 DEPEND="${COMMON_DEPEND}
+	app-text/yelp-tools
+	dev-util/gdbus-codegen
 	>=dev-util/gtk-doc-am-1.14
 	>=dev-util/intltool-0.50.1
-	dev-util/itstool
 	virtual/pkgconfig
 "
 

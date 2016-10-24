@@ -47,8 +47,8 @@ src_configure() {
 		--disable-static \
 		--enable-tests \
 		$(use_enable packagekit) \
-		$(use_enable raw exiv) \
-		APPSTREAM_UTIL=$(type -P true)
+		$(use_enable raw exiv)
+#		APPSTREAM_UTIL=$(type -P true)
 }
 
 src_test() {

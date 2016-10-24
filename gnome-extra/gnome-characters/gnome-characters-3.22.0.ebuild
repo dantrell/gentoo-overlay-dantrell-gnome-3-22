@@ -25,8 +25,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	dev-libs/appstream-glib
-	>=dev-util/intltool-0.50.1
-	sys-devel/gettext
+	>=sys-devel/gettext-0.19.8
 	virtual/pkgconfig
 	test? (
 		${PYTHON_DEPS}

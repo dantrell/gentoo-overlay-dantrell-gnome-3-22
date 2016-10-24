@@ -14,7 +14,7 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="debug glade +python"
+IUSE="glade +python"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 # test if unbundling of libgd is possible
@@ -27,7 +27,7 @@ RDEPEND="
 	>=dev-libs/gobject-introspection-0.10.1:=
 	dev-libs/libgit2:=[threads]
 
-	>=dev-libs/libgit2-glib-0.24.0[ssh]
+	>=dev-libs/libgit2-glib-0.24.4[ssh]
 	<dev-libs/libgit2-glib-0.25.0
 
 	>=dev-libs/libpeas-1.5.0[gtk]
@@ -45,7 +45,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	$(vala_depend)
-	>=dev-libs/libgit2-glib-0.22.0[vala]
+	>=dev-libs/libgit2-glib-0.24.4[vala]
 	>=dev-util/intltool-0.40
 	gnome-base/gnome-common
 	>=sys-devel/gettext-0.17
@@ -57,11 +57,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	sed \
-		-e '/CFLAGS/s:-g::g' \
-		-e '/CFLAGS/s:-O0::g' \
-		-i configure.ac || die
-
 	gnome2_src_prepare
 	vala_src_prepare
 }
@@ -70,7 +65,6 @@ src_configure() {
 	gnome2_src_configure \
 		--disable-static \
 		--disable-deprecations \
-		$(use_enable debug) \
 		$(use_enable glade glade-catalog) \
 		$(use_enable python)
 }
