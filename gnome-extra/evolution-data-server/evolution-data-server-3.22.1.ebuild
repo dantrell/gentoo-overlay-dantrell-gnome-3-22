@@ -12,7 +12,7 @@ HOMEPAGE="https://wiki.gnome.org/Apps/Evolution"
 
 # Note: explicitly "|| ( LGPL-2 LGPL-3 )", not "LGPL-2+".
 LICENSE="|| ( LGPL-2 LGPL-3 ) BSD Sleepycat"
-SLOT="0/57" # subslot = libcamel-1.2 soname version
+SLOT="0/59" # subslot = libcamel-1.2 soname version
 KEYWORDS="*"
 
 IUSE="api-doc-extras +berkdb +gnome-online-accounts +gtk google +introspection ipv6 ldap kerberos vala +weather"
@@ -30,7 +30,7 @@ RDEPEND="
 	>=app-crypt/gcr-3.4
 	>=app-crypt/libsecret-0.5[crypt]
 	>=dev-db/sqlite-3.7.17:=
-	>=dev-libs/glib-2.40:2
+	>=dev-libs/glib-2.46:2
 	>=dev-libs/libgdata-0.10:=
 	>=dev-libs/libical-0.43:=
 	>=dev-libs/libxml2-2
@@ -64,12 +64,11 @@ DEPEND="${RDEPEND}
 	dev-util/gperf
 	>=dev-util/gtk-doc-am-1.14
 	>=dev-util/intltool-0.35.5
+	>=gnome-base/gnome-common-2
 	>=sys-devel/gettext-0.17
 	virtual/pkgconfig
 	vala? ( $(vala_depend) )
 "
-# eautoreconf needs:
-#	>=gnome-base/gnome-common-2
 
 pkg_setup() {
 	python-any-r1_pkg_setup

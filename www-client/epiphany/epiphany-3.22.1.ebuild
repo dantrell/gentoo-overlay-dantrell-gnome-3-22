@@ -30,7 +30,6 @@ COMMON_DEPEND="
 	gnome-base/gnome-desktop:3=
 
 	dev-db/sqlite:3
-	x11-libs/libwnck:3
 	x11-libs/libX11
 "
 # epiphany-extensions support was removed in 3.7; let's not pretend it still works
@@ -39,12 +38,10 @@ RDEPEND="${COMMON_DEPEND}
 	!www-client/epiphany-extensions
 "
 # paxctl needed for bug #407085
-# eautoreconf requires gnome-common-3.5.5
 DEPEND="${COMMON_DEPEND}
 	app-text/yelp-tools
 	dev-libs/appstream-glib
 	>=dev-util/intltool-0.50
-	dev-util/itstool
 	sys-apps/paxctl
 	sys-devel/gettext
 	virtual/pkgconfig
@@ -59,10 +56,7 @@ PATCHES=(
 )
 
 src_configure() {
-	# Many years have passed since gecko based epiphany went away,
-	# hence, stop relying on nss for migrating from that versions.
 	gnome2_src_configure \
-		--disable-nss \
 		--enable-shared \
 		--disable-static \
 		--with-distributor-name=Gentoo \

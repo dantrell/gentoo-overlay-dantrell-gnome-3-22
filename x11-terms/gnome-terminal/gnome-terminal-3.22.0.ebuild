@@ -14,16 +14,15 @@ KEYWORDS="*"
 
 IUSE="debug +deprecated-transparency +gnome-shell +nautilus vanilla-hotkeys"
 
-# FIXME: automagic dependency on gtk+[X]
+# FIXME: automagic dependency on gtk+[X], just transitive but needs proper control
 RDEPEND="
 	>=dev-libs/glib-2.42:2[dbus]
-	>=x11-libs/gtk+-3.12:3[X]
-	>=x11-libs/vte-0.44.2:2.91
+	>=x11-libs/gtk+-3.20:3[X]
+	>=x11-libs/vte-0.46.0:2.91
+	>=dev-libs/libpcre2-10
 	>=gnome-base/dconf-0.14
 	>=gnome-base/gsettings-desktop-schemas-0.1.0
 	sys-apps/util-linux
-	x11-libs/libSM
-	x11-libs/libICE
 	gnome-shell? ( gnome-base/gnome-shell )
 	nautilus? ( >=gnome-base/nautilus-3 )
 "
@@ -32,9 +31,7 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	app-text/yelp-tools
 	dev-libs/libxml2
-	dev-util/desktop-file-utils
 	dev-util/gdbus-codegen
-	dev-util/itstool
 	>=dev-util/intltool-0.50
 	sys-devel/gettext
 	virtual/pkgconfig

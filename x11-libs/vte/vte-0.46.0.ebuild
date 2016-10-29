@@ -13,26 +13,28 @@ SLOT="2.91"
 KEYWORDS="*"
 
 IUSE="+crypt debug glade +introspection vala"
+REQUIRED_USE="vala? ( introspection )"
 
 RDEPEND="
 	>=dev-libs/glib-2.40:2
+	>=dev-libs/libpcre2-10.21
 	>=x11-libs/gtk+-3.8:3[introspection?]
 	>=x11-libs/pango-1.22.0
-	>=dev-libs/libpcre2-10.21
 
 	sys-libs/ncurses:0=
 	sys-libs/zlib
 
+	crypt?  ( >=net-libs/gnutls-3.2.7 )
 	glade? ( >=dev-util/glade-3.9:3.10 )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.0:= )
 "
 DEPEND="${RDEPEND}
+	dev-libs/libxml2
 	>=dev-util/gtk-doc-am-1.13
 	>=dev-util/intltool-0.35
 	sys-devel/gettext
 	virtual/pkgconfig
 
-	crypt?  ( >=net-libs/gnutls-3.2.7 )
 	vala? ( $(vala_depend) )
 "
 RDEPEND="${RDEPEND}
