@@ -24,7 +24,11 @@ RDEPEND="
 	x11-libs/libXi[${MULTILIB_USEDEP}]
 	x11-libs/libXtst[${MULTILIB_USEDEP}]
 	introspection? ( >=dev-libs/gobject-introspection-0.9.6:= )
-	X? ( x11-libs/libX11[${MULTILIB_USEDEP}] )
+	X? (
+		x11-libs/libX11[${MULTILIB_USEDEP}]
+		x11-libs/libXi[${MULTILIB_USEDEP}]
+		x11-libs/libXtst[${MULTILIB_USEDEP}]
+	)
 "
 DEPEND="${RDEPEND}
 	>=dev-util/gtk-doc-am-1.9

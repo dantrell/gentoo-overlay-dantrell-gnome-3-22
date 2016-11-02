@@ -28,7 +28,7 @@ PATCHES=(
 	# https://bugzilla.gnome.org/show_bug.cgi?id=746920
 	"${FILESDIR}"/${PN}-3.14.2.3-srcdir.patch
 	# Leave build of gtk+:2 engine to x11-themes/gtk-engines-adwaita
-	"${FILESDIR}"/${PN}-3.20.2-exclude-engine.patch
+	"${FILESDIR}"/${PN}-3.22.2-exclude-engine.patch
 )
 
 src_prepare() {
@@ -42,8 +42,4 @@ src_configure() {
 		--disable-gtk2-engine \
 		--disable-gtk3-engine \
 		GTK_UPDATE_ICON_CACHE=$(type -P true)
-}
-
-src_install() {
-	emake install DESTDIR="${D}"
 }

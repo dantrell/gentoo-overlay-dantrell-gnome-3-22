@@ -3,7 +3,7 @@
 EAPI="6"
 GNOME2_LA_PUNT="yes"
 
-inherit autotools bash-completion-r1 gnome2
+inherit autotools bash-completion-r1 gnome2 systemd
 
 DESCRIPTION="Virtual filesystem implementation for gio"
 HOMEPAGE="https://wiki.gnome.org/Projects/gvfs"
@@ -12,7 +12,7 @@ LICENSE="LGPL-2+"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="afp archive bluray cdda fuse google gnome-keyring gnome-online-accounts gphoto2 gtk +http ios mtp nfs samba systemd test +udev udisks zeroconf"
+IUSE="afp archive bluray cdda fuse google gnome-keyring gnome-online-accounts gphoto2 gtk +http ios mtp nfs policykit samba systemd test +udev udisks zeroconf"
 REQUIRED_USE="
 	cdda? ( udev )
 	google? ( gnome-online-accounts )
@@ -25,10 +25,9 @@ REQUIRED_USE="
 # https://bugzilla.gnome.org/700162
 RESTRICT="test"
 
-# Can use libgphoto-2.5.0 as well. Automagic detection.
 RDEPEND="
 	app-crypt/gcr:=
-	>=dev-libs/glib-2.46.2:2
+	>=dev-libs/glib-2.49.3:2
 	sys-apps/dbus
 	dev-libs/libxml2:2
 	net-misc/openssh
@@ -41,16 +40,21 @@ RDEPEND="
 	google? (
 		>=dev-libs/libgdata-0.17.3:=[crypt,gnome-online-accounts]
 		>=net-libs/gnome-online-accounts-3.17.1:= )
-	gphoto2? ( >=media-libs/libgphoto2-2.4.7:= )
+	gphoto2? ( >=media-libs/libgphoto2-2.5.0:= )
 	gtk? ( >=x11-libs/gtk+-3.0:3 )
 	http? ( >=net-libs/libsoup-2.42:2.4 )
 	ios? (
 		>=app-pda/libimobiledevice-1.2:=
 		>=app-pda/libplist-1:= )
-	mtp? ( >=media-libs/libmtp-1.1.6 )
+	mtp? ( >=media-libs/libmtp-1.1.12 )
 	nfs? ( >=net-fs/libnfs-1.9.7 )
-	samba? ( || ( >=net-fs/samba-3.4.6[smbclient] >=net-fs/samba-4[client] ) )
-	systemd? ( sys-apps/systemd:0= )
+	policykit? (
+		sys-auth/polkit
+		sys-libs/libcap )
+	samba? ( || (
+		( >=net-fs/samba-3.4.6[smbclient] <net-fs/samba-4[smbclient] )
+		>=net-fs/samba-4[client] ) )
+	systemd? ( >=sys-apps/systemd-206:0= )
 	udev? (
 		cdda? ( dev-libs/libcdio-paranoia )
 		virtual/libgudev:=
@@ -61,7 +65,7 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	app-text/docbook-xsl-stylesheets
 	dev-libs/libxslt
-	>=dev-util/intltool-0.40
+	>=sys-devel/gettext-0.19.4
 	virtual/pkgconfig
 	dev-util/gdbus-codegen
 	dev-util/gtk-doc-am
@@ -93,13 +97,14 @@ src_configure() {
 	# --enable-documentation installs man pages
 	# --disable-obexftp, upstream bug #729945
 	gnome2_src_configure \
-		--enable-bash-completion \
-		--with-bash-completion-dir="$(get_bashcompdir)" \
-		--enable-gcr \
 		--disable-gdu \
 		--disable-hal \
-		--with-dbus-service-dir="${EPREFIX}"/usr/share/dbus-1/services \
+		--enable-bash-completion \
 		--enable-documentation \
+		--enable-gcr \
+		--with-bash-completion-dir="$(get_bashcompdir)" \
+		--with-dbus-service-dir="${EPREFIX}"/usr/share/dbus-1/services \
+		--with-systemduserunitdir="$(systemd_get_userunitdir)" \
 		$(use_enable afp) \
 		$(use_enable archive) \
 		$(use_enable bluray) \
@@ -110,14 +115,15 @@ src_configure() {
 		$(use_enable google) \
 		$(use_enable gphoto2) \
 		$(use_enable gtk) \
+		$(use_enable http) \
 		$(use_enable ios afc) \
 		$(use_enable mtp libmtp) \
 		$(use_enable nfs) \
-		$(use_enable udev) \
-		$(use_enable udev gudev) \
-		$(use_enable http) \
+		$(use_enable policykit admin) \
 		$(use_enable samba) \
 		$(use_enable systemd libsystemd-login) \
+		$(use_enable udev gudev) \
+		$(use_enable udev) \
 		$(use_enable udisks udisks2) \
 		$(use_enable zeroconf avahi)
 }

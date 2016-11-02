@@ -30,6 +30,7 @@ RDEPEND="
 	>=net-libs/gupnp-av-0.12.8
 	>=net-libs/libsoup-2.44:2.4
 	>=sys-apps/util-linux-2.20
+	x11-libs/gdk-pixbuf:2
 	x11-misc/shared-mime-info
 	introspection? ( >=dev-libs/gobject-introspection-1.33.4:= )
 	sqlite? (
@@ -50,6 +51,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 # Maintainer only
+#   app-text/docbook-xsl-stylesheets
 #	>=dev-lang/vala-0.22
 #   dev-libs/libxslt
 
@@ -59,7 +61,6 @@ src_configure() {
 	gnome2_src_configure \
 		XSLTPROC=$(type -P false) \
 		--enable-gst-launch-plugin \
-		--enable-mediathek-plugin \
 		--with-media-engine=gstreamer \
 		--enable-nls \
 		--with-systemduserunitdir=$(systemd_get_userunitdir) \

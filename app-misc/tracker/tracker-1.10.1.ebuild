@@ -29,7 +29,7 @@ REQUIRED_USE="
 RDEPEND="
 	>=app-i18n/enca-1.9
 	>=dev-db/sqlite-3.9.0:=
-	>=dev-libs/glib-2.40:2
+	>=dev-libs/glib-2.44:2
 	>=dev-libs/gobject-introspection-0.9.5:=
 	>=dev-libs/icu-4.8.1.1:=
 	|| (
@@ -87,7 +87,6 @@ DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	$(vala_depend)
 	dev-util/gdbus-codegen
-	>=dev-libs/libxslt-1
 	>=dev-util/gtk-doc-am-1.8
 	>=dev-util/intltool-0.40.0
 	>=sys-devel/gettext-0.17
@@ -125,12 +124,6 @@ src_prepare() {
 	create_version_script "www-client/firefox" "Mozilla Firefox" firefox-version.sh
 	create_version_script "mail-client/thunderbird" "Mozilla Thunderbird" thunderbird-version.sh
 
-	# Looks like sorting got fixed but not test reference files
-	sort "${S}"/tests/libtracker-data/functions/functions-tracker-1.out \
-		-o "${S}"/tests/libtracker-data/functions/functions-tracker-1.out || die
-	sort "${S}"/tests/libtracker-data/functions/functions-tracker-2.out \
-		-o "${S}"/tests/libtracker-data/functions/functions-tracker-2.out || die
-
 	eautoreconf # See bug #367975
 	gnome2_src_prepare
 	vala_src_prepare
@@ -164,7 +157,6 @@ src_configure() {
 		--disable-static \
 		--enable-abiword \
 		--enable-artwork \
-		--enable-cfg-man-pages \
 		--enable-dvi \
 		--enable-enca \
 		--enable-guarantee-metadata \

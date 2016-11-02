@@ -11,7 +11,7 @@ LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="+deprecated-background +introspection kms test wayland"
+IUSE="input_devices_wacom +deprecated-background +introspection kms test udev wayland"
 REQUIRED_USE="
 	wayland? ( kms )
 "
@@ -19,16 +19,17 @@ REQUIRED_USE="
 # libXi-1.7.4 or newer needed per:
 # https://bugzilla.gnome.org/show_bug.cgi?id=738944
 COMMON_DEPEND="
+	>=dev-libs/atk-2.5.3
+	>=dev-libs/json-glib-0.12.0
 	>=x11-libs/pango-1.2[X,introspection?]
 	>=x11-libs/cairo-1.10[X]
 	>=x11-libs/gtk+-3.19.8:3[X,introspection?]
-	>=dev-libs/glib-2.36.0:2[dbus]
-	>=media-libs/clutter-1.25.6:1.0[X,introspection?]
-	>=media-libs/cogl-1.17.1:1.0=[introspection?]
+	>=dev-libs/glib-2.49.0:2[dbus]
+	>=media-libs/cogl-1.21.2:1.0=[introspection?]
 	>=media-libs/libcanberra-0.26[gtk3]
 	>=x11-libs/startup-notification-0.7
 	>=x11-libs/libXcomposite-0.2
-	>=gnome-base/gsettings-desktop-schemas-3.19.3[introspection?]
+	>=gnome-base/gsettings-desktop-schemas-3.21.4[introspection?]
 	gnome-base/gnome-desktop:3=
 	>sys-power/upower-0.99:=
 
@@ -51,24 +52,23 @@ COMMON_DEPEND="
 
 	gnome-extra/zenity
 
+	input_devices_wacom? ( >=dev-libs/libwacom-0.13 )
 	introspection? ( >=dev-libs/gobject-introspection-1.42:= )
 	kms? (
-		dev-libs/libinput
-		>=media-libs/clutter-1.20[egl]
+		>=dev-libs/libinput-1.4
 		media-libs/cogl:1.0=[kms]
 		>=media-libs/mesa-10.3[gbm]
 		sys-apps/systemd
 		virtual/libgudev
 		x11-libs/libdrm:= )
+	udev? ( virtual/libgudev:= )
 	wayland? (
 		>=dev-libs/wayland-1.6.90
-		>=dev-libs/wayland-protocols-1.1
-		>=media-libs/clutter-1.20[wayland]
+		>=dev-libs/wayland-protocols-1.7
 		x11-base/xorg-server[wayland] )
 "
 DEPEND="${COMMON_DEPEND}
-	>=dev-util/intltool-0.41
-	sys-devel/gettext
+	>=sys-devel/gettext-0.19.6
 	virtual/pkgconfig
 	x11-proto/xextproto
 	x11-proto/xineramaproto
@@ -99,6 +99,7 @@ src_configure() {
 		$(use_enable kms native-backend) \
 		$(use_enable wayland) \
 		$(use_enable wayland wayland-egl-server) \
+		$(use_with input_devices_wacom libwacom) \
 		$(use_with !deprecated-background gudev)
 }
 

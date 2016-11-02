@@ -27,7 +27,7 @@ RESTRICT="test"
 # NOTE: cairo[svg] dep is due to bug 291283 (not patched to avoid eautoreconf)
 COMMON_DEPEND="
 	>=dev-libs/atk-2.15[introspection?,${MULTILIB_USEDEP}]
-	>=dev-libs/glib-2.45.8:2[${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.49.4:2[${MULTILIB_USEDEP}]
 	media-libs/fontconfig[${MULTILIB_USEDEP}]
 	>=media-libs/libepoxy-1.0[${MULTILIB_USEDEP}]
 	>=x11-libs/cairo-1.14[aqua?,glib,svg,X?,${MULTILIB_USEDEP}]
@@ -43,7 +43,7 @@ COMMON_DEPEND="
 	introspection? ( >=dev-libs/gobject-introspection-1.39:= )
 	wayland? (
 		>=dev-libs/wayland-1.9.91[${MULTILIB_USEDEP}]
-		>=dev-libs/wayland-protocols-1.0
+		>=dev-libs/wayland-protocols-1.7
 		media-libs/mesa[wayland,${MULTILIB_USEDEP}]
 		>=x11-libs/libxkbcommon-0.2[${MULTILIB_USEDEP}]
 	)
@@ -66,9 +66,9 @@ DEPEND="${COMMON_DEPEND}
 	app-text/docbook-xml-dtd:4.1.2
 	dev-libs/libxslt
 	dev-libs/gobject-introspection-common
-	>=dev-util/gdbus-codegen-2.38.2
+	>=dev-util/gdbus-codegen-2.48
 	>=dev-util/gtk-doc-am-1.20
-	>=sys-devel/gettext-0.18.3[${MULTILIB_USEDEP}]
+	>=sys-devel/gettext-0.19.7[${MULTILIB_USEDEP}]
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
 	X? (
 		x11-proto/xextproto[${MULTILIB_USEDEP}]
@@ -132,7 +132,7 @@ src_prepare() {
 	fi
 
 	# gtk-update-icon-cache is installed by dev-util/gtk-update-icon-cache
-	eapply "${FILESDIR}"/${PN}-3.16.2-remove_update-icon-cache.patch
+	eapply "${FILESDIR}"/${PN}-3.22.2-update-icon-cache.patch
 
 	# call eapply_user (implicitly) before eautoreconf
 	gnome2_src_prepare

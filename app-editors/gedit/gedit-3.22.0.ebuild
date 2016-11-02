@@ -2,7 +2,7 @@
 
 EAPI="6"
 GNOME2_LA_PUNT="yes" # plugins are dlopened
-PYTHON_COMPAT=( python3_{3,4,5} )
+PYTHON_COMPAT=( python{3_4,3_5} )
 VALA_MIN_API_VERSION="0.26"
 VALA_USE_DEPEND="vapigen"
 
@@ -27,16 +27,14 @@ REQUIRED_USE="
 COMMON_DEPEND="
 	>=dev-libs/libxml2-2.5.0:2
 	>=dev-libs/glib-2.44:2[dbus]
-	>=x11-libs/gtk+-3.19.0:3[introspection?]
-	>=x11-libs/gtksourceview-3.19.4:3.0[introspection?]
+	>=x11-libs/gtk+-3.21.3:3[introspection?]
+	>=x11-libs/gtksourceview-3.21.2:3.0[introspection?]
 	>=dev-libs/libpeas-1.14.1[gtk]
 
 	gnome-base/gsettings-desktop-schemas
 	gnome-base/gvfs
 
 	x11-libs/libX11
-
-	net-libs/libsoup:2.4
 
 	introspection? ( >=dev-libs/gobject-introspection-0.9.3:= )
 	python? (
@@ -53,10 +51,8 @@ DEPEND="${COMMON_DEPEND}
 	${vala_depend}
 	app-text/docbook-xml-dtd:4.1.2
 	app-text/yelp-tools
-	dev-libs/libxml2:2
 	>=dev-util/gtk-doc-am-1
 	>=dev-util/intltool-0.50.1
-	dev-util/itstool
 	>=sys-devel/gettext-0.18
 	virtual/pkgconfig
 "
@@ -74,7 +70,7 @@ src_prepare() {
 src_configure() {
 	gnome2_src_configure \
 		--disable-deprecations \
-		--enable-updater \
+		--disable-updater \
 		--enable-gvfs-metadata \
 		$(use_enable introspection) \
 		$(use_enable spell) \

@@ -23,12 +23,12 @@ RESTRICT="test"
 # Require {glib,gdbus-codegen}-2.30.0 due to GDBus API changes between 2.29.92
 # and 2.30.0
 COMMON_DEPEND="
-	>=dev-libs/glib-2.45.7:2[dbus]
+	>=app-arch/gnome-autoar-0.1
+	>=dev-libs/glib-2.49.1:2[dbus]
 	>=x11-libs/pango-1.28.3
-	>=x11-libs/gtk+-3.19.12:3[introspection?]
+	>=x11-libs/gtk+-3.21.6:3[introspection?]
 	>=dev-libs/libxml2-2.7.8:2
 	>=gnome-base/gnome-desktop-3:3=
-	>=dev-libs/gnome-autoar-0.1
 
 	gnome-base/dconf
 	>=gnome-base/gsettings-desktop-schemas-3.8.0
@@ -46,8 +46,7 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-lang/perl-5
 	>=dev-util/gdbus-codegen-2.33
 	>=dev-util/gtk-doc-am-1.10
-	>=dev-util/intltool-0.50
-	sys-devel/gettext
+	>=sys-devel/gettext-0.19.7
 	virtual/pkgconfig
 	x11-proto/xproto
 "
@@ -114,6 +113,7 @@ src_prepare() {
 
 src_configure() {
 	gnome2_src_configure \
+		--enable-desktop \
 		--disable-profiling \
 		--disable-update-mimedb \
 		$(use_enable exif libexif) \

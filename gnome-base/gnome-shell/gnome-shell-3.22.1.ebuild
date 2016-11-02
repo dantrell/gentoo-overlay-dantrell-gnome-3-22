@@ -2,7 +2,7 @@
 
 EAPI="6"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python{3_3,3_4,3_5} )
+PYTHON_COMPAT=( python{3_4,3_5} )
 
 inherit autotools gnome2 multilib pax-utils python-r1 systemd
 
@@ -25,14 +25,14 @@ COMMON_DEPEND="
 	>=app-crypt/gcr-3.7.5[introspection]
 	>=dev-libs/glib-2.45.3:2[dbus]
 	>=dev-libs/gjs-1.39
-	>=dev-libs/gobject-introspection-1.45.4:=
+	>=dev-libs/gobject-introspection-1.49.1:=
 	dev-libs/libical:=
 	>=x11-libs/gtk+-3.15.0:3[introspection]
 	>=media-libs/clutter-1.21.5:1.0[introspection]
 	>=dev-libs/json-glib-0.13.2
 	>=dev-libs/libcroco-0.6.8:0.6
 	>=gnome-base/gnome-desktop-3.7.90:3=[introspection]
-	>=gnome-base/gsettings-desktop-schemas-3.19.2
+	>=gnome-base/gsettings-desktop-schemas-3.21.3
 	>=gnome-base/gnome-keyring-3.3.90
 	gnome-base/libgnome-keyring
 	>=gnome-extra/evolution-data-server-3.17.2:=
@@ -116,8 +116,8 @@ PDEPEND="
 DEPEND="${COMMON_DEPEND}
 	dev-libs/libxslt
 	>=dev-util/gtk-doc-am-1.17
-	>=dev-util/intltool-0.40
 	gnome-base/gnome-common
+	>=sys-devel/gettext-0.19.6
 	virtual/pkgconfig
 	!!=dev-lang/spidermonkey-1.8.2*
 "

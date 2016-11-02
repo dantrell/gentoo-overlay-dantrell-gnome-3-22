@@ -2,7 +2,7 @@
 
 EAPI="6"
 GNOME2_LA_PUNT="yes" # plugins are dlopened
-PYTHON_COMPAT=( python3_{3,4,5} )
+PYTHON_COMPAT=( python{3_4,3_5} )
 PYTHON_REQ_USE="xml"
 VALA_MIN_API_VERSION="0.28"
 
@@ -31,7 +31,7 @@ RDEPEND="
 	>=dev-libs/glib-2.32:2
 	>=dev-libs/libpeas-1.7.0[gtk,python?]
 	>=x11-libs/gtk+-3.9:3
-	>=x11-libs/gtksourceview-3.17.3:3.0
+	>=x11-libs/gtksourceview-3.21.3:3.0
 	python? (
 		${PYTHON_DEPS}
 		>=app-editors/gedit-3.16[introspection,${PYTHON_USEDEP}]
@@ -51,9 +51,9 @@ RDEPEND="
 	zeitgeist? ( >=gnome-extra/zeitgeist-0.9.12[introspection] )
 "
 DEPEND="${RDEPEND}
+	app-text/yelp-tools
 	>=dev-util/intltool-0.40.0
-	dev-util/itstool
-	sys-devel/gettext
+	>=sys-devel/gettext-0.17
 	virtual/pkgconfig
 "
 

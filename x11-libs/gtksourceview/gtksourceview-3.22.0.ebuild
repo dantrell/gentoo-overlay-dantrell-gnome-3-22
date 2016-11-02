@@ -38,7 +38,6 @@ src_prepare() {
 src_configure() {
 	gnome2_src_configure \
 		--disable-deprecations \
-		--enable-providers \
 		$(use_enable glade glade-catalog) \
 		$(use_enable introspection) \
 		$(use_enable vala)

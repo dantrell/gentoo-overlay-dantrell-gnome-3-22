@@ -26,8 +26,7 @@ RDEPEND="
 		>=net-libs/gnutls-3:=[${MULTILIB_USEDEP}] )
 "
 DEPEND="${RDEPEND}
-	>=dev-util/intltool-0.35.0
-	sys-devel/gettext
+	>=sys-devel/gettext-0.19.4
 	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
 	test? ( sys-apps/dbus[X] )
 "
@@ -45,7 +44,7 @@ multilib_src_configure() {
 }
 
 multilib_src_test() {
-	# non-native tests fail if glib-networking is already installed.
+	# XXX: non-native tests fail if glib-networking is already installed.
 	# have no idea what's wrong. would appreciate some help.
 	multilib_is_native_abi || return 0
 

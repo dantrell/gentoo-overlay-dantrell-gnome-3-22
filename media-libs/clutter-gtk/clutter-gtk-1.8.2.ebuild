@@ -15,13 +15,13 @@ KEYWORDS="*"
 IUSE="X debug examples gtk +introspection wayland"
 
 RDEPEND="
-	>=x11-libs/gtk+-3.19.4:3[X=,introspection?,wayland=]
+	>=x11-libs/gtk+-3.21.0:3[X=,introspection?,wayland=]
 	>=media-libs/clutter-1.23.7:1.0[X=,gtk=,introspection?,wayland=]
 	media-libs/cogl:1.0=[introspection?]
 	introspection? ( >=dev-libs/gobject-introspection-0.9.12:= )
 "
 DEPEND="${RDEPEND}
-	dev-util/gtk-doc-am
+	>=dev-util/gtk-doc-am-1.14
 	>=sys-devel/gettext-0.18
 	virtual/pkgconfig
 "
