@@ -1,20 +1,21 @@
-From 95420469407223898564425b7622ac66e7ed70d5 Mon Sep 17 00:00:00 2001
+From 09d1f1a057268a6acdfb42e7dcb2843c0066f542 Mon Sep 17 00:00:00 2001
 From: Ole Reifschneider <tranquility@gentoo.org>
 Date: Sat, 25 Apr 2015 22:22:09 +0200
-Subject: [PATCH] Make wayland support optional
+Subject: [PATCH 2/5] Make wayland support optional
 
+Signed-off-by: Gilles Dartiguelongue <eva@gentoo.org>
 ---
  configure.ac | 21 +++++++++++++++------
  1 file changed, 15 insertions(+), 6 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 9713256..6b34962 100644
+index 19096f5..140459c 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -231,12 +231,21 @@ if test "x$have_udev" = xyes ; then
+@@ -225,12 +225,21 @@ if test "x$have_udev" = xyes ; then
  fi
  AM_CONDITIONAL(HAVE_UDEV, [test "x$have_udev" = "xyes"])
-
+ 
 -PKG_CHECK_MODULES(WAYLAND, gdk-wayland-3.0, have_wayland=yes, have_wayland=no)
 -if test "x$have_wayland" = xyes ; then
 -	if test "x$have_udev" != xyes ; then
@@ -36,9 +37,9 @@ index 9713256..6b34962 100644
 +
 +        PKG_CHECK_MODULES(WAYLAND, gdk-wayland-3.0)
 +])
-
- PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_VERSION
-                   libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION
---
-2.0.5
+ 
+ PKG_CHECK_MODULES(NETWORK_MANAGER,
+                   libnm >= $NETWORK_MANAGER_REQUIRED_VERSION
+-- 
+2.10.1
 

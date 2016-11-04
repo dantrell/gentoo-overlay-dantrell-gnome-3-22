@@ -41,6 +41,8 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.50.1
 	>=sys-devel/gettext-0.18
 	virtual/pkgconfig
+
+	dev-cpp/mm-common
 "
 
 pkg_setup() {

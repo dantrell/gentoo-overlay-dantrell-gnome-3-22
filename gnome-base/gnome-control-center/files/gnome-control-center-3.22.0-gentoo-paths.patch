@@ -1,7 +1,24 @@
-diff '--exclude=.git' -urN a/panels/datetime/Makefile.am b/panels/datetime/Makefile.am
---- a/panels/datetime/Makefile.am	2016-09-20 04:49:16.000000000 -0400
-+++ b/panels/datetime/Makefile.am	2016-09-28 00:06:38.848143847 -0400
-@@ -23,6 +23,7 @@
+From c093ce404bf9868980fe7b83d6aa2ab3ec7831e2 Mon Sep 17 00:00:00 2001
+From: Alexandre Rostovtsev <tetromino@gentoo.org>
+Date: Sun, 8 Dec 2013 23:44:56 +0100
+Subject: [PATCH 5/5] Fix some absolute paths to be appropriate for Gentoo
+
+Signed-off-by: Gilles Dartiguelongue <eva@gentoo.org>
+---
+ panels/datetime/Makefile.am         | 1 +
+ panels/datetime/test-endianess.c    | 4 ++--
+ panels/datetime/test-timezone.c     | 2 +-
+ panels/datetime/tz.h                | 4 ++--
+ panels/printers/Makefile.am         | 3 +++
+ panels/printers/cc-printers-panel.c | 4 ++--
+ panels/printers/pp-host.c           | 2 +-
+ 7 files changed, 12 insertions(+), 8 deletions(-)
+
+diff --git a/panels/datetime/Makefile.am b/panels/datetime/Makefile.am
+index 43523a6..d8d677d 100644
+--- a/panels/datetime/Makefile.am
++++ b/panels/datetime/Makefile.am
+@@ -23,6 +23,7 @@ AM_CPPFLAGS =						\
  	$(DATETIME_PANEL_CFLAGS)			\
  	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
  	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
@@ -9,10 +26,11 @@ diff '--exclude=.git' -urN a/panels/datetime/Makefile.am b/panels/datetime/Makef
  	$(NULL)
  
  # test-timezone is still too noisy
-diff '--exclude=.git' -urN a/panels/datetime/test-endianess.c b/panels/datetime/test-endianess.c
---- a/panels/datetime/test-endianess.c	2016-09-20 04:49:16.000000000 -0400
-+++ b/panels/datetime/test-endianess.c	2016-09-28 00:06:38.848143847 -0400
-@@ -26,11 +26,11 @@
+diff --git a/panels/datetime/test-endianess.c b/panels/datetime/test-endianess.c
+index 06b2613..eb52bb6 100644
+--- a/panels/datetime/test-endianess.c
++++ b/panels/datetime/test-endianess.c
+@@ -26,11 +26,11 @@ test_endianess (void)
  	GDir *dir;
  	const char *name;
  
@@ -26,9 +44,10 @@ diff '--exclude=.git' -urN a/panels/datetime/test-endianess.c b/panels/datetime/
  		if (dir == NULL) {
  			g_assert_not_reached ();
  		}
-diff '--exclude=.git' -urN a/panels/datetime/test-timezone.c b/panels/datetime/test-timezone.c
---- a/panels/datetime/test-timezone.c	2016-09-20 04:49:16.000000000 -0400
-+++ b/panels/datetime/test-timezone.c	2016-09-28 00:06:38.848143847 -0400
+diff --git a/panels/datetime/test-timezone.c b/panels/datetime/test-timezone.c
+index db5c030..7ef5cef 100644
+--- a/panels/datetime/test-timezone.c
++++ b/panels/datetime/test-timezone.c
 @@ -2,7 +2,7 @@
  #include <gtk/gtk.h>
  #include "cc-timezone-map.h"
@@ -38,9 +57,10 @@ diff '--exclude=.git' -urN a/panels/datetime/test-timezone.c b/panels/datetime/t
  
  static GList *
  get_timezone_list (GList *tzs,
-diff '--exclude=.git' -urN a/panels/datetime/tz.h b/panels/datetime/tz.h
---- a/panels/datetime/tz.h	2015-03-17 07:25:21.000000000 -0400
-+++ b/panels/datetime/tz.h	2016-09-28 00:06:38.848143847 -0400
+diff --git a/panels/datetime/tz.h b/panels/datetime/tz.h
+index 93905b3..1ba918c 100644
+--- a/panels/datetime/tz.h
++++ b/panels/datetime/tz.h
 @@ -28,9 +28,9 @@
  #include <glib.h>
  
@@ -53,10 +73,11 @@ diff '--exclude=.git' -urN a/panels/datetime/tz.h b/panels/datetime/tz.h
  #endif
  
  typedef struct _TzDB TzDB;
-diff '--exclude=.git' -urN a/panels/printers/Makefile.am b/panels/printers/Makefile.am
---- a/panels/printers/Makefile.am	2016-09-20 04:49:16.000000000 -0400
-+++ b/panels/printers/Makefile.am	2016-09-28 00:08:29.101513819 -0400
-@@ -10,6 +10,9 @@
+diff --git a/panels/printers/Makefile.am b/panels/printers/Makefile.am
+index 512cda5..87726dd 100644
+--- a/panels/printers/Makefile.am
++++ b/panels/printers/Makefile.am
+@@ -10,6 +10,9 @@ AM_CPPFLAGS = 						\
  	-I$(top_srcdir)/shell/				\
  	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
  	-DTEST_SRCDIR=\""$(srcdir)/"\"			\
@@ -66,10 +87,11 @@ diff '--exclude=.git' -urN a/panels/printers/Makefile.am b/panels/printers/Makef
  	$(NULL)
  
  noinst_LTLIBRARIES = libprinters.la
-diff '--exclude=.git' -urN a/panels/printers/cc-printers-panel.c b/panels/printers/cc-printers-panel.c
---- a/panels/printers/cc-printers-panel.c	2016-09-20 04:49:16.000000000 -0400
-+++ b/panels/printers/cc-printers-panel.c	2016-09-28 00:06:38.848143847 -0400
-@@ -2589,8 +2589,8 @@
+diff --git a/panels/printers/cc-printers-panel.c b/panels/printers/cc-printers-panel.c
+index fb55608..a6dfb90 100644
+--- a/panels/printers/cc-printers-panel.c
++++ b/panels/printers/cc-printers-panel.c
+@@ -2590,8 +2590,8 @@ test_page_cb (GtkButton *button,
  
    if (printer_name)
      {
@@ -80,10 +102,11 @@ diff '--exclude=.git' -urN a/panels/printers/cc-printers-panel.c b/panels/printe
                                       NULL };
        const gchar  *datadir = NULL;
        http_t       *http = NULL;
-diff '--exclude=.git' -urN a/panels/printers/pp-host.c b/panels/printers/pp-host.c
---- a/panels/printers/pp-host.c	2016-04-26 07:03:05.000000000 -0400
-+++ b/panels/printers/pp-host.c	2016-09-28 00:06:38.848143847 -0400
-@@ -254,7 +254,7 @@
+diff --git a/panels/printers/pp-host.c b/panels/printers/pp-host.c
+index fbfb434..bd00518 100644
+--- a/panels/printers/pp-host.c
++++ b/panels/printers/pp-host.c
+@@ -254,7 +254,7 @@ _pp_host_get_snmp_devices_thread (GSimpleAsyncResult *res,
    data->devices->devices = NULL;
  
    argv = g_new0 (gchar *, 3);
@@ -92,3 +115,6 @@ diff '--exclude=.git' -urN a/panels/printers/pp-host.c b/panels/printers/pp-host
    argv[1] = g_strdup (priv->hostname);
  
    /* Use SNMP to get printer's informations */
+-- 
+2.10.1
+
