@@ -134,6 +134,10 @@ DEPEND="${COMMON_DEPEND}
 
 src_prepare() {
 	# From GNOME:
+	# 	https://bugzilla.gnome.org/show_bug.cgi?id=773673
+	eapply "${FILESDIR}"/${PN}-3.22.1-disable-user-accounts-panel.patch
+
+	# From GNOME:
 	# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=8da6fa28e1c5e6eab551585ecdbd914b08936d5e
 	eapply "${FILESDIR}"/${PN}-3.22.1-display-fix-possible-crash-on-startup.patch
 

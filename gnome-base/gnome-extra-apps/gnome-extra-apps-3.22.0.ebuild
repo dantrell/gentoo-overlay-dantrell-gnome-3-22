@@ -88,7 +88,7 @@ RDEPEND="
 	geary? ( >=mail-client/geary-0.11.2 )
 	share? ( >=gnome-extra/gnome-user-share-3.18.1 )
 	shotwell? ( >=media-gfx/shotwell-0.23.7 )
-	todo? ( >=gnome-extra/gnome-todo-3.20.0 )
+	todo? ( >=gnome-extra/gnome-todo-${PV} )
 	tracker? (
 		>=app-misc/tracker-1.10
 		>=gnome-extra/gnome-documents-${PV}

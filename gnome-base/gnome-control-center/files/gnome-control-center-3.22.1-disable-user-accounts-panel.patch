@@ -1,0 +1,11 @@
+diff '--exclude=.git' -urN a/shell/cc-panel-loader.c b/shell/cc-panel-loader.c
+--- a/shell/cc-panel-loader.c	2016-08-12 08:43:57.000000000 -0400
++++ b/shell/cc-panel-loader.c	2016-11-11 00:25:32.260362107 -0500
+@@ -98,7 +98,6 @@
+   PANEL_TYPE("sharing",          cc_sharing_panel_get_type      ),
+   PANEL_TYPE("sound",            cc_sound_panel_get_type        ),
+   PANEL_TYPE("universal-access", cc_ua_panel_get_type           ),
+-  PANEL_TYPE("user-accounts",    cc_user_panel_get_type         ),
+ #ifdef BUILD_WACOM
+   PANEL_TYPE("wacom",            cc_wacom_panel_get_type        ),
+ #endif
