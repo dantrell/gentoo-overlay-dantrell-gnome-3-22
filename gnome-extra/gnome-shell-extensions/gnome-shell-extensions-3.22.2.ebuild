@@ -29,10 +29,10 @@ PDEPEND="
 	x11-libs/gtk+:3[introspection]
 	x11-libs/pango[introspection]
 	x11-themes/adwaita-icon-theme
+	x11-wm/mutter[introspection]
 "
 DEPEND="
-	>=dev-util/intltool-0.50
-	sys-devel/gettext
+	>=sys-devel/gettext-0.19.6
 	virtual/pkgconfig
 "
 # eautoreconf needs gnome-base/gnome-common

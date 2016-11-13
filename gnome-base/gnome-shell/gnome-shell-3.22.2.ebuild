@@ -13,7 +13,7 @@ LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="+bluetooth +deprecated +deprecated-background +networkmanager +nls systemd vanilla-motd vanilla-screen +xephyr"
+IUSE="+bluetooth +deprecated +deprecated-background +networkmanager nsplugin +nls systemd vanilla-motd vanilla-screen +xephyr"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # libXfixes-5.0 needed for pointer barriers
@@ -28,13 +28,9 @@ COMMON_DEPEND="
 	>=dev-libs/gobject-introspection-1.49.1:=
 	dev-libs/libical:=
 	>=x11-libs/gtk+-3.15.0:3[introspection]
-	>=media-libs/clutter-1.21.5:1.0[introspection]
-	>=dev-libs/json-glib-0.13.2
 	>=dev-libs/libcroco-0.6.8:0.6
 	>=gnome-base/gnome-desktop-3.7.90:3=[introspection]
 	>=gnome-base/gsettings-desktop-schemas-3.21.3
-	>=gnome-base/gnome-keyring-3.3.90
-	gnome-base/libgnome-keyring
 	>=gnome-extra/evolution-data-server-3.17.2:=
 	>=media-libs/gstreamer-0.11.92:1.0
 	>=net-im/telepathy-logger-0.2.4[introspection]
@@ -50,14 +46,13 @@ COMMON_DEPEND="
 
 	dev-libs/dbus-glib
 	dev-libs/libxml2:2
-	gnome-base/librsvg
 	media-libs/libcanberra[gtk3]
 	media-libs/mesa
 	>=media-sound/pulseaudio-2
 	>=net-libs/libsoup-2.40:2.4[introspection]
 	x11-libs/libX11
 	x11-libs/gdk-pixbuf:2[introspection]
-	x11-libs/pango[introspection]
+
 	x11-apps/mesa-progs
 
 	bluetooth? ( >=net-wireless/gnome-bluetooth-3.9[introspection] )
@@ -66,27 +61,28 @@ COMMON_DEPEND="
 		app-crypt/libsecret
 		>=gnome-extra/nm-applet-0.9.8
 		>=net-misc/networkmanager-0.9.8:=[introspection] )
+	nsplugin? ( >=dev-libs/json-glib-0.13.2 )
 	xephyr? ( <x11-wm/mutter-3.21.1 )
 "
 # Runtime-only deps are probably incomplete and approximate.
 # Introspection deps generated using:
 #  grep -roe "imports.gi.*" gnome-shell-* | cut -f2 -d: | sort | uniq
 # Each block:
-# 1. Pull in polkit-0.101 for pretty authorization dialogs
-# 2. Introspection stuff needed via imports.gi.*
-# 3. gnome-session is needed for gnome-session-quit
-# 4. Control shell settings
+# 1. Introspection stuff needed via imports.gi.*
+# 2. gnome-session is needed for gnome-session-quit
+# 3. Control shell settings
+# 4. Systemd optional for suspending support
 # 5. xdg-utils needed for xdg-open, used by extension tool
-# 6. gnome-icon-theme-symbolic and dejavu font neeed for various icons & arrows
-# 7. IBus is needed for nls integration
-# 8. mobile-broadband-provider-info, timezone-data for shell-mobile-providers.c
+# 6. adwaita-icon-theme and dejavu font neeed for various icons & arrows
+# 7. mobile-broadband-provider-info, timezone-data for shell-mobile-providers.c
+# 8. IBus is needed for nls integration
 RDEPEND="${COMMON_DEPEND}
-	>=sys-auth/polkit-0.101[introspection]
-
+	app-accessibility/at-spi2-core:2[introspection]
 	>=app-accessibility/caribou-0.4.8
-	media-libs/cogl[introspection]
+	dev-libs/libgweather:2[introspection]
 	>=sys-apps/accountsservice-0.6.14[introspection]
 	>=sys-power/upower-0.99:=[introspection]
+	x11-libs/pango[introspection]
 
 	>=gnome-base/gnome-session-2.91.91
 	>=gnome-base/gnome-settings-daemon-3.8.3
@@ -115,6 +111,7 @@ PDEPEND="
 "
 DEPEND="${COMMON_DEPEND}
 	dev-libs/libxslt
+	>=dev-util/gdbus-codegen-2.45.3
 	>=dev-util/gtk-doc-am-1.17
 	gnome-base/gnome-common
 	>=sys-devel/gettext-0.19.6
@@ -197,6 +194,7 @@ src_configure() {
 		--enable-man \
 		$(use_with bluetooth) \
 		$(use_enable networkmanager) \
+		$(use_enable nsplugin browser-plugin) \
 		$(use_enable systemd) \
 		BROWSER_PLUGIN_DIR="${EPREFIX}"/usr/$(get_libdir)/nsbrowser/plugins
 
@@ -236,12 +234,6 @@ pkg_postinst() {
 		ewarn "you need to either install media-libs/gst-plugins-good:1.0"
 		ewarn "and media-plugins/gst-plugins-vpx:1.0, or use dconf-editor to change"
 		ewarn "apps.gnome-shell.recorder/pipeline to what you want to use."
-	fi
-
-	if ! has_version ">=x11-base/xorg-server-1.11"; then
-		ewarn "If you use multiple screens, it is highly recommended that you"
-		ewarn "upgrade to >=x11-base/xorg-server-1.11 to be able to make use of"
-		ewarn "pointer barriers which will make it easier to use hot corners."
 	fi
 
 	if has_version "<x11-drivers/ati-drivers-12"; then

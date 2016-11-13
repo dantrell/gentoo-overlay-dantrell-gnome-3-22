@@ -21,7 +21,7 @@ COMMON_DEPEND="
 	${PYTHON_DEPS}
 	dev-libs/glib:2[dbus]
 	>=dev-python/pygobject-3.10.2:3[${PYTHON_USEDEP}]
-	>=gnome-base/gsettings-desktop-schemas-3.4
+	>=gnome-base/gsettings-desktop-schemas-3.21.2
 "
 # g-s-d, gnome-desktop, gnome-shell etc. needed at runtime for the gsettings schemas
 RDEPEND="${COMMON_DEPEND}
