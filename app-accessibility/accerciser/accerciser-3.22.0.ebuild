@@ -48,8 +48,7 @@ src_prepare() {
 }
 
 src_configure() {
-	python_foreach_impl run_in_build_dir gnome2_src_configure \
-		ITSTOOL=$(type -P true)
+	python_foreach_impl run_in_build_dir gnome2_src_configure
 }
 
 src_compile() {
