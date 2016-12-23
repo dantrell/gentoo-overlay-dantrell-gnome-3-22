@@ -51,9 +51,7 @@ RDEPEND="
 	policykit? (
 		sys-auth/polkit
 		sys-libs/libcap )
-	samba? ( || (
-		( >=net-fs/samba-3.4.6[smbclient] <net-fs/samba-4[smbclient] )
-		>=net-fs/samba-4[client] ) )
+	samba? ( >=net-fs/samba-4[client] )
 	systemd? ( >=sys-apps/systemd-206:0= )
 	udev? (
 		cdda? ( dev-libs/libcdio-paranoia )
