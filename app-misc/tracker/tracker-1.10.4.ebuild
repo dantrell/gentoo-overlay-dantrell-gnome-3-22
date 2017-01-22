@@ -1,10 +1,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
+GNOME2_EAUTORECONF="yes" # See bug #367975
 GNOME2_LA_PUNT="yes"
 PYTHON_COMPAT=( python2_7 )
 
-inherit autotools bash-completion-r1 gnome2 linux-info multilib python-any-r1 vala versionator virtualx
+inherit autotools bash-completion-r1 gnome2 linux-info python-any-r1 vala versionator virtualx
 
 DESCRIPTION="A tagging metadata database, search tool and indexer"
 HOMEPAGE="https://wiki.gnome.org/Projects/Tracker"
@@ -15,7 +16,7 @@ KEYWORDS="*"
 
 IUSE="cue elibc_glibc exif ffmpeg firefox-bookmarks flac gif gsf
 gstreamer gtk iptc +iso +jpeg libav +miner-fs mp3 nautilus networkmanager
-pdf playlist rss stemmer test thunderbird +tiff upnp-av upower +vorbis +xml xmp xps"
+pdf playlist rss +seccomp stemmer test thunderbird +tiff upnp-av upower +vorbis +xml xmp xps"
 REQUIRED_USE="
 	?? ( gstreamer ffmpeg )
 	cue? ( gstreamer )
@@ -37,8 +38,8 @@ RDEPEND="
 		media-gfx/graphicsmagick[imagemagick,png,jpeg?] )
 	>=media-libs/libpng-1.2:0=
 	>=media-libs/libmediaart-1.9:2.0
-	>=x11-libs/pango-1:=
 	sys-apps/util-linux
+	>=x11-libs/pango-1:=
 
 	cue? ( media-libs/libcue )
 	elibc_glibc? ( >=sys-libs/glibc-2.12 )
@@ -52,12 +53,12 @@ RDEPEND="
 		>=www-client/firefox-bin-4.0 ) )
 	flac? ( >=media-libs/flac-1.2.1 )
 	gif? ( media-libs/giflib:= )
-	gsf? ( >=gnome-extra/libgsf-1.14.24 )
+	gsf? ( >=gnome-extra/libgsf-1.14.24:0= )
 	gstreamer? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0 )
 	gtk? (
-		>=dev-libs/libgee-0.3:0.8
+		>=dev-libs/libgee-0.3:0.8=
 		>=x11-libs/gtk+-3:3 )
 	iptc? ( media-libs/libiptcdata )
 	iso? ( >=sys-libs/libosinfo-0.2.9:= )
@@ -69,8 +70,9 @@ RDEPEND="
 		>=x11-libs/cairo-1:=
 		>=app-text/poppler-0.16:=[cairo,utils]
 		>=x11-libs/gtk+-2.12:2 )
-	playlist? ( >=dev-libs/totem-pl-parser-3 )
+	playlist? ( >=dev-libs/totem-pl-parser-3:= )
 	rss? ( >=net-libs/libgrss-0.7:0 )
+	seccomp? ( >=sys-libs/libseccomp-2.0 )
 	stemmer? ( dev-libs/snowball-stemmer )
 	thunderbird? ( || (
 		>=mail-client/thunderbird-5.0
@@ -79,7 +81,7 @@ RDEPEND="
 	upnp-av? ( >=media-libs/gupnp-dlna-0.9.4:2.0 )
 	vorbis? ( >=media-libs/libvorbis-0.22 )
 	xml? ( >=dev-libs/libxml2-2.6 )
-	xmp? ( >=media-libs/exempi-2.1 )
+	xmp? ( >=media-libs/exempi-2.1:2 )
 	xps? ( app-text/libgxps )
 	!gstreamer? ( !ffmpeg? ( || ( media-video/totem media-video/mplayer ) ) )
 "
