@@ -104,6 +104,12 @@ src_prepare() {
 		eapply "${FILESDIR}"/${PN}-3.22.0-support-alternative-search.patch
 	fi
 
+	# From GNOME:
+	# 	https://git.gnome.org/browse/nautilus/commit/?id=92b90ec25d2a35920cf693fa003f084385569458
+	# 	https://git.gnome.org/browse/nautilus/commit/?id=2591f9dcd1f6fa85a03ad904c554288a709a46f0
+	eapply "${FILESDIR}"/${PN}-3.22.3-general-fix-failing-builds-with-tracker-disabled.patch
+	eapply "${FILESDIR}"/${PN}-3.22.3-nautilus-file-reorder-tracker-dependant-functions.patch
+
 	# Remove -D*DEPRECATED flags. Don't leave this for eclass! (bug #448822)
 	sed -e 's/DISABLE_DEPRECATED_CFLAGS=.*/DISABLE_DEPRECATED_CFLAGS=/' \
 		-i configure || die "sed failed"
