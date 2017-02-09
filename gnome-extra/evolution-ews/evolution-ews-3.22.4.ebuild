@@ -32,7 +32,7 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-	# We don't have libmspack, needing internal lzx
+	# We don't have libmspack, needing internal lzx, bug 607306
 	gnome2_src_configure \
 		--with-internal-lzx \
 		$(use_enable test tests)
