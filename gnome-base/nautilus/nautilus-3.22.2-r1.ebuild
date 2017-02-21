@@ -10,7 +10,7 @@ HOMEPAGE="https://wiki.gnome.org/Apps/Nautilus"
 
 LICENSE="GPL-2+ LGPL-2+ FDL-1.1"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 IUSE="exif gnome +introspection packagekit +previewer selinux sendto tracker vanilla-icon vanilla-icon-grid vanilla-menu vanilla-menu-compress vanilla-rename vanilla-search xmp"
 REQUIRED_USE="!vanilla-icon-grid? ( !vanilla-icon )"

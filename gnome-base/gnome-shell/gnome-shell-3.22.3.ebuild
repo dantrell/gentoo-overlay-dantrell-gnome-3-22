@@ -156,7 +156,7 @@ src_prepare() {
 	fi
 
 	if use deprecated-background; then
-		eapply "${FILESDIR}"/${PN}-3.22.0-restore-deprecated-background-code.patch
+		eapply "${FILESDIR}"/${PN}-3.22.3-restore-deprecated-background-code.patch
 	fi
 
 	if ! use vanilla-motd; then
