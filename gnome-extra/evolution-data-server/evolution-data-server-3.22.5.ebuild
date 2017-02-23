@@ -70,13 +70,6 @@ DEPEND="${RDEPEND}
 	vala? ( $(vala_depend) )
 "
 
-# From gnome-3-22 branch, will be included in 3.22.5 release
-
-PATCHES=(
-	"${FILESDIR}"/${PV}-gperf-3.1.patch
-	"${FILESDIR}"/${PV}-imap-notify.patch
-)
-
 pkg_setup() {
 	python-any-r1_pkg_setup
 }
