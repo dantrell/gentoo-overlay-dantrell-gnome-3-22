@@ -133,7 +133,7 @@ src_prepare() {
 		# 	https://git.gnome.org/browse/gdm/commit/?id=1ac67f522f5690c27023d98096ca817f12f7eb88
 		# 	https://bugzilla.gnome.org/show_bug.cgi?id=749418
 		eapply "${FILESDIR}"/${PN}-3.20.0-get-seat-id-from-function.patch
-		eapply "${FILESDIR}"/${PN}-3.22.0-restore-deprecated-consolekit-code.patch
+		eapply "${FILESDIR}"/${PN}-3.22.2-restore-deprecated-consolekit-code.patch
 		eapply "${FILESDIR}"/${PN}-3.18.2-rebase-autologin-fixes.patch
 	fi
 
