@@ -46,7 +46,7 @@ src_prepare() {
 		# From Fedora:
 		# 	http://pkgs.fedoraproject.org/cgit/rpms/gnome-terminal.git/tree/?h=f25
 		eapply "${FILESDIR}"/${PN}-3.18.2-build-dont-treat-warnings-as-errors.patch
-		eapply "${FILESDIR}"/${PN}-3.22.1-transparency.patch
+		eapply "${FILESDIR}"/${PN}-3.22.2-transparency.patch
 
 		# From GNOME:
 		# 	https://git.gnome.org/browse/gnome-terminal/commit/?id=b3c270b3612acd45f309521cf1167e1abd561c09

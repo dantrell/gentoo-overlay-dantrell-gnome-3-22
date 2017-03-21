@@ -12,7 +12,7 @@ LICENSE="GPL-2+"
 SLOT="2"
 KEYWORDS="*"
 
-IUSE="+bluetooth +colord +cups debug +deprecated +gnome-online-accounts +i18n input_devices_wacom kerberos libinput networkmanager systemd v4l vanilla-datetime vanilla-hostname wayland"
+IUSE="+bluetooth +colord +cups debug +deprecated +gnome-online-accounts +ibus input_devices_wacom kerberos libinput networkmanager systemd v4l vanilla-datetime vanilla-hostname wayland"
 
 # False positives caused by nested configure scripts
 QA_CONFIGURE_OPTIONS=".*"
@@ -60,7 +60,7 @@ COMMON_DEPEND="
 	gnome-online-accounts? (
 		>=media-libs/grilo-0.3.0:0.3=
 		>=net-libs/gnome-online-accounts-3.21.5:= )
-	i18n? ( >=app-i18n/ibus-1.5.2 )
+	ibus? ( >=app-i18n/ibus-1.5.2 )
 	kerberos? ( app-crypt/mit-krb5 )
 	networkmanager? (
 		>=gnome-extra/nm-applet-1.2.0
@@ -88,7 +88,7 @@ RDEPEND="${COMMON_DEPEND}
 		app-admin/system-config-printer
 		net-print/cups-pk-helper )
 	input_devices_wacom? ( gnome-base/gnome-settings-daemon[input_devices_wacom] )
-	i18n? ( >=gnome-base/libgnomekbd-3 )
+	ibus? ( >=gnome-base/libgnomekbd-3 )
 	wayland? ( libinput? ( dev-libs/libinput ) )
 	!wayland? (
 		libinput? ( >=x11-drivers/xf86-input-libinput-0.19.0 )
@@ -138,7 +138,11 @@ src_prepare() {
 
 	# From GNOME:
 	# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=8da6fa28e1c5e6eab551585ecdbd914b08936d5e
+	# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=4825881b129bdde0eaa5419ece6198ebda420825
+	# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=97e4d87ae8a123d5b1711ddbaba6bc0d3a0a39a8
 	eapply "${FILESDIR}"/${PN}-3.22.1-display-fix-possible-crash-on-startup.patch
+	eapply "${FILESDIR}"/${PN}-3.22.2-fix-build-without-wayland.patch
+	eapply "${FILESDIR}"/${PN}-3.22.2-fix-dual-gpu-crash.patch
 
 	# Make some panels and dependencies optional; requires eautoreconf
 	# https://bugzilla.gnome.org/686840, 697478, 700145
@@ -164,7 +168,7 @@ src_prepare() {
 		# From Funtoo:
 		# 	https://bugs.funtoo.org/browse/FL-1329
 		eapply "${FILESDIR}"/${PN}-3.20.0-restore-critical-battery-action-label.patch
-		eapply "${FILESDIR}"/${PN}-3.16.3-restore-deprecated-code.patch
+		eapply "${FILESDIR}"/${PN}-3.22.2-restore-deprecated-code.patch
 	fi
 
 	if ! use vanilla-datetime; then
@@ -194,7 +198,7 @@ src_configure() {
 		$(usex debug --enable-debug=yes ' ') \
 		$(use_enable deprecated) \
 		$(use_enable gnome-online-accounts goa) \
-		$(use_enable i18n ibus) \
+		$(use_enable ibus) \
 		$(use_enable kerberos) \
 		$(use_enable networkmanager) \
 		$(use_with v4l cheese) \

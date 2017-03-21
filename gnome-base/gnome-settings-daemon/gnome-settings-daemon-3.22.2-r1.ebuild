@@ -114,6 +114,8 @@ src_prepare() {
 
 	# Make colord and wacom optional; requires eautoreconf
 	eapply "${FILESDIR}"/${PN}-3.22.0-optional.patch
+	# Allow specifying udevrulesdir via configure, bug 509484; requires eautoreconf
+	eapply "${FILESDIR}"/${PN}-${PV}-udevrulesdir-configure.patch
 
 	eautoreconf
 	gnome2_src_prepare
@@ -123,6 +125,7 @@ src_configure() {
 	gnome2_src_configure \
 		--disable-static \
 		--enable-man \
+		--with-udevrulesdir="$(get_udevdir)"/rules.d \
 		$(use_enable colord color) \
 		$(use_enable cups) \
 		$(use_enable debug) \
@@ -137,10 +140,6 @@ src_configure() {
 
 src_test() {
 	virtx emake check
-}
-
-src_install() {
-	gnome2_src_install udevrulesdir="$(get_udevdir)"/rules.d #509484
 }
 
 pkg_postinst() {

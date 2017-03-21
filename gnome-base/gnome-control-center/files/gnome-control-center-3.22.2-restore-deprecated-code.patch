@@ -1,6 +1,6 @@
-diff '--exclude=.git' -urN gnome-control-center-3.16.3/config.h.in gnome-control-center-3.16.3-patch/config.h.in
---- gnome-control-center-3.16.3/config.h.in	2015-07-21 10:32:50.000000000 -0400
-+++ gnome-control-center-3.16.3-patch/config.h.in	2015-09-24 18:30:45.334994236 -0400
+diff '--exclude=.git' -urN a/config.h.in b/config.h.in
+--- a/config.h.in	2017-03-14 05:48:31.000000000 -0400
++++ b/config.h.in	2017-03-19 09:24:29.215111714 -0400
 @@ -12,6 +12,9 @@
  /* Define to 1 to build the Wacom panel */
  #undef BUILD_WACOM
@@ -11,27 +11,27 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/config.h.in gnome-control
  /* Gettext package */
  #undef GETTEXT_PACKAGE
  
-diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure gnome-control-center-3.16.3-patch/configure
---- gnome-control-center-3.16.3/configure	2015-07-21 10:32:38.000000000 -0400
-+++ gnome-control-center-3.16.3-patch/configure	2015-09-24 18:30:45.336994225 -0400
-@@ -643,6 +643,8 @@
- UPDATE_MIME_DATABASE
- PANEL_LIBS
+diff '--exclude=.git' -urN a/configure b/configure
+--- a/configure	2017-03-14 05:48:31.000000000 -0400
++++ b/configure	2017-03-19 09:52:13.221330692 -0400
+@@ -645,6 +645,8 @@
  PANEL_CFLAGS
+ gnome_session_libexecdir
+ GNOMESESSIONDIR
 +ENABLE_DEPRECATED_FALSE
 +ENABLE_DEPRECATED_TRUE
  KRB5_LIBS
  KRB5_CFLAGS
  KRB5_CONFIG
-@@ -964,6 +966,7 @@
- enable_ibus
+@@ -965,6 +967,7 @@
  enable_cups
  with_cheese
+ with_gnome_session_libexecdir
 +enable_deprecated
  enable_update_mimedb
  enable_more_warnings
  '
-@@ -1698,6 +1701,7 @@
+@@ -1697,6 +1700,7 @@
    --enable-documentation  build documentation
    --disable-ibus          Disable IBus support
    --disable-cups          disable CUPS support (default: enabled)
@@ -39,9 +39,9 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure gnome-control-c
    --disable-update-mimedb do not update mime database after installation
    --enable-more-warnings  Maximum compiler warnings
  
-@@ -18161,6 +18165,28 @@
- USER_ACCOUNTS_PANEL_CFLAGS="$USER_ACCOUNTS_PANEL_CFLAGS $KRB5_CFLAGS"
- USER_ACCOUNTS_PANEL_LIBS="$USER_ACCOUNTS_PANEL_LIBS $KRB5_LIBS"
+@@ -18140,6 +18144,28 @@
+ fi
+ 
  
 +# Build deprecated functionality
 +# Check whether --enable-deprecated was given.
@@ -66,9 +66,9 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure gnome-control-c
 +
 +
  
- PANEL_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-cc-panel\\\"\" -DPANEL_ID=\"\\\"\$(cappletname)\\\"\""
- 
-@@ -18586,6 +18612,10 @@
+ if test $pkg_failed = yes; then
+    	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+@@ -19818,6 +19844,10 @@
    as_fn_error $? "conditional \"BUILD_WACOM\" was never defined.
  Usually this means the macro was only invoked conditionally." "$LINENO" 5
  fi
@@ -79,7 +79,7 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure gnome-control-c
  if test -z "${ENABLE_UPDATE_MIMEDB_TRUE}" && test -z "${ENABLE_UPDATE_MIMEDB_FALSE}"; then
    as_fn_error $? "conditional \"ENABLE_UPDATE_MIMEDB\" was never defined.
  Usually this means the macro was only invoked conditionally." "$LINENO" 5
-@@ -20950,49 +20980,33 @@
+@@ -22102,51 +22132,33 @@
  fi
  
  
@@ -127,9 +127,10 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure gnome-control-c
 -	{ $as_echo "$as_me:${as_lineno-$LINENO}:    Region panel IBus support disabled" >&5
 -$as_echo "$as_me:    Region panel IBus support disabled" >&6;}
 -fi
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: ** gnome-session libexecdir: $GNOMESESSIONDIR" >&5
+-$as_echo "$as_me: ** gnome-session libexecdir: $GNOMESESSIONDIR" >&6;}
 -{ $as_echo "$as_me:${as_lineno-$LINENO}: End options" >&5
 -$as_echo "$as_me: End options" >&6;}
-+
 +echo "
 +              gnome-control-center $VERSION
 +              `echo gnome-control-center $VERSION | sed "s/./=/g"`
@@ -146,6 +147,7 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure gnome-control-c
 +        compiler:                 ${CC}
 +        cflags:                   ${CFLAGS}
 +        Maintainer mode:          ${USE_MAINTAINER_MODE}
++        gnome-session libexecdir: ${GNOMESESSIONDIR}
 +
 +        NetworkManager support:   ${have_networkmanager}
 +        Bluetooth support:        ${have_bluetooth}
@@ -159,12 +161,12 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure gnome-control-c
 +        Enable deprecated stuff:  ${enable_deprecated}
 +
 +"
-diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure.ac gnome-control-center-3.16.3-patch/configure.ac
---- gnome-control-center-3.16.3/configure.ac	2015-09-24 18:15:39.758091857 -0400
-+++ gnome-control-center-3.16.3-patch/configure.ac	2015-09-24 18:30:45.336994225 -0400
-@@ -440,6 +440,15 @@
- USER_ACCOUNTS_PANEL_CFLAGS="$USER_ACCOUNTS_PANEL_CFLAGS $KRB5_CFLAGS"
- USER_ACCOUNTS_PANEL_LIBS="$USER_ACCOUNTS_PANEL_LIBS $KRB5_LIBS"
+diff '--exclude=.git' -urN a/configure.ac b/configure.ac
+--- a/configure.ac	2017-03-19 09:23:45.404364621 -0400
++++ b/configure.ac	2017-03-19 09:52:18.094301461 -0400
+@@ -448,6 +448,15 @@
+ AS_AC_EXPAND(GNOMESESSIONDIR, $with_gnome_session_libexecdir)
+ AC_SUBST([gnome_session_libexecdir], [$GNOMESESSIONDIR])
  
 +# Build deprecated functionality
 +AC_ARG_ENABLE(deprecated, [  --enable-deprecated     build deprecated functionality],
@@ -178,7 +180,7 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure.ac gnome-contro
  dnl =======================================
  dnl Panels
  dnl =======================================
-@@ -641,50 +650,36 @@
+@@ -650,51 +659,37 @@
  
  AC_OUTPUT
  
@@ -228,6 +230,7 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure.ac gnome-contro
 -else
 -	AC_MSG_NOTICE([   Region panel IBus support disabled])
 -fi
+-AC_MSG_NOTICE([** gnome-session libexecdir: $GNOMESESSIONDIR])
 -AC_MSG_NOTICE([End options])
 +dnl ---------------------------------------------------------------------------
 +dnl - Show summary
@@ -249,6 +252,7 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure.ac gnome-contro
 +        compiler:                 ${CC}
 +        cflags:                   ${CFLAGS}
 +        Maintainer mode:          ${USE_MAINTAINER_MODE}
++        gnome-session libexecdir: ${GNOMESESSIONDIR}
 +
 +        NetworkManager support:   ${have_networkmanager}
 +        Bluetooth support:        ${have_bluetooth}
@@ -262,10 +266,10 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/configure.ac gnome-contro
 +        Enable deprecated stuff:  ${enable_deprecated}
 +
 +"
-diff '--exclude=.git' -urN gnome-control-center-3.16.3/panels/power/cc-power-panel.c gnome-control-center-3.16.3-patch/panels/power/cc-power-panel.c
---- gnome-control-center-3.16.3/panels/power/cc-power-panel.c	2015-09-24 18:31:04.611883054 -0400
-+++ gnome-control-center-3.16.3-patch/panels/power/cc-power-panel.c	2015-09-24 18:30:45.336994225 -0400
-@@ -1860,6 +1860,34 @@
+diff '--exclude=.git' -urN a/panels/power/cc-power-panel.c b/panels/power/cc-power-panel.c
+--- a/panels/power/cc-power-panel.c	2017-03-19 09:23:54.352312954 -0400
++++ b/panels/power/cc-power-panel.c	2017-03-19 09:24:29.219111691 -0400
+@@ -2142,6 +2142,34 @@
      }
  
  
@@ -299,8 +303,8 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/panels/power/cc-power-pan
 +
    vbox = WID (priv->builder, "vbox_power");
  
-   s = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Off"));
-@@ -1880,8 +1908,11 @@
+   /* Frame header */
+@@ -2163,8 +2191,11 @@
    gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
                                  cc_list_box_update_header_func,
                                  NULL, NULL);
@@ -314,7 +318,7 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/panels/power/cc-power-pan
  
    atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (label)),
                                 ATK_RELATION_LABEL_FOR,
-@@ -1913,16 +1944,34 @@
+@@ -2197,16 +2228,34 @@
    gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
  
    priv->automatic_suspend_label = sw = gtk_label_new ("");
@@ -359,7 +363,7 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/panels/power/cc-power-pan
  
    priv->critical_battery_row = row = gtk_list_box_row_new ();
    box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-@@ -1938,6 +1987,9 @@
+@@ -2222,6 +2271,9 @@
  
    value = 0;
  
@@ -369,7 +373,7 @@ diff '--exclude=.git' -urN gnome-control-center-3.16.3/panels/power/cc-power-pan
    connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
    result = g_dbus_connection_call_sync (connection,
                                          "org.freedesktop.login1",
-@@ -1961,6 +2013,7 @@
+@@ -2245,6 +2297,7 @@
        g_variant_unref(result_variant);
        g_variant_unref(result);
      }

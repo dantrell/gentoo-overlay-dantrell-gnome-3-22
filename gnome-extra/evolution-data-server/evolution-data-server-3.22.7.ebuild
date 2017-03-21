@@ -24,7 +24,7 @@ REQUIRED_USE="vala? ( introspection )"
 RESTRICT="test"
 
 # sys-libs/db is only required for migrating from <3.13 versions
-# gdata-0.15.1 is required for google tasks
+# gdata-0.17.7 soft required for google tasks (more than 100)
 # berkdb needed only for migrating old calendar data, bug #519512
 RDEPEND="
 	>=app-crypt/gcr-3.4
@@ -49,7 +49,7 @@ RDEPEND="
 	)
 	google? (
 		>=dev-libs/json-glib-1.0.4
-		>=dev-libs/libgdata-0.15.1:=
+		>=dev-libs/libgdata-0.17.7:=
 		>=net-libs/webkit-gtk-2.11.91:4
 	)
 	gnome-online-accounts? ( >=net-libs/gnome-online-accounts-3.8:= )

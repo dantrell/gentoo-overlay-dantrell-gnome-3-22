@@ -53,6 +53,7 @@ iso     - app-cdr/cdrtools
 jar,zip - app-arch/zip and app-arch/unzip
 lha     - app-arch/lha
 lzop    - app-arch/lzop
+lz4     - app-arch/lz4
 rar     - app-arch/unrar or app-arch/unar
 rpm     - app-arch/rpm
 unstuff - app-arch/stuffit
@@ -66,7 +67,7 @@ src_prepare() {
 	fi
 
 	# File providing Gentoo package names for various archivers
-	cp -f "${FILESDIR}"/3.6.0-packages.match data/packages.match || die
+	cp -f "${FILESDIR}"/3.22-packages.match data/packages.match || die
 	gnome2_src_prepare
 }
 

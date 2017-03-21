@@ -3,7 +3,7 @@
 EAPI="6"
 GNOME2_LA_PUNT="yes"
 
-inherit gnome2 virtualx
+inherit flag-o-matic gnome2 virtualx
 
 DESCRIPTION="GNOME webbrowser based on Webkit"
 HOMEPAGE="https://wiki.gnome.org/Apps/Web"
@@ -56,6 +56,9 @@ PATCHES=(
 )
 
 src_configure() {
+	# https://bugzilla.gnome.org/show_bug.cgi?id=778495
+	append-cflags -std=gnu11
+
 	gnome2_src_configure \
 		--enable-shared \
 		--disable-static \

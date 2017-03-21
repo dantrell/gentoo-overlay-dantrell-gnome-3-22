@@ -45,6 +45,7 @@ COMMON_DEPEND="
 	x11-libs/libXdmcp
 	x11-libs/libXext
 	x11-libs/libXft
+	x11-libs/libxcb
 	>=x11-misc/xdg-utils-1.0.2-r3
 
 	virtual/pam
@@ -133,7 +134,7 @@ src_prepare() {
 		# 	https://git.gnome.org/browse/gdm/commit/?id=1ac67f522f5690c27023d98096ca817f12f7eb88
 		# 	https://bugzilla.gnome.org/show_bug.cgi?id=749418
 		eapply "${FILESDIR}"/${PN}-3.20.0-get-seat-id-from-function.patch
-		eapply "${FILESDIR}"/${PN}-3.22.2-restore-deprecated-consolekit-code.patch
+		eapply "${FILESDIR}"/${PN}-3.22.3-restore-deprecated-consolekit-code.patch
 		eapply "${FILESDIR}"/${PN}-3.18.2-rebase-autologin-fixes.patch
 	fi
 
@@ -234,8 +235,12 @@ pkg_postinst() {
 
 	readme.gentoo_print_elog
 
-	if ! version_is_at_least 3.16.0 ${REPLACING_VERSIONS}; then
-		ewarn "GDM will now use a new TTY per logged user as explained at:"
-		ewarn "https://wiki.gentoo.org/wiki/Project:GNOME/GNOME3-Troubleshooting#GDM_.3E.3D_3.16_opens_one_graphical_session_per_user"
-	fi
+	local v
+	for v in ${REPLACING_VERSIONS}; do
+		if ! version_is_at_least 3.16.0 ${v}; then
+			ewarn "GDM will now use a new TTY per logged user as explained at:"
+			ewarn "https://wiki.gentoo.org/wiki/Project:GNOME/GNOME3-Troubleshooting#GDM_.3E.3D_3.16_opens_one_graphical_session_per_user"
+			break
+		fi
+	done
 }

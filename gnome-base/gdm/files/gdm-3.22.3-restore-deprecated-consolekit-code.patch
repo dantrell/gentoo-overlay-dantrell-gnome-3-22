@@ -1,6 +1,6 @@
 diff '--exclude=.git' -urN a/common/gdm-common.c b/common/gdm-common.c
 --- a/common/gdm-common.c	2017-01-05 09:40:34.000000000 -0500
-+++ b/common/gdm-common.c	2017-03-04 03:12:03.032934060 -0500
++++ b/common/gdm-common.c	2017-03-19 10:26:01.471264396 -0400
 @@ -39,12 +39,25 @@
  #include "mkdtemp.h"
  #endif
@@ -395,7 +395,7 @@ diff '--exclude=.git' -urN a/common/gdm-common.c b/common/gdm-common.c
  static void
 diff '--exclude=.git' -urN a/common/gdm-common.h b/common/gdm-common.h
 --- a/common/gdm-common.h	2017-01-05 09:40:34.000000000 -0500
-+++ b/common/gdm-common.h	2017-03-04 03:12:03.032934060 -0500
++++ b/common/gdm-common.h	2017-03-19 10:26:01.471264396 -0400
 @@ -31,6 +31,9 @@
                  expr;                \
          } while G_UNLIKELY (errno == EINTR);
@@ -408,7 +408,7 @@ diff '--exclude=.git' -urN a/common/gdm-common.h b/common/gdm-common.h
  
 diff '--exclude=.git' -urN a/common/gdm-log.c b/common/gdm-log.c
 --- a/common/gdm-log.c	2017-01-05 09:40:34.000000000 -0500
-+++ b/common/gdm-log.c	2017-03-04 03:12:03.032934060 -0500
++++ b/common/gdm-log.c	2017-03-19 10:26:01.471264396 -0400
 @@ -30,7 +30,9 @@
  #include <unistd.h>
  
@@ -448,8 +448,8 @@ diff '--exclude=.git' -urN a/common/gdm-log.c b/common/gdm-log.c
  
  void
 diff '--exclude=.git' -urN a/configure.ac b/configure.ac
---- a/configure.ac	2017-03-01 16:00:15.000000000 -0500
-+++ b/configure.ac	2017-03-04 03:12:03.032934060 -0500
+--- a/configure.ac	2017-03-06 12:09:04.000000000 -0500
++++ b/configure.ac	2017-03-19 10:26:01.471264396 -0400
 @@ -263,7 +263,15 @@
                             [Use TCP Wrappers @<:@default=auto@:>@]),,
              with_tcp_wrappers=auto)
@@ -615,7 +615,7 @@ diff '--exclude=.git' -urN a/configure.ac b/configure.ac
 +
 diff '--exclude=.git' -urN a/daemon/Makefile.am b/daemon/Makefile.am
 --- a/daemon/Makefile.am	2017-01-05 09:40:34.000000000 -0500
-+++ b/daemon/Makefile.am	2017-03-04 03:12:03.032934060 -0500
++++ b/daemon/Makefile.am	2017-03-19 10:26:01.471264396 -0400
 @@ -20,6 +20,7 @@
  	-DGDM_SCREENSHOT_DIR=\"$(GDM_SCREENSHOT_DIR)\"		\
  	-DGDM_CACHE_DIR=\""$(localstatedir)/cache/gdm"\"	\
@@ -649,7 +649,7 @@ diff '--exclude=.git' -urN a/daemon/Makefile.am b/daemon/Makefile.am
  	gdm-local-display-factory-glue.c	\
 diff '--exclude=.git' -urN a/daemon/gdm-launch-environment.c b/daemon/gdm-launch-environment.c
 --- a/daemon/gdm-launch-environment.c	2017-01-05 09:40:34.000000000 -0500
-+++ b/daemon/gdm-launch-environment.c	2017-03-04 03:12:03.032934060 -0500
++++ b/daemon/gdm-launch-environment.c	2017-03-19 10:26:01.471264396 -0400
 @@ -190,6 +190,9 @@
                  char *seat_id;
  
@@ -670,8 +670,8 @@ diff '--exclude=.git' -urN a/daemon/gdm-launch-environment.c b/daemon/gdm-launch
  
  static void
 diff '--exclude=.git' -urN a/daemon/gdm-local-display-factory.c b/daemon/gdm-local-display-factory.c
---- a/daemon/gdm-local-display-factory.c	2017-03-04 03:11:48.127205824 -0500
-+++ b/daemon/gdm-local-display-factory.c	2017-03-04 03:17:24.098081108 -0500
+--- a/daemon/gdm-local-display-factory.c	2017-03-19 10:25:48.246341845 -0400
++++ b/daemon/gdm-local-display-factory.c	2017-03-19 10:26:01.472264390 -0400
 @@ -42,6 +42,7 @@
  
  #define GDM_LOCAL_DISPLAY_FACTORY_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GDM_TYPE_LOCAL_DISPLAY_FACTORY, GdmLocalDisplayFactoryPrivate))
@@ -899,8 +899,8 @@ diff '--exclude=.git' -urN a/daemon/gdm-local-display-factory.c b/daemon/gdm-loc
          G_OBJECT_CLASS (gdm_local_display_factory_parent_class)->finalize (object);
  }
 diff '--exclude=.git' -urN a/daemon/gdm-manager.c b/daemon/gdm-manager.c
---- a/daemon/gdm-manager.c	2017-03-01 15:58:01.000000000 -0500
-+++ b/daemon/gdm-manager.c	2017-03-04 03:12:03.033934042 -0500
+--- a/daemon/gdm-manager.c	2017-03-03 15:32:43.000000000 -0500
++++ b/daemon/gdm-manager.c	2017-03-19 10:26:01.472264390 -0400
 @@ -34,7 +34,9 @@
  #include <glib/gstdio.h>
  #include <glib-object.h>
@@ -1505,7 +1505,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-manager.c b/daemon/gdm-manager.c
  
                  if (error != NULL) {
                          g_debug ("GdmManager: Error while retrieving remoteness for session: %s",
-@@ -929,7 +1337,8 @@
+@@ -931,7 +1339,8 @@
                   * same audit session, ignore it since it doesn't "own" the
                   * reauthentication session
                   */
@@ -1515,7 +1515,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-manager.c b/daemon/gdm-manager.c
                                                              NULL);
                  session_id = g_object_get_data (G_OBJECT (session), "caller-session-id");
  
-@@ -1141,16 +1550,20 @@
+@@ -1143,16 +1552,20 @@
  display_is_on_seat0 (GdmDisplay *display)
  {
          gboolean is_on_seat0 = TRUE;
@@ -1542,7 +1542,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-manager.c b/daemon/gdm-manager.c
          return is_on_seat0;
  }
  
-@@ -1759,11 +2172,57 @@
+@@ -1770,11 +2183,57 @@
  }
  
  static char *
@@ -1603,8 +1603,8 @@ diff '--exclude=.git' -urN a/daemon/gdm-manager.c b/daemon/gdm-manager.c
  
  static void
 diff '--exclude=.git' -urN a/daemon/gdm-server.c b/daemon/gdm-server.c
---- a/daemon/gdm-server.c	2017-01-05 09:40:34.000000000 -0500
-+++ b/daemon/gdm-server.c	2017-03-04 03:12:03.033934042 -0500
+--- a/daemon/gdm-server.c	2017-03-02 16:33:50.000000000 -0500
++++ b/daemon/gdm-server.c	2017-03-19 10:26:01.472264390 -0400
 @@ -43,7 +43,9 @@
  #include <linux/vt.h>
  #endif
@@ -1724,7 +1724,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-server.c b/daemon/gdm-server.c
           * '-listen tcp' as the X server dosen't listen on tcp sockets
 diff '--exclude=.git' -urN a/daemon/gdm-session-worker-job.c b/daemon/gdm-session-worker-job.c
 --- a/daemon/gdm-session-worker-job.c	2017-01-05 09:40:34.000000000 -0500
-+++ b/daemon/gdm-session-worker-job.c	2017-03-04 03:12:03.033934042 -0500
++++ b/daemon/gdm-session-worker-job.c	2017-03-19 10:26:01.472264390 -0400
 @@ -36,7 +36,9 @@
  #include <sys/prctl.h>
  #endif
@@ -1736,8 +1736,8 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker-job.c b/daemon/gdm-sessio
  #ifdef ENABLE_SYSTEMD_JOURNAL
  #include <systemd/sd-journal.h>
 diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-worker.c
---- a/daemon/gdm-session-worker.c	2017-03-01 15:58:01.000000000 -0500
-+++ b/daemon/gdm-session-worker.c	2017-03-04 03:12:03.034934023 -0500
+--- a/daemon/gdm-session-worker.c	2017-03-03 15:32:37.000000000 -0500
++++ b/daemon/gdm-session-worker.c	2017-03-19 10:32:12.317116756 -0400
 @@ -28,9 +28,11 @@
  #include <string.h>
  #include <sys/types.h>
@@ -2076,9 +2076,9 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
          }
 +#endif
  
-         session_pid = fork ();
- 
-@@ -1901,6 +2139,7 @@
+         if (!worker->priv->is_program_session && !run_script (worker, GDMCONFDIR "/PostLogin")) {
+                 g_set_error (error,
+@@ -1919,6 +2157,7 @@
                          _exit (2);
                  }
  
@@ -2086,7 +2086,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
                  /* Take control of the tty
                   */
                  if (needs_controlling_terminal) {
-@@ -1908,6 +2147,7 @@
+@@ -1926,6 +2165,7 @@
                                  g_debug ("GdmSessionWorker: could not take control of tty: %m");
                          }
                  }
@@ -2094,7 +2094,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
  
  #ifdef HAVE_LOGINCAP
                  if (setusercontext (NULL, passwd_entry, passwd_entry->pw_uid, LOGIN_SETALL) < 0) {
-@@ -2052,6 +2292,7 @@
+@@ -2070,6 +2310,7 @@
          return TRUE;
  }
  
@@ -2102,7 +2102,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
  static gboolean
  set_up_for_new_vt (GdmSessionWorker *worker)
  {
-@@ -2102,6 +2343,7 @@
+@@ -2155,6 +2396,7 @@
          close (fd);
          return FALSE;
  }
@@ -2110,7 +2110,24 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
  
  static gboolean
  set_up_for_current_vt (GdmSessionWorker  *worker,
-@@ -2190,6 +2432,7 @@
+@@ -2221,14 +2463,14 @@
+                 g_free (pam_xauth);
+          }
+ #endif
+-
++#ifdef WITH_SYSTEMD
+         if (g_strcmp0 (worker->priv->display_seat_id, "seat0") == 0) {
+                 g_debug ("GdmSessionWorker: setting XDG_VTNR to current vt");
+                 set_xdg_vtnr_to_current_vt (worker);
+         } else {
+                 g_debug ("GdmSessionWorker: not setting XDG_VTNR since not seat0");
+         }
+-
++#endif
+         return TRUE;
+ out:
+         return FALSE;
+@@ -2251,6 +2493,7 @@
                          return FALSE;
                  }
                  break;
@@ -2118,7 +2135,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
          case GDM_SESSION_DISPLAY_MODE_NEW_VT:
          case GDM_SESSION_DISPLAY_MODE_LOGIND_MANAGED:
                  if (!set_up_for_new_vt (worker)) {
-@@ -2200,6 +2443,7 @@
+@@ -2261,6 +2504,7 @@
                          return FALSE;
                  }
                  break;
@@ -2126,20 +2143,14 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
          }
  
          flags = 0;
-@@ -2229,7 +2473,9 @@
+@@ -2282,7 +2526,17 @@
          g_debug ("GdmSessionWorker: state SESSION_OPENED");
          worker->priv->state = GDM_SESSION_WORKER_STATE_SESSION_OPENED;
  
 +#ifdef WITH_SYSTEMD
          session_id = gdm_session_worker_get_environment_variable (worker, "XDG_SESSION_ID");
 +#endif
- 
-         /* FIXME: should we do something here?
-          * Note that error return status from PreSession script should
-@@ -2239,6 +2485,14 @@
-          */
-         run_script (worker, GDMCONFDIR "/PreSession");
- 
++
 +#ifdef WITH_CONSOLE_KIT
 +        register_ck_session (worker);
 +
@@ -2147,11 +2158,10 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
 +                session_id = get_ck_session_id (worker);
 +        }
 +#endif
-+
+ 
          if (session_id != NULL) {
                  g_free (worker->priv->session_id);
-                 worker->priv->session_id = session_id;
-@@ -2343,6 +2597,19 @@
+@@ -2388,6 +2642,19 @@
  }
  
  static gboolean
@@ -2171,7 +2181,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
  gdm_session_worker_handle_set_session_display_mode (GdmDBusWorker         *object,
                                                      GDBusMethodInvocation *invocation,
                                                      const char            *str)
-@@ -3149,6 +3416,7 @@
+@@ -3194,6 +3461,7 @@
          interface->handle_open = gdm_session_worker_handle_open;
          interface->handle_set_language_name = gdm_session_worker_handle_set_language_name;
          interface->handle_set_session_name = gdm_session_worker_handle_set_session_name;
@@ -2181,7 +2191,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.c b/daemon/gdm-session-wo
          interface->handle_start_program = gdm_session_worker_handle_start_program;
 diff '--exclude=.git' -urN a/daemon/gdm-session-worker.xml b/daemon/gdm-session-worker.xml
 --- a/daemon/gdm-session-worker.xml	2017-01-05 09:40:34.000000000 -0500
-+++ b/daemon/gdm-session-worker.xml	2017-03-04 03:12:03.034934023 -0500
++++ b/daemon/gdm-session-worker.xml	2017-03-19 10:26:01.473264385 -0400
 @@ -13,6 +13,9 @@
      <method name="SetSessionName">
        <arg name="session_name" direction="in" type="s" />
@@ -2193,9 +2203,9 @@ diff '--exclude=.git' -urN a/daemon/gdm-session-worker.xml b/daemon/gdm-session-
        <arg name="mode" direction="in" type="s"/>
      </method>
 diff '--exclude=.git' -urN a/daemon/gdm-session.c b/daemon/gdm-session.c
---- a/daemon/gdm-session.c	2017-03-01 10:58:36.000000000 -0500
-+++ b/daemon/gdm-session.c	2017-03-04 03:12:03.034934023 -0500
-@@ -3064,6 +3064,10 @@
+--- a/daemon/gdm-session.c	2017-03-03 15:31:20.000000000 -0500
++++ b/daemon/gdm-session.c	2017-03-19 10:26:01.473264385 -0400
+@@ -3066,6 +3066,10 @@
          g_return_val_if_fail (self != NULL, FALSE);
          g_return_val_if_fail (GDM_IS_SESSION (self), FALSE);
  
@@ -2206,7 +2216,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-session.c b/daemon/gdm-session.c
  #ifdef ENABLE_WAYLAND_SUPPORT
          if (gdm_session_is_wayland_session (self)) {
                  bypasses_xsession = TRUE;
-@@ -3159,6 +3163,27 @@
+@@ -3161,6 +3165,27 @@
  }
  
  void
@@ -2236,7 +2246,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-session.c b/daemon/gdm-session.c
  {
 diff '--exclude=.git' -urN a/daemon/gdm-session.h b/daemon/gdm-session.h
 --- a/daemon/gdm-session.h	2017-01-05 09:40:34.000000000 -0500
-+++ b/daemon/gdm-session.h	2017-03-04 03:12:03.034934023 -0500
++++ b/daemon/gdm-session.h	2017-03-19 10:26:01.473264385 -0400
 @@ -180,6 +180,8 @@
                                                             const char *text);
  void              gdm_session_select_program              (GdmSession *session,
@@ -2248,7 +2258,7 @@ diff '--exclude=.git' -urN a/daemon/gdm-session.h b/daemon/gdm-session.h
  void              gdm_session_select_user                 (GdmSession *session,
 diff '--exclude=.git' -urN a/data/Makefile.am b/data/Makefile.am
 --- a/data/Makefile.am	2017-01-05 09:40:34.000000000 -0500
-+++ b/data/Makefile.am	2017-03-04 03:12:03.034934023 -0500
++++ b/data/Makefile.am	2017-03-19 10:26:01.473264385 -0400
 @@ -187,6 +187,8 @@
  
  systemdsystemunit =
@@ -2268,8 +2278,8 @@ diff '--exclude=.git' -urN a/data/Makefile.am b/data/Makefile.am
  if ENABLE_GDM_XSESSION
  
 diff '--exclude=.git' -urN a/data/pam-redhat/gdm-autologin.pam b/data/pam-redhat/gdm-autologin.pam
---- a/data/pam-redhat/gdm-autologin.pam	2017-01-05 09:40:34.000000000 -0500
-+++ b/data/pam-redhat/gdm-autologin.pam	2017-03-04 03:12:03.035934005 -0500
+--- a/data/pam-redhat/gdm-autologin.pam	2017-03-02 14:38:44.000000000 -0500
++++ b/data/pam-redhat/gdm-autologin.pam	2017-03-19 10:26:01.473264385 -0400
 @@ -8,6 +8,7 @@
  session    required    pam_selinux.so close
  session    required    pam_loginuid.so
@@ -2279,8 +2289,8 @@ diff '--exclude=.git' -urN a/data/pam-redhat/gdm-autologin.pam b/data/pam-redhat
  session    optional    pam_keyinit.so force revoke
  session    required    pam_namespace.so
 diff '--exclude=.git' -urN a/data/pam-redhat/gdm-fingerprint.pam b/data/pam-redhat/gdm-fingerprint.pam
---- a/data/pam-redhat/gdm-fingerprint.pam	2017-01-05 09:40:34.000000000 -0500
-+++ b/data/pam-redhat/gdm-fingerprint.pam	2017-03-04 03:12:03.035934005 -0500
+--- a/data/pam-redhat/gdm-fingerprint.pam	2017-03-02 14:34:56.000000000 -0500
++++ b/data/pam-redhat/gdm-fingerprint.pam	2017-03-19 10:26:01.474264379 -0400
 @@ -9,6 +9,7 @@
  session     required      pam_selinux.so close
  session     required      pam_loginuid.so
@@ -2290,8 +2300,8 @@ diff '--exclude=.git' -urN a/data/pam-redhat/gdm-fingerprint.pam b/data/pam-redh
  session     optional      pam_keyinit.so force revoke
  session     required      pam_namespace.so
 diff '--exclude=.git' -urN a/data/pam-redhat/gdm-password.pam b/data/pam-redhat/gdm-password.pam
---- a/data/pam-redhat/gdm-password.pam	2017-01-05 09:40:34.000000000 -0500
-+++ b/data/pam-redhat/gdm-password.pam	2017-03-04 03:12:03.035934005 -0500
+--- a/data/pam-redhat/gdm-password.pam	2017-03-02 14:34:56.000000000 -0500
++++ b/data/pam-redhat/gdm-password.pam	2017-03-19 10:26:01.474264379 -0400
 @@ -12,6 +12,7 @@
  session     required      pam_selinux.so close
  session     required      pam_loginuid.so
@@ -2301,8 +2311,8 @@ diff '--exclude=.git' -urN a/data/pam-redhat/gdm-password.pam b/data/pam-redhat/
  session     optional      pam_keyinit.so force revoke
  session     required      pam_namespace.so
 diff '--exclude=.git' -urN a/data/pam-redhat/gdm-pin.pam b/data/pam-redhat/gdm-pin.pam
---- a/data/pam-redhat/gdm-pin.pam	2017-01-05 09:40:34.000000000 -0500
-+++ b/data/pam-redhat/gdm-pin.pam	2017-03-04 03:12:03.035934005 -0500
+--- a/data/pam-redhat/gdm-pin.pam	2017-03-02 14:34:56.000000000 -0500
++++ b/data/pam-redhat/gdm-pin.pam	2017-03-19 10:26:01.474264379 -0400
 @@ -13,6 +13,7 @@
  session     required      pam_selinux.so close
  session     required      pam_loginuid.so
@@ -2312,8 +2322,8 @@ diff '--exclude=.git' -urN a/data/pam-redhat/gdm-pin.pam b/data/pam-redhat/gdm-p
  session     optional      pam_keyinit.so force revoke
  session     required      pam_namespace.so
 diff '--exclude=.git' -urN a/data/pam-redhat/gdm-smartcard.pam b/data/pam-redhat/gdm-smartcard.pam
---- a/data/pam-redhat/gdm-smartcard.pam	2017-01-05 09:40:34.000000000 -0500
-+++ b/data/pam-redhat/gdm-smartcard.pam	2017-03-04 03:12:03.035934005 -0500
+--- a/data/pam-redhat/gdm-smartcard.pam	2017-03-02 14:34:56.000000000 -0500
++++ b/data/pam-redhat/gdm-smartcard.pam	2017-03-19 10:26:01.474264379 -0400
 @@ -9,6 +9,7 @@
  session     required      pam_selinux.so close
  session     required      pam_loginuid.so
@@ -2324,7 +2334,7 @@ diff '--exclude=.git' -urN a/data/pam-redhat/gdm-smartcard.pam b/data/pam-redhat
  session     required      pam_namespace.so
 diff '--exclude=.git' -urN a/libgdm/gdm-user-switching.c b/libgdm/gdm-user-switching.c
 --- a/libgdm/gdm-user-switching.c	2017-01-05 09:40:35.000000000 -0500
-+++ b/libgdm/gdm-user-switching.c	2017-03-04 03:12:03.035934005 -0500
++++ b/libgdm/gdm-user-switching.c	2017-03-19 10:26:01.474264379 -0400
 @@ -31,12 +31,25 @@
  #include <glib-object.h>
  #include <gio/gio.h>
