@@ -81,6 +81,9 @@ COMMON_DEPEND="
 # mouse panel needs a concrete set of X11 drivers at runtime, bug #580474
 # Also we need newer driver versions to allow wacom and libinput drivers to
 # not collide
+#
+# system-config-printer provides org.fedoraproject.Config.Printing service and interface
+# cups-pk-helper provides org.opensuse.cupspkhelper.mechanism.all-edit policykit helper policy
 RDEPEND="${COMMON_DEPEND}
 	x11-themes/adwaita-icon-theme
 	colord? ( >=gnome-extra/gnome-color-manager-3 )
@@ -134,7 +137,7 @@ DEPEND="${COMMON_DEPEND}
 src_prepare() {
 	# From GNOME:
 	# 	https://bugzilla.gnome.org/show_bug.cgi?id=773673
-	eapply "${FILESDIR}"/${PN}-3.22.1-disable-user-accounts-panel.patch
+	eapply "${FILESDIR}"/${PN}-3.22.2-user-accounts-prevent-segfault-when-user-list-is-empty.patch
 
 	# From GNOME:
 	# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=8da6fa28e1c5e6eab551585ecdbd914b08936d5e

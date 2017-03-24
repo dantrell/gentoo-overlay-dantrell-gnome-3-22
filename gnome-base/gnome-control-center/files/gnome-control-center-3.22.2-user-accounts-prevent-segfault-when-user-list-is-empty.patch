@@ -1,0 +1,36 @@
+From 2744bcb9db47f4b612e69b50c0c5b99bd8315093 Mon Sep 17 00:00:00 2001
+From: Rui Matos <tiagomatos@gmail.com>
+Date: Fri, 17 Mar 2017 16:29:03 +0100
+Subject: [PATCH] user-accounts: Prevent a potential crash with an empty user
+ list
+
+From a Coverity scan:
+
+panels/user-accounts/um-user-panel.c:1312:20: warning: Access to field
+'data' results in a dereference of a null pointer (loaded from
+variable 'list')
+
+https://bugzilla.gnome.org/show_bug.cgi?id=780315
+---
+ panels/user-accounts/um-user-panel.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/panels/user-accounts/um-user-panel.c b/panels/user-accounts/um-user-panel.c
+index 4f11a0a..fc3fcc8 100644
+--- a/panels/user-accounts/um-user-panel.c
++++ b/panels/user-accounts/um-user-panel.c
+@@ -1309,8 +1309,10 @@ users_loaded (ActUserManager     *manager,
+                 g_debug ("adding user %s\n", get_real_or_user_name (user));
+                 user_added (d->um, user, d);
+         }
+-        show_user (list->data, d);
+-        g_slist_free (list);
++        if (list) {
++                show_user (list->data, d);
++                g_slist_free (list);
++        }
+ 
+         g_signal_connect (d->um, "user-added", G_CALLBACK (user_added), d);
+         g_signal_connect (d->um, "user-removed", G_CALLBACK (user_removed), d);
+-- 
+2.9.3

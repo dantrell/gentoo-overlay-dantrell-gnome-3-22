@@ -13,7 +13,7 @@ LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="+bluetooth +deprecated +deprecated-background +networkmanager nsplugin +nls systemd vanilla-motd vanilla-screen +xephyr"
+IUSE="+bluetooth browser-extension +deprecated +deprecated-background +ibus +networkmanager nsplugin systemd vanilla-motd vanilla-screen +xephyr"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # libXfixes-5.0 needed for pointer barriers
@@ -102,12 +102,13 @@ RDEPEND="${COMMON_DEPEND}
 	networkmanager? (
 		net-misc/mobile-broadband-provider-info
 		sys-libs/timezone-data )
-	nls? ( >=app-i18n/ibus-1.4.99[dconf(+),gtk3,introspection] )
+	ibus? ( >=app-i18n/ibus-1.4.99[dconf(+),gtk3,introspection] )
 "
 # avoid circular dependency, see bug #546134
 PDEPEND="
 	>=gnome-base/gdm-3.5[introspection]
 	>=gnome-base/gnome-control-center-3.8.3[bluetooth(+)?,networkmanager(+)?]
+	browser-extension? ( gnome-extra/chrome-gnome-shell )
 "
 DEPEND="${COMMON_DEPEND}
 	dev-libs/libxslt

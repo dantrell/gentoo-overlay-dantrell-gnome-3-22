@@ -18,7 +18,7 @@ RDEPEND="
 	>=app-admin/packagekit-base-1.1.0
 	app-crypt/libsecret
 	dev-db/sqlite:3
-	>=dev-libs/appstream-glib-0.6.5:0
+	>=dev-libs/appstream-glib-0.6.7:0
 	>=dev-libs/glib-2.46:2
 	>=dev-libs/json-glib-1.1.1
 	>=gnome-base/gsettings-desktop-schemas-3.11.5
@@ -68,10 +68,14 @@ src_configure() {
 		--disable-ostree \
 		--disable-rpm \
 		--disable-steam \
-		--disable-xdg-app \
+		--disable-flatpak \
+		--enable-webapps \
+		--disable-snap \
 		$(use_enable spell gtkspell) \
 		$(use_enable test dogtail) \
 		$(use_enable test tests) \
+		$(use_enable gnome gnome-desktop) \
+		$(use_enable gnome shell-extensions) \
 		$(use_enable udev gudev)
 }
 
