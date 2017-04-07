@@ -191,7 +191,6 @@ src_prepare() {
 src_configure() {
 	# Do not error out on warnings
 	gnome2_src_configure \
-		--enable-browser-plugin \
 		--enable-man \
 		$(use_with bluetooth) \
 		$(use_enable networkmanager) \
