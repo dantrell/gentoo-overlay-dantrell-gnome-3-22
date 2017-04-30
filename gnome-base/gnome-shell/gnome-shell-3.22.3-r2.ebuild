@@ -184,6 +184,9 @@ src_prepare() {
 	# https://bugzilla.gnome.org/show_bug.cgi?id=726435
 	eapply "${FILESDIR}"/${PN}-3.14.0-bluetooth-gold.patch
 
+	# Little bug when user has toggled version validation in the session, bug #616698
+	eapply "${FILESDIR}"/${PN}-3.22.3-CVE-2017-8288.patch
+
 	eautoreconf
 	gnome2_src_prepare
 }
