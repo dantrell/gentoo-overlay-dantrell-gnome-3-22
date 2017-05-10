@@ -7,16 +7,17 @@ inherit gnome2
 DESCRIPTION="Logic puzzle game for GNOME"
 HOMEPAGE="https://wiki.gnome.org/Apps/Hitori"
 
-LICENSE="GPL-2+"
+LICENSE="GPL-3+ CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS="*"
 
 IUSE=""
 
+# gtk+-3.22 for build-time optional gtk_show_uri_on_window usage
 RDEPEND="
 	>=dev-libs/glib-2.32:2
+	>=x11-libs/gtk+-3.22:3
 	>=x11-libs/cairo-1.4
-	>=x11-libs/gtk+-3.15:3
 "
 DEPEND="${RDEPEND}
 	app-text/yelp-tools
