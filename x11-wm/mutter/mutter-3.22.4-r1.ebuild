@@ -89,6 +89,13 @@ src_prepare() {
 			-i src/Makefile.in || die
 	fi
 
+	# Important fixes from gnome-3-22 branch, mostly for wayland session
+	eapply "${FILESDIR}"/${PN}-3.22.4-wayland-crash-fix.patch # firefox wrongly using subsurfaces for popups occasional crash fix
+	eapply "${FILESDIR}"/${PN}-3.22.4-clutter-missing-null-terminator.patch # fixes potential crashes on armhf
+	eapply "${FILESDIR}"/${PN}-3.22.4-wayland-ensure-pending-geometry.patch # initial positioning fix for wayland for certain apps
+	eapply "${FILESDIR}"/${PN}-3.22.4-wayland-size-hints.patch # apply min/max size hints in more cases properly
+	eapply "${FILESDIR}"/${PN}-3.22.4-wayland-clipboard-fix.patch # Fixes utf8 clipboard with gtk+-3.22.13+
+
 	if use deprecated-background; then
 		eapply "${FILESDIR}"/${PN}-3.22.0-restore-deprecated-background-code.patch
 	fi
