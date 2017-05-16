@@ -71,7 +71,6 @@ net-libs/gnome-online-accounts::gentoo
 net-libs/libsoup-gnome::gentoo
 net-libs/libsoup::gentoo
 net-misc/rygel::gentoo
-net-misc/vinagre::gentoo
 sci-geosciences/gnome-maps::gentoo
 sys-apps/baobab::gentoo
 sys-apps/gnome-disk-utility::gentoo
