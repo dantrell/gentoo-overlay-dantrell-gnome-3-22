@@ -14,8 +14,8 @@ KEYWORDS="*"
 IUSE="+bijiben boxes builder california epiphany +evolution flashback +fonts +games geary +share +shotwell +todo +tracker"
 
 # Note to developers:
+#
 # This is a wrapper for the extra apps integrated with GNOME 3
-# New package
 #
 # cantarell upstream relies on noto, unifont and symbola fonts for
 # the fonts they cannot handle due to lack of enough manpower:
@@ -55,7 +55,7 @@ RDEPEND="
 
 	bijiben? ( >=app-misc/bijiben-3.21.2 )
 	boxes? ( >=gnome-extra/gnome-boxes-${PV} )
-	builder? ( >=gnome-extra/gnome-builder-3.18.0 )
+	builder? ( >=gnome-extra/gnome-builder-${PV} )
 	california? ( >=gnome-extra/california-0.4.0 )
 	epiphany? ( >=www-client/epiphany-${PV} )
 	evolution? ( >=mail-client/evolution-${PV} )
