@@ -34,6 +34,10 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 "
 
+PATCHES=(
+	"${FILESDIR}"/${PN}-3.22.0-send-to-symbolic.patch
+)
+
 src_prepare() {
 	if use branding; then
 		for i in 16 22 24 32 48; do
