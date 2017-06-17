@@ -38,7 +38,7 @@ COMMON_DEPEND="
 	>=sys-auth/polkit-0.100[introspection]
 	>=x11-libs/libXfixes-5.0
 	x11-libs/libXtst
-	>=x11-wm/mutter-3.20.0[introspection]
+	>=x11-wm/mutter-3.20.0[deprecated-background=,introspection]
 	>=x11-libs/startup-notification-0.11
 
 	${PYTHON_DEPS}
@@ -56,7 +56,6 @@ COMMON_DEPEND="
 	x11-apps/mesa-progs
 
 	bluetooth? ( >=net-wireless/gnome-bluetooth-3.9[introspection] )
-	deprecated-background? ( x11-wm/mutter[deprecated-background] )
 	networkmanager? (
 		app-crypt/libsecret
 		>=gnome-extra/nm-applet-0.9.8
@@ -159,10 +158,6 @@ src_prepare() {
 
 	if use deprecated-background; then
 		eapply "${FILESDIR}"/${PN}-3.22.3-restore-deprecated-background-code.patch
-
-		# Provided by gnome-base/gnome-shell-common
-		sed -e '/.*calendar-today.svg.*/d' \
-			-i data/Makefile.am || die "sed failed"
 	fi
 
 	if ! use vanilla-motd; then
