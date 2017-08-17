@@ -34,7 +34,6 @@ RDEPEND="
 	>=dev-libs/gobject-introspection-0.9.5:=
 	>=dev-libs/icu-4.8.1.1:=
 	>=media-libs/libpng-1.2:0=
-	>=media-libs/libmediaart-1.9:2.0
 	>=x11-libs/pango-1:=
 	sys-apps/util-linux
 	virtual/imagemagick-tools[png,jpeg?]
@@ -70,7 +69,6 @@ RDEPEND="
 		>=x11-libs/gtk+-2.12:2 )
 	playlist? ( >=dev-libs/totem-pl-parser-3:= )
 	rss? ( >=net-libs/libgrss-0.7:0 )
-	seccomp? ( >=sys-libs/libseccomp-2.0 )
 	stemmer? ( dev-libs/snowball-stemmer )
 	thunderbird? ( || (
 		>=mail-client/thunderbird-5.0
@@ -82,6 +80,7 @@ RDEPEND="
 	xmp? ( >=media-libs/exempi-2.1:2 )
 	xps? ( app-text/libgxps )
 	!gstreamer? ( !ffmpeg? ( || ( media-video/totem media-video/mplayer ) ) )
+	seccomp? ( >=sys-libs/libseccomp-2.0 )
 "
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
@@ -162,7 +161,7 @@ src_configure() {
 		--enable-guarantee-metadata \
 		--enable-icon \
 		--enable-introspection \
-		--enable-libmediaart \
+		--disable-libmediaart \
 		--enable-libpng \
 		--enable-miner-apps \
 		--enable-miner-user-guides \

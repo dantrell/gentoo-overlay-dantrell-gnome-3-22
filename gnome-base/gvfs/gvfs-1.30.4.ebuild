@@ -77,11 +77,11 @@ DEPEND="${RDEPEND}
 # libgcrypt.m4, provided by libgcrypt, needed for eautoreconf, bug #399043
 # test dependencies needed per https://bugzilla.gnome.org/700162
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-1.30.2-sysmacros.patch #580234
-)
-
 src_prepare() {
+	# From GNOME:
+	# 	https://git.gnome.org/browse/gvfs/commit/?id=3424bef7ef71dc3a8c2c71310671cd6d39e7b3e7
+	eapply "${FILESDIR}"/${PN}-1.31.4-metadata-include-headers-for-device-number-functionality.patch
+
 	if ! use udev; then
 		sed -e 's/gvfsd-burn/ /' \
 			-e 's/burn.mount.in/ /' \
