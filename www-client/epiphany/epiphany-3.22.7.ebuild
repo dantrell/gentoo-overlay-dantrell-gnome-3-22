@@ -19,7 +19,7 @@ COMMON_DEPEND="
 	>=x11-libs/gtk+-3.19.1:3
 	>=net-libs/webkit-gtk-2.14.2:4=
 	x11-libs/libX11
-	>=app-crypt/gcr-3.5.5:=
+	>=app-crypt/gcr-3.5.5:=[gtk]
 	>=gnome-base/gnome-desktop-2.91.2:3=
 	>=x11-libs/libnotify-0.5.1:=
 	>=app-crypt/libsecret-0.14
