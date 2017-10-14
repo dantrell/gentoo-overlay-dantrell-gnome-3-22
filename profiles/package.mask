@@ -85,6 +85,8 @@ gnome-extra/gnome-calculator::gentoo
 gnome-extra/gnome-calculator::gnome-kit
 gnome-extra/gnome-calendar::gentoo
 gnome-extra/gnome-calendar::gnome-kit
+gnome-extra/gnome-characters::gentoo
+gnome-extra/gnome-characters::gnome-kit
 gnome-extra/gnome-clocks::gentoo
 gnome-extra/gnome-clocks::gnome-kit
 gnome-extra/gnome-color-manager::gentoo
@@ -142,6 +144,8 @@ net-libs/libsoup-gnome::gentoo
 net-libs/libsoup-gnome::gnome-kit
 net-libs/libsoup::gentoo
 net-libs/libsoup::gnome-kit
+net-misc/gnome-online-miners::gentoo
+net-misc/gnome-online-miners::gnome-kit
 net-misc/rygel::gentoo
 net-misc/rygel::gnome-kit
 sci-geosciences/gnome-maps::gentoo

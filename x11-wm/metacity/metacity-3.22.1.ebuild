@@ -53,10 +53,7 @@ src_configure() {
 		--enable-canberra \
 		--enable-compositor \
 		--enable-render \
-		--enable-shape \
 		--enable-sm \
 		--enable-startup-notification \
-		--enable-xsync \
-		--enable-themes-documentation \
 		$(use_enable xinerama)
 }
