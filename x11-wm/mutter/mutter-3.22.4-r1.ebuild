@@ -143,12 +143,3 @@ src_configure() {
 src_test() {
 	virtx emake check
 }
-
-src_install() {
-	gnome2_src_install
-
-	#dosym /usr/lib64/mutter/libmutter-clutter-1.0.so /usr/lib64
-	#dosym /usr/lib64/mutter/libmutter-cogl-pango.so /usr/lib64
-	#dosym /usr/lib64/mutter/libmutter-cogl-path.so /usr/lib64
-	#dosym /usr/lib64/mutter/libmutter-cogl.so /usr/lib64
-}
