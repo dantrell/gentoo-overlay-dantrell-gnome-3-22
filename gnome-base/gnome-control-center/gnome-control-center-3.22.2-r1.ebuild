@@ -12,7 +12,11 @@ LICENSE="GPL-2+"
 SLOT="2"
 KEYWORDS="*"
 
-IUSE="+bluetooth +colord +cups debug +deprecated +gnome-online-accounts +ibus input_devices_wacom kerberos libinput networkmanager systemd v4l vanilla-datetime vanilla-hostname wayland"
+IUSE="+bluetooth ck +colord +cups debug elogind +gnome-online-accounts +ibus input_devices_wacom kerberos libinput networkmanager systemd v4l vanilla-datetime vanilla-hostname wayland"
+REQUIRED_USE="
+	?? ( ck elogind systemd )
+	wayland? ( || ( elogind systemd ) )
+"
 
 # False positives caused by nested configure scripts
 QA_CONFIGURE_OPTIONS=".*"
@@ -103,15 +107,10 @@ RDEPEND="${COMMON_DEPEND}
 	!<gnome-extra/gnome-media-2.32.0-r300
 	!<net-wireless/gnome-bluetooth-3.3.2
 
-	!deprecated? (
-		systemd? ( >=sys-apps/systemd-186:0= )
-	)
-	!systemd? (
-		app-admin/openrc-settingsd
-		sys-auth/consolekit
-
-		deprecated? ( >=sys-power/upower-0.99:=[deprecated] )
-	)
+	ck? ( >=sys-power/upower-0.99:=[ck] )
+	elogind? ( sys-auth/elogind )
+	systemd? ( >=sys-apps/systemd-186:0= )
+	!systemd? ( app-admin/openrc-settingsd )
 "
 # PDEPEND to avoid circular dependency
 PDEPEND=">=gnome-base/gnome-session-2.91.6-r1"
@@ -157,7 +156,7 @@ src_prepare() {
 	# Fix some absolute paths to be appropriate for Gentoo
 	eapply "${FILESDIR}"/${PN}-3.22.0-gentoo-paths.patch
 
-	if use deprecated; then
+	if use ck; then
 		# From GNOME:
 		# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=4033a3dbca5bef880b0694c0cdad0ccd465b3e4a
 		# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=1abacd29706716edee2dd9b368ca75861ed5389d
@@ -196,10 +195,10 @@ src_configure() {
 		--disable-static \
 		--enable-documentation \
 		$(use_enable bluetooth) \
+		$(use_enable ck deprecated) \
 		$(use_enable colord color) \
 		$(use_enable cups) \
 		$(usex debug --enable-debug=yes ' ') \
-		$(use_enable deprecated) \
 		$(use_enable gnome-online-accounts goa) \
 		$(use_enable ibus) \
 		$(use_enable kerberos) \

@@ -13,8 +13,11 @@ LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="+bluetooth browser-extension +deprecated +deprecated-background +ibus +networkmanager nsplugin systemd vanilla-motd vanilla-screen +xephyr"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+IUSE="+bluetooth browser-extension ck +deprecated-background elogind +ibus +networkmanager nsplugin systemd vanilla-motd vanilla-screen xephyr"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}
+	?? ( ck elogind systemd )
+	xephyr? ( ck !elogind !systemd )
+"
 
 # libXfixes-5.0 needed for pointer barriers
 # FIXME:
@@ -62,6 +65,7 @@ COMMON_DEPEND="
 		>=net-misc/networkmanager-0.9.8:=[introspection] )
 	nsplugin? ( >=dev-libs/json-glib-0.13.2 )
 	xephyr? ( <x11-wm/mutter-3.21.1 )
+	!xephyr? ( >=x11-wm/mutter-3.22.0 )
 "
 # Runtime-only deps are probably incomplete and approximate.
 # Introspection deps generated using:
@@ -86,12 +90,9 @@ RDEPEND="${COMMON_DEPEND}
 	>=gnome-base/gnome-session-2.91.91
 	>=gnome-base/gnome-settings-daemon-3.8.3
 
-	!deprecated? (
-		systemd? ( >=sys-apps/systemd-186:0= )
-	)
-	!systemd? (
-		deprecated? ( >=sys-power/upower-0.99:=[deprecated] )
-	)
+	ck? ( >=sys-power/upower-0.99:=[ck] )
+	elogind? ( sys-auth/elogind )
+	systemd? ( >=sys-apps/systemd-186:0= )
 
 	x11-misc/xdg-utils
 
@@ -117,13 +118,10 @@ DEPEND="${COMMON_DEPEND}
 	sys-devel/autoconf-archive
 	>=sys-devel/gettext-0.19.6
 	virtual/pkgconfig
-	!!=dev-lang/spidermonkey-1.8.2*
 "
-# libmozjs.so is picked up from /usr/lib while compiling, so block at build-time
-# https://bugs.gentoo.org/show_bug.cgi?id=360413
 
 src_prepare() {
-	if use xephyr; then
+	if use ck && use xephyr; then
 		# From GNOME (enforce old X11 backend):
 		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=0c22a21a2490024110d8a61afd4d385b2e91de6c
 		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=f9ef80749af3535879f6e3d11ac3489270b849f1
@@ -149,7 +147,7 @@ src_prepare() {
 		eapply "${FILESDIR}"/${PN}-3.22.1-reduce-mutter-dependency-requirement.patch
 	fi
 
-	if use deprecated; then
+	if use ck; then
 		# From Funtoo:
 		# 	https://bugs.funtoo.org/browse/FL-1329
 		eapply "${FILESDIR}"/${PN}-3.22.0-restore-deprecated-code.patch
@@ -201,7 +199,7 @@ src_configure() {
 		$(use_enable systemd) \
 		BROWSER_PLUGIN_DIR="${EPREFIX}"/usr/$(get_libdir)/nsbrowser/plugins
 
-	if use xephyr; then
+	if use ck && use xephyr; then
 		# Enforce old X11 backend
 		find . -type f -name Makefile -exec sed -i 's/-lmutter-clutter-1.0 //g' {} +
 		find . -type f -name Makefile -exec sed -i 's/-lmutter-cogl //g' {} +
@@ -257,11 +255,9 @@ pkg_postinst() {
 		ewarn "https://wiki.gentoo.org/wiki/Systemd"
 	fi
 
-	if use deprecated; then
-		ewarn "You are enabling 'deprecated' USE flag to skip systemd requirement,"
-		ewarn "this can lead to unexpected problems and is not supported neither by"
-		ewarn "upstream neither by Gnome Gentoo maintainers. If you suffer any problem,"
-		ewarn "you will need to disable this USE flag system wide and retest before"
-		ewarn "opening any bug report."
+	if ! use systemd; then
+		ewarn "You have emerged ${PN} without systemd,"
+		ewarn "if you experience any issues please use the support thread:"
+		ewarn "https://forums.gentoo.org/viewtopic-t-1022050.html"
 	fi
 }

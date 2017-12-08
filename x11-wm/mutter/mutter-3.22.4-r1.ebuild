@@ -11,7 +11,11 @@ LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="debug +gles2 input_devices_wacom +deprecated-background +introspection test udev wayland"
+IUSE="ck debug +deprecated-background elogind gles2 input_devices_wacom +introspection systemd test udev wayland"
+REQUIRED_USE="
+	?? ( ck elogind systemd )
+	wayland? ( || ( elogind systemd ) )
+"
 
 # libXi-1.7.4 or newer needed per:
 # https://bugzilla.gnome.org/show_bug.cgi?id=738944
@@ -48,6 +52,7 @@ COMMON_DEPEND="
 	x11-misc/xkeyboard-config
 
 	gnome-extra/zenity
+	media-libs/mesa[egl]
 
 	gles2? ( media-libs/mesa[gles2] )
 	input_devices_wacom? ( >=dev-libs/libwacom-0.13 )
@@ -58,7 +63,7 @@ COMMON_DEPEND="
 		>=dev-libs/wayland-1.6.90
 		>=dev-libs/wayland-protocols-1.7
 		>=media-libs/mesa-10.3[egl,gbm,wayland]
-		sys-apps/systemd
+		|| ( sys-auth/elogind sys-apps/systemd )
 		virtual/libgudev:=
 		>=virtual/libudev-136:=
 		x11-base/xorg-server[wayland]
@@ -95,6 +100,10 @@ src_prepare() {
 	eapply "${FILESDIR}"/${PN}-3.22.4-wayland-ensure-pending-geometry.patch # initial positioning fix for wayland for certain apps
 	eapply "${FILESDIR}"/${PN}-3.22.4-wayland-size-hints.patch # apply min/max size hints in more cases properly
 	eapply "${FILESDIR}"/${PN}-3.22.4-wayland-clipboard-fix.patch # Fixes utf8 clipboard with gtk+-3.22.13+
+
+	if use elogind; then
+		eapply "${FILESDIR}"/${PN}-3.22.4-support-elogind.patch
+	fi
 
 	if use deprecated-background; then
 		eapply "${FILESDIR}"/${PN}-3.22.0-restore-deprecated-background-code.patch
@@ -137,7 +146,7 @@ src_configure() {
 		$(use_enable wayland native-backend) \
 		$(use_enable wayland wayland-egl-server) \
 		$(use_with input_devices_wacom libwacom) \
-		$(use_with !deprecated-background gudev)
+		$(use_with udev gudev)
 }
 
 src_test() {
