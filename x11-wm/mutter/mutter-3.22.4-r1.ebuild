@@ -101,6 +101,10 @@ src_prepare() {
 	eapply "${FILESDIR}"/${PN}-3.22.4-wayland-size-hints.patch # apply min/max size hints in more cases properly
 	eapply "${FILESDIR}"/${PN}-3.22.4-wayland-clipboard-fix.patch # Fixes utf8 clipboard with gtk+-3.22.13+
 
+	# From GNOME:
+	# 	https://gitlab.gnome.org/GNOME/mutter/commit/361bf847af82c7dca097302fe64c575079280c9c
+	eapply "${FILESDIR}"/${PN}-3.25.92-build-require-libgudev-232.patch
+
 	if use elogind; then
 		eapply "${FILESDIR}"/${PN}-3.22.4-support-elogind.patch
 	fi

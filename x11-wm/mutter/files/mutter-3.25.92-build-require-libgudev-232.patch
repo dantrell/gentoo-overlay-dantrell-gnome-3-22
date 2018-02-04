@@ -1,0 +1,48 @@
+From 361bf847af82c7dca097302fe64c575079280c9c Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Fri, 1 Sep 2017 02:06:38 +0200
+Subject: build: Require libgudev >= 232
+
+And remove the g_autoptr implementations in mutter itself.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=760670
+---
+ configure.ac                        | 4 ++--
+ src/backends/native/meta-launcher.c | 4 ----
+ 2 files changed, 2 insertions(+), 6 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index af00563..8c8b686 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -225,10 +225,10 @@ AC_MSG_CHECKING([gudev])
+ if test x$with_gudev = xno ; then
+   AC_MSG_RESULT([disabled])
+ else
+-  if $PKG_CONFIG --exists gudev-1.0; then
++  if $PKG_CONFIG --exists "gudev-1.0 >= 232"; then
+     have_gudev=yes
+     AC_MSG_RESULT(yes)
+-    MUTTER_PC_MODULES="$MUTTER_PC_MODULES gudev-1.0"
++    MUTTER_PC_MODULES="$MUTTER_PC_MODULES gudev-1.0 >= 232"
+     AC_DEFINE([HAVE_LIBGUDEV], 1, [Building with gudev for device type detection])
+   else
+     AC_MSG_RESULT(no)
+diff --git a/src/backends/native/meta-launcher.c b/src/backends/native/meta-launcher.c
+index 90b4b98..eb35f88 100644
+--- a/src/backends/native/meta-launcher.c
++++ b/src/backends/native/meta-launcher.c
+@@ -49,10 +49,6 @@
+ 
+ #define DRM_CARD_UDEV_DEVICE_TYPE "drm_minor"
+ 
+-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GUdevDevice, g_object_unref)
+-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GUdevClient, g_object_unref)
+-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GUdevEnumerator, g_object_unref)
+-
+ struct _MetaLauncher
+ {
+   Login1Session *session_proxy;
+-- 
+cgit v1.1
+
