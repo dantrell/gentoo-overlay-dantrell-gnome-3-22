@@ -15,7 +15,7 @@ IUSE="+introspection"
 
 RDEPEND="
 	>=dev-libs/glib-2.43.4:2
-	>=dev-libs/libical-0.43
+	>=dev-libs/libical-0.43:=
 	>=dev-libs/libpeas-1.17
 	>=gnome-extra/evolution-data-server-3.17.1:=[gtk]
 	>=net-libs/gnome-online-accounts-3.2:=
@@ -32,6 +32,10 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
+	# From GNOME:
+	# 	https://gitlab.gnome.org/GNOME/gnome-todo/commit/6de8adc351b758c1d608ae0ea8acf6d35ed502ea
+	eapply "${FILESDIR}"/${PN}-3.26.2-eds-build-with-libical-3-0.patch
+
 	# From Arch Linux:
 	# 	https://git.archlinux.org/svntogit/packages.git/commit/?id=2c0d28e17eca04d8905cc36d682865de762ef88f
 	eapply "${FILESDIR}"/${PN}-3.22.0-correct-linking-order.patch
