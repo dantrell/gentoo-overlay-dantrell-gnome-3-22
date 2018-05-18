@@ -13,7 +13,7 @@ LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 KEYWORDS="*"
 
-IUSE="+bluetooth browser-extension ck +deprecated-background elogind +ibus +networkmanager nsplugin systemd vanilla-motd vanilla-screen xephyr"
+IUSE="+bluetooth browser-extension ck +deprecated-background elogind +ibus +networkmanager nsplugin systemd vanilla-gc vanilla-motd vanilla-screen xephyr"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	?? ( ck elogind systemd )
 	xephyr? ( ck !elogind !systemd )
@@ -156,6 +156,12 @@ src_prepare() {
 
 	if use deprecated-background; then
 		eapply "${FILESDIR}"/${PN}-3.22.3-restore-deprecated-background-code.patch
+	fi
+
+	if ! use vanilla-gc; then
+		# From GNOME:
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/issues/64
+		eapply "${FILESDIR}"/${PN}-3.14.4-force-garbage-collection.patch
 	fi
 
 	if ! use vanilla-motd; then
