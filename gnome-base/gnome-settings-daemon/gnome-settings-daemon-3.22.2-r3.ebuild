@@ -119,6 +119,10 @@ src_prepare() {
 	# Allow specifying udevrulesdir via configure, bug 509484; requires eautoreconf
 	eapply "${FILESDIR}"/${PN}-${PV}-udevrulesdir-configure.patch
 
+	# From Ben Wolsieffer:
+	# 	https://bugzilla.gnome.org/show_bug.cgi?id=734964
+	eapply "${FILESDIR}"/${PN}-3.12.0-optionally-allow-suspending-with-multiple-monitors-on-lid-close.patch
+
 	eautoreconf
 	gnome2_src_prepare
 }
