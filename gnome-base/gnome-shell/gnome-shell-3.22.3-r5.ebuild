@@ -123,15 +123,15 @@ DEPEND="${COMMON_DEPEND}
 src_prepare() {
 	if use ck && use xephyr; then
 		# From GNOME (enforce old X11 backend):
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=0c22a21a2490024110d8a61afd4d385b2e91de6c
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=f9ef80749af3535879f6e3d11ac3489270b849f1
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=22f0d3076ead0c20ff5fc0e5f861d7164142e168
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=f5c058a036b21da747921d0ed9eefa64331e4f17
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=358f64d66b37fa547af3e06dc85f4c5f008b7847
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=b7867fe44c45f60a9399baf737132a9ba30351aa
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=093fd54e2b7cf2e57982f78f729394f4f1c0cf4b
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=5ae3e5aeb78d9d47641c85d3e15096912dc36cad
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=af28a219be30490c1c50a9ed99c1e22e70a36826
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/0c22a21a2490024110d8a61afd4d385b2e91de6c
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/f9ef80749af3535879f6e3d11ac3489270b849f1
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/22f0d3076ead0c20ff5fc0e5f861d7164142e168
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/f5c058a036b21da747921d0ed9eefa64331e4f17
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/358f64d66b37fa547af3e06dc85f4c5f008b7847
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/b7867fe44c45f60a9399baf737132a9ba30351aa
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/093fd54e2b7cf2e57982f78f729394f4f1c0cf4b
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/5ae3e5aeb78d9d47641c85d3e15096912dc36cad
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/af28a219be30490c1c50a9ed99c1e22e70a36826
 		eapply -R "${FILESDIR}"/${PN}-3.22.1-window-tracker-consider-flatpak-id-for-window-matching.patch
 		eapply -R "${FILESDIR}"/${PN}-3.21.92-recorder-composite-captured-images-before-passing-into-gstreamer.patch
 		eapply -R "${FILESDIR}"/${PN}-3.21.92-screenshot-composite-multiple-captures-into-one-image.patch
@@ -143,7 +143,7 @@ src_prepare() {
 		eapply -R "${FILESDIR}"/${PN}-3.21.1-build-with-merged-mutter-clutter-cogl.patch
 
 		# From GNOME (enforce old X11 backend):
-		# 	https://git.gnome.org/browse/gnome-shell/commit/?id=296b61b61c623b6a2a1011618ab1300041f45840
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/296b61b61c623b6a2a1011618ab1300041f45840
 		eapply "${FILESDIR}"/${PN}-3.22.1-reduce-mutter-dependency-requirement.patch
 	fi
 
@@ -264,6 +264,6 @@ pkg_postinst() {
 	if ! use systemd; then
 		ewarn "You have emerged ${PN} without systemd,"
 		ewarn "if you experience any issues please use the support thread:"
-		ewarn "https://forums.gentoo.org/viewtopic-t-1022050.html"
+		ewarn "https://forums.gentoo.org/viewtopic-t-1082226.html"
 	fi
 }

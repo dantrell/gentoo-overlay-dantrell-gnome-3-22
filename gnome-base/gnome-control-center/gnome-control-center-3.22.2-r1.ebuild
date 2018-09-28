@@ -6,7 +6,7 @@ GNOME2_LA_PUNT="yes"
 inherit autotools bash-completion-r1 gnome2
 
 DESCRIPTION="GNOME's main interface to configure various aspects of the desktop"
-HOMEPAGE="https://git.gnome.org/browse/gnome-control-center/"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/gnome-control-center/"
 
 LICENSE="GPL-2+"
 SLOT="2"
@@ -137,9 +137,9 @@ src_prepare() {
 	eapply "${FILESDIR}"/${PN}-3.22.2-user-accounts-prevent-segfault-when-user-list-is-empty.patch
 
 	# From GNOME:
-	# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=8da6fa28e1c5e6eab551585ecdbd914b08936d5e
-	# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=4825881b129bdde0eaa5419ece6198ebda420825
-	# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=97e4d87ae8a123d5b1711ddbaba6bc0d3a0a39a8
+	# 	https://gitlab.gnome.org/GNOME/gnome-control-center/commit/8da6fa28e1c5e6eab551585ecdbd914b08936d5e
+	# 	https://gitlab.gnome.org/GNOME/gnome-control-center/commit/4825881b129bdde0eaa5419ece6198ebda420825
+	# 	https://gitlab.gnome.org/GNOME/gnome-control-center/commit/97e4d87ae8a123d5b1711ddbaba6bc0d3a0a39a8
 	eapply "${FILESDIR}"/${PN}-3.22.1-display-fix-possible-crash-on-startup.patch
 	eapply "${FILESDIR}"/${PN}-3.22.2-fix-build-without-wayland.patch
 	eapply "${FILESDIR}"/${PN}-3.22.2-fix-dual-gpu-crash.patch
@@ -156,10 +156,10 @@ src_prepare() {
 
 	if use ck; then
 		# From GNOME:
-		# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=4033a3dbca5bef880b0694c0cdad0ccd465b3e4a
-		# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=1abacd29706716edee2dd9b368ca75861ed5389d
-		# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=cc4e1349e9e01b98d544d5808dd30266145204bb
-		# 	https://git.gnome.org/browse/gnome-control-center/commit/?id=b1e2bc6f043cbca0901c7c224bc9084b54974851
+		# 	https://gitlab.gnome.org/GNOME/gnome-control-center/commit/4033a3dbca5bef880b0694c0cdad0ccd465b3e4a
+		# 	https://gitlab.gnome.org/GNOME/gnome-control-center/commit/1abacd29706716edee2dd9b368ca75861ed5389d
+		# 	https://gitlab.gnome.org/GNOME/gnome-control-center/commit/cc4e1349e9e01b98d544d5808dd30266145204bb
+		# 	https://gitlab.gnome.org/GNOME/gnome-control-center/commit/b1e2bc6f043cbca0901c7c224bc9084b54974851
 		eapply -R "${FILESDIR}"/${PN}-3.22.0-power-fix-automatic-suspend-label-not-taking-batteries-into-account.patch
 		eapply -R "${FILESDIR}"/${PN}-3.22.0-power-warn-if-automatic-suspend-timeouts-are-negative.patch
 		eapply -R "${FILESDIR}"/${PN}-3.22.0-power-simplify-update-automatic-suspend-label.patch
