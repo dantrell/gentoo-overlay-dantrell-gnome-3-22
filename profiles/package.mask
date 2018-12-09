@@ -7,7 +7,6 @@ app-accessibility/orca::gnome-kit
 app-arch/file-roller::gentoo
 app-arch/file-roller::gnome-kit
 app-editors/latexila::gentoo
-app-editors/latexila::gnome-kit
 app-misc/bijiben::gentoo
 app-misc/bijiben::gnome-kit
 app-misc/gnote::gentoo
@@ -28,8 +27,8 @@ dev-python/pygobject::gentoo
 dev-python/pygobject::gnome-kit
 dev-util/devhelp::gentoo
 dev-util/devhelp::gnome-kit
-dev-util/gnome-builder::dev-kit
 dev-util/gnome-builder::gentoo
+dev-util/gnome-builder::gnome-kit
 dev-vcs/gitg::gentoo
 dev-vcs/gitg::gnome-kit
 games-arcade/gnome-nibbles::gentoo
@@ -112,7 +111,6 @@ gnome-extra/gnome-system-monitor::gnome-kit
 gnome-extra/gnome-todo::gentoo
 gnome-extra/gnome-todo::gnome-kit
 gnome-extra/gnome-tweak-tool::gentoo
-gnome-extra/gnome-tweak-tool::gnome-kit
 gnome-extra/gnome-user-docs::gentoo
 gnome-extra/gnome-user-docs::gnome-kit
 gnome-extra/nautilus-tracker-tags::gentoo

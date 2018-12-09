@@ -36,7 +36,7 @@ src_prepare() {
 	# 	https://gitlab.gnome.org/GNOME/gnome-todo/commit/6de8adc351b758c1d608ae0ea8acf6d35ed502ea
 	eapply "${FILESDIR}"/${PN}-3.26.2-eds-build-with-libical-3-0.patch
 
-	# From Arch Linux:
+	# From Arch:
 	# 	https://git.archlinux.org/svntogit/packages.git/commit/?id=2c0d28e17eca04d8905cc36d682865de762ef88f
 	eapply "${FILESDIR}"/${PN}-3.22.0-correct-linking-order.patch
 
