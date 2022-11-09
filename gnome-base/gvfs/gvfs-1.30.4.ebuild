@@ -26,7 +26,7 @@ REQUIRED_USE="
 RESTRICT="test"
 
 RDEPEND="
-	app-crypt/gcr:=
+	app-crypt/gcr:0=
 	>=dev-libs/glib-2.49.3:2
 	sys-apps/dbus
 	dev-libs/libxml2:2
@@ -47,7 +47,7 @@ RDEPEND="
 		>=app-pda/libimobiledevice-1.2:=
 		>=app-pda/libplist-1:= )
 	mtp? ( >=media-libs/libmtp-1.1.12 )
-	nfs? ( >=net-fs/libnfs-1.9.7 )
+	nfs? ( >=net-fs/libnfs-1.9.7:= )
 	policykit? (
 		sys-auth/polkit
 		sys-libs/libcap )
