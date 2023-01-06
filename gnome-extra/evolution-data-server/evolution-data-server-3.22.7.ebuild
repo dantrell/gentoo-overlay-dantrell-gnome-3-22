@@ -1,9 +1,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
-GNOME2_LA_PUNT="yes"
+EAPI="8"
 PYTHON_COMPAT=( python{3_8,3_9,3_10,3_11} pypy )
-VALA_USE_DEPEND="vapigen"
 
 inherit db-use flag-o-matic gnome2 python-any-r1 systemd vala virtualx
 
@@ -15,22 +13,22 @@ LICENSE="|| ( LGPL-2 LGPL-3 ) BSD Sleepycat"
 SLOT="0/59" # subslot = libcamel-1.2 soname version
 KEYWORDS="*"
 
-IUSE="api-doc-extras +berkdb +gnome-online-accounts +gtk google +introspection ldap kerberos vala +weather"
+IUSE="+berkdb +gnome-online-accounts +gtk gtk-doc google +introspection ldap kerberos vala +weather"
 REQUIRED_USE="vala? ( introspection )"
 
 # Some tests fail due to missing locales.
 # Also, dbus tests are flaky, bugs #397975 #501834
 # It looks like a nightmare to disable those for now.
-RESTRICT="test"
+RESTRICT="!test? ( test )"
 
-# gdata-0.17.7 soft required for google tasks (more than 100)
+# gdata-0.17.7 soft required for new gdata_feed_get_next_page_token API to handle more than 100 google tasks
 # berkdb needed only for migrating old addressbook data from <3.13 versions, bug #519512
+gdata_depend=">=dev-libs/libgdata-0.17.7:="
 RDEPEND="
 	>=app-crypt/gcr-3.4:0=
 	>=app-crypt/libsecret-0.5[crypt]
 	>=dev-db/sqlite-3.7.17:=
 	>=dev-libs/glib-2.46:2
-	>=dev-libs/libgdata-0.10:=
 	>=dev-libs/libical-0.43:=
 	>=dev-libs/libxml2-2
 	>=dev-libs/nspr-4.4:=
@@ -48,16 +46,21 @@ RDEPEND="
 	)
 	google? (
 		>=dev-libs/json-glib-1.0.4
-		>=dev-libs/libgdata-0.17.7:=
 		>=net-libs/webkit-gtk-2.11.91:4
+		${gdata_depend}
 	)
-	gnome-online-accounts? ( >=net-libs/gnome-online-accounts-3.8:= )
+	gnome-online-accounts? (
+		>=net-libs/gnome-online-accounts-3.8:=
+		${gdata_depend} )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.12:= )
 	kerberos? ( virtual/krb5:= )
 	ldap? ( >=net-nds/openldap-2:= )
 	weather? ( >=dev-libs/libgweather-3.10:2= )
 "
 DEPEND="${RDEPEND}
+	vala? ( $(vala_depend) )
+"
+BDEPEND="
 	${PYTHON_DEPS}
 	dev-util/gdbus-codegen
 	dev-util/gperf
@@ -66,7 +69,6 @@ DEPEND="${RDEPEND}
 	>=gnome-base/gnome-common-2
 	>=sys-devel/gettext-0.17
 	virtual/pkgconfig
-	vala? ( $(vala_depend) )
 "
 
 pkg_setup() {
@@ -78,7 +80,7 @@ src_prepare() {
 	# 	https://bugzilla.gnome.org/show_bug.cgi?id=795295
 	eapply "${FILESDIR}"/${PN}-3.13.90-bug-795295-fails-to-compile-after-icu-61-1-upgrade-icuunicodestring.patch
 
-	use vala && vala_src_prepare
+	use vala && vala_setup
 	gnome2_src_prepare
 }
 
@@ -89,8 +91,8 @@ src_configure() {
 
 	# phonenumber does not exist in tree
 	gnome2_src_configure \
-		$(use_enable api-doc-extras gtk-doc) \
-		$(use_with api-doc-extras private-docs) \
+		$(use_enable gtk-doc) \
+		$(use_with gtk-doc private-docs) \
 		$(usex berkdb --with-libdb="${EPREFIX}"/usr --with-libdb=no) \
 		$(use_enable gnome-online-accounts goa) \
 		$(use_enable gtk) \
