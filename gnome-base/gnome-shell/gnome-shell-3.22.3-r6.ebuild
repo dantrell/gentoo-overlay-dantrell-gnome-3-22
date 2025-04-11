@@ -2,7 +2,7 @@
 
 EAPI="6"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python{3_9,3_10,3_11} )
+PYTHON_COMPAT=( python{3_10,3_11,3_12,3_13} )
 
 inherit autotools flag-o-matic gnome2 multilib pax-utils python-r1 systemd
 
@@ -112,9 +112,9 @@ PDEPEND="
 DEPEND="${COMMON_DEPEND}
 	dev-libs/libxslt
 	>=dev-util/gdbus-codegen-2.45.3
-	>=dev-util/gtk-doc-am-1.17
+	>=dev-build/gtk-doc-am-1.17
 	gnome-base/gnome-common
-	sys-devel/autoconf-archive
+	dev-build/autoconf-archive
 	>=sys-devel/gettext-0.19.6
 	virtual/pkgconfig
 "
@@ -122,15 +122,15 @@ DEPEND="${COMMON_DEPEND}
 src_prepare() {
 	if use ck && use xephyr; then
 		# From GNOME (enforce old X11 backend):
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/0c22a21a2490024110d8a61afd4d385b2e91de6c
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/f9ef80749af3535879f6e3d11ac3489270b849f1
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/22f0d3076ead0c20ff5fc0e5f861d7164142e168
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/f5c058a036b21da747921d0ed9eefa64331e4f17
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/358f64d66b37fa547af3e06dc85f4c5f008b7847
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/b7867fe44c45f60a9399baf737132a9ba30351aa
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/093fd54e2b7cf2e57982f78f729394f4f1c0cf4b
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/5ae3e5aeb78d9d47641c85d3e15096912dc36cad
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/af28a219be30490c1c50a9ed99c1e22e70a36826
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/0c22a21a2490024110d8a61afd4d385b2e91de6c
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/f9ef80749af3535879f6e3d11ac3489270b849f1
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/22f0d3076ead0c20ff5fc0e5f861d7164142e168
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/f5c058a036b21da747921d0ed9eefa64331e4f17
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/358f64d66b37fa547af3e06dc85f4c5f008b7847
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/b7867fe44c45f60a9399baf737132a9ba30351aa
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/093fd54e2b7cf2e57982f78f729394f4f1c0cf4b
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/5ae3e5aeb78d9d47641c85d3e15096912dc36cad
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/af28a219be30490c1c50a9ed99c1e22e70a36826
 		eapply -R "${FILESDIR}"/${PN}-3.22.1-window-tracker-consider-flatpak-id-for-window-matching.patch
 		eapply -R "${FILESDIR}"/${PN}-3.21.92-recorder-composite-captured-images-before-passing-into-gstreamer.patch
 		eapply -R "${FILESDIR}"/${PN}-3.21.92-screenshot-composite-multiple-captures-into-one-image.patch
@@ -142,7 +142,7 @@ src_prepare() {
 		eapply -R "${FILESDIR}"/${PN}-3.21.1-build-with-merged-mutter-clutter-cogl.patch
 
 		# From GNOME (enforce old X11 backend):
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/296b61b61c623b6a2a1011618ab1300041f45840
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/296b61b61c623b6a2a1011618ab1300041f45840
 		eapply "${FILESDIR}"/${PN}-3.22.1-reduce-mutter-dependency-requirement.patch
 	fi
 
@@ -159,7 +159,7 @@ src_prepare() {
 
 	if ! use vanilla-gc; then
 		# From GNOME:
-		# 	https://gitlab.gnome.org/GNOME/gnome-shell/issues/64
+		# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/64
 		eapply "${FILESDIR}"/${PN}-3.14.4-force-garbage-collection.patch
 	fi
 
@@ -191,10 +191,10 @@ src_prepare() {
 	eapply "${FILESDIR}"/${PN}-3.22.3-CVE-2017-8288.patch
 
 	# From GNOME:
-	# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/3033506f2c266115a00ff43daaad14e59e3215c5
-	# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/87da623d86323a0744b8723e1991f053586defaf
-	# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/9c41736a813354fd9291177b12f6c4f85bd1c5f7
-	# 	https://gitlab.gnome.org/GNOME/gnome-shell/commit/5bca4a884e8f02441a89d7b44490339d869e5966
+	# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/3033506f2c266115a00ff43daaad14e59e3215c5
+	# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/87da623d86323a0744b8723e1991f053586defaf
+	# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/9c41736a813354fd9291177b12f6c4f85bd1c5f7
+	# 	https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/5bca4a884e8f02441a89d7b44490339d869e5966
 	eapply "${FILESDIR}"/${PN}-3.24.3-dnd-nullify-dragactor-after-weve-destroyed-it-and-avoid-invalid-access.patch
 	eapply "${FILESDIR}"/${PN}-3.26.2-messagelist-stop-syncing-if-closebutton-has-been-destroyed.patch
 	eapply "${FILESDIR}"/${PN}-3.26.2-automountmanager-remove-allowautorun-expire-timeout-on-volume-removal.patch

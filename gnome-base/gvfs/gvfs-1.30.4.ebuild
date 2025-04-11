@@ -68,7 +68,7 @@ DEPEND="${RDEPEND}
 	>=sys-devel/gettext-0.19.4
 	virtual/pkgconfig
 	dev-util/gdbus-codegen
-	dev-util/gtk-doc-am
+	dev-build/gtk-doc-am
 	test? (
 		>=dev-python/twisted-16
 		|| (
@@ -81,7 +81,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	# From GNOME:
-	# 	https://gitlab.gnome.org/GNOME/gvfs/commit/3424bef7ef71dc3a8c2c71310671cd6d39e7b3e7
+	# 	https://gitlab.gnome.org/GNOME/gvfs/-/commit/3424bef7ef71dc3a8c2c71310671cd6d39e7b3e7
 	eapply "${FILESDIR}"/${PN}-1.31.4-metadata-include-headers-for-device-number-functionality.patch
 
 	if ! use udev; then

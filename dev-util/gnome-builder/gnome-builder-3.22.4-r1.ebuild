@@ -1,7 +1,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
-PYTHON_COMPAT=( python{3_9,3_10,3_11} )
+PYTHON_COMPAT=( python{3_10,3_11,3_12,3_13} )
 VALA_MIN_API_VERSION="0.30"
 VALA_USE_DEPEND="vapigen"
 DISABLE_AUTOFORMATTING=1
@@ -46,7 +46,7 @@ RDEPEND="
 	>=dev-libs/libpeas-1.18.0[python,${PYTHON_SINGLE_USEDEP}]
 	>=dev-libs/json-glib-1.2.0
 	webkit? ( >=net-libs/webkit-gtk-2.12.0:4=[introspection] )
-	clang? ( sys-devel/clang:= )
+	clang? ( llvm-core/clang:= )
 	git? (
 		dev-libs/libgit2[ssh,threads]
 		>=dev-libs/libgit2-glib-0.24.0[ssh] )
@@ -62,7 +62,7 @@ DEPEND="${RDEPEND}
 	dev-cpp/mm-common
 	dev-libs/appstream-glib
 	dev-util/desktop-file-utils
-	>=dev-util/gtk-doc-am-1.11
+	>=dev-build/gtk-doc-am-1.11
 	>=sys-devel/gettext-0.19.8
 	virtual/pkgconfig
 	!<sys-apps/sandbox-2.10-r3
@@ -77,7 +77,7 @@ that are currently available with packages include:
   highlighting and symbol resolving support.
 * dev-python/jedi and dev-python/lxml for more accurate Python
   autocompletion support.
-* dev-util/meson for integration with the Meson build system.
+* dev-build/meson for integration with the Meson build system.
 '
 # FIXME: Package gnome-code-assistance and mention here, or maybe USE flag and default enable because it's rather important
 # jhbuild support
@@ -86,9 +86,9 @@ that are currently available with packages include:
 
 PATCHES=(
 	# From GNOME:
-	# 	https://gitlab.gnome.org/GNOME/gnome-builder/commit/294920f6b932992e9da8864ca96ae35fe2402406
-	# 	https://gitlab.gnome.org/GNOME/gnome-builder/commit/1d7c6fa60faf9e81f2fa0f93898f8e1cc68da6d4
-	# 	https://gitlab.gnome.org/GNOME/gnome-builder/commit/8bf74c787af082102958de7498a9b4f4248788cc
+	# 	https://gitlab.gnome.org/GNOME/gnome-builder/-/commit/294920f6b932992e9da8864ca96ae35fe2402406
+	# 	https://gitlab.gnome.org/GNOME/gnome-builder/-/commit/1d7c6fa60faf9e81f2fa0f93898f8e1cc68da6d4
+	# 	https://gitlab.gnome.org/GNOME/gnome-builder/-/commit/8bf74c787af082102958de7498a9b4f4248788cc
 	"${FILESDIR}"/${PN}-3.25.3-jedi-silence-xml-parser-warning.patch
 	"${FILESDIR}"/${PN}-3.25.4-jedi-ignore-non-gir-files.patch
 	"${FILESDIR}"/${PN}-3.25.91-jedi-adapt-to-jedi-0-10-0.patch
